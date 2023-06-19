@@ -26,28 +26,28 @@ Este projeto é uma aplicação de e-commerce voltada para pedidos e vendas de p
 
 ## Instalação
 
-    1. Clone este repositório:
+1. Clone este repositório:
 
 ```npm
     git clone https://github.com/FranciscoYlderlan/Food-Explorer-Frontend.git
 ```
-    2. Acesse a pasta do projeto:
+2. Acesse a pasta do projeto:
 
 ```npm
     cd Food-Explorer-Frontend
 ```
-    3. Instale as dependências do projeto:
+3. Instale as dependências do projeto:
 
 ```npm
     npm install
 ```
 
-  4. Execute o projeto:
+4. Execute o projeto:
 
 ```npm
   npm run dev
 ```
-  5. Acesse a aplicação no navegador em [http://localhost:3000](http://localhost:3000).
+5. Acesse a aplicação no navegador em [http://localhost:3000](http://localhost:3000).
 
 ## Contribuição
 
