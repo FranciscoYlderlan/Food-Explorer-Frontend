@@ -47,7 +47,7 @@ Este projeto é uma aplicação de e-commerce voltada para pedidos e vendas de p
 ```npm
   npm run dev
 ```
-5. Acesse a aplicação no navegador em [http://localhost:3000](http://localhost:3000).
+5. Acesse a aplicação no navegador em [http://localhost:5173/](http://http://localhost:5173/).
 
 ## Contribuição
 
