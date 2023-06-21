@@ -10,7 +10,8 @@ export const StyledSelect = styled(Select)`
 
 export const Container = styled.div`
   margin: 15rem auto 0;
-  width: 70%;
+  max-width: 113rem;
+  height: 39rem;
   /* color: ${({ theme }) => theme.COLORS.LIGHT_400};
   .MuiDataGrid-withBorderColor,
   .MuiDataGrid-cell {
