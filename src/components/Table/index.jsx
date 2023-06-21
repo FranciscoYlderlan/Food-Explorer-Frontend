@@ -1,62 +1,10 @@
-import * as React from 'react'
+import { useState } from 'react'
 import { DataGrid } from '@mui/x-data-grid'
-import Select from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem'
-import TextField from '@mui/material/TextField'
-import { Container } from './styles'
+
+import { Container, StyledSelect } from './styles'
 
 export function Table() {
-  const columns = [
-    {
-      field: 'status',
-      headerName: 'Status',
-      width: 150,
-      renderCell: (params) => (
-        <Select
-          value={params.value}
-          onChange={(event) => console.log(event.target.value)}
-        >
-          <MenuItem value="Em andamento">Em andamento</MenuItem>
-          <MenuItem value="Concluído">Concluído</MenuItem>
-          <MenuItem value="Pendente">Pendente</MenuItem>
-        </Select>
-      ),
-    },
-    {
-      field: 'codigo',
-      headerName: 'Código',
-      width: 150,
-      renderCell: (params) => (
-        <TextField
-          value={params.value}
-          onChange={(event) => console.log(event.target.value)}
-        />
-      ),
-    },
-    {
-      field: 'detalhamento',
-      headerName: 'Detalhamento',
-      width: 250,
-      renderCell: (params) => (
-        <TextField
-          value={params.value}
-          onChange={(event) => console.log(event.target.value)}
-        />
-      ),
-    },
-    {
-      field: 'dataHora',
-      headerName: 'Data e Hora',
-      width: 200,
-      renderCell: (params) => (
-        <TextField
-          value={params.value}
-          onChange={(event) => console.log(event.target.value)}
-        />
-      ),
-    },
-  ]
-
   const rows = [
     {
       id: 1,
@@ -81,17 +29,72 @@ export function Table() {
     },
   ]
 
+  const [rowData, setRowData] = useState(rows)
+
+  function handleSelectChange(event, params) {
+    const updatedRowData = rowData.map((row) => {
+      if (row.codigo === params.row.codigo) {
+        return { ...row, status: event.target.value }
+      }
+      return row
+    })
+    setRowData(updatedRowData)
+  }
+
+  const columns = [
+    {
+      field: 'status',
+      headerName: 'Status',
+      width: 150,
+      renderCell: (params) => (
+        <StyledSelect
+          value={params.value}
+          onChange={(event) => handleSelectChange(event, params)}
+        >
+          <MenuItem value="Em andamento">Em andamento</MenuItem>
+          <MenuItem value="Concluído">Concluído</MenuItem>
+          <MenuItem value="Pendente">Pendente</MenuItem>
+        </StyledSelect>
+      ),
+    },
+    {
+      field: 'codigo',
+      headerName: 'Código',
+      width: 150,
+      // renderCell: (params) => (
+      //   <TextField
+      //     value={params.value}
+      //     onChange={(event) => console.log(event.target.value)}
+      //   />
+      // ),
+    },
+    {
+      field: 'detalhamento',
+      headerName: 'Detalhamento',
+      width: 250,
+      // renderCell: (params) => (
+      //   <TextField
+      //     value={params.value}
+      //     onChange={(event) => console.log(event.target.value)}
+      //   />
+      // ),
+    },
+    {
+      field: 'dataHora',
+      headerName: 'Data e Hora',
+      width: 200,
+      // renderCell: (params) => (
+      //   <TextField
+      //     value={params.value}
+      //     onChange={(event) => console.log(event.target.value)}
+      //   />
+      // ),
+    },
+  ]
+
   return (
     <Container>
-      <DataGrid
-        columns={columns}
-        rows={rows}
-        sx={{
-          boxShadow: 2,
-          border: 2,
-          borderColor: `${({ theme }) => theme.COLORS.LIGHT_300}`,
-        }}
-      />
+      <DataGrid columns={columns} rows={rowData} />
     </Container>
   )
 }
