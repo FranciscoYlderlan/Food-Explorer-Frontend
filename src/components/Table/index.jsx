@@ -1,14 +1,12 @@
 import { useState } from 'react'
 
-import { DataGrid } from '@mui/x-data-grid'
-
 import Pagination from '@mui/material/Pagination'
 
 import PaginationItem from '@mui/material/PaginationItem'
 
 import MenuItem from '@mui/material/MenuItem'
 
-import { Container, StyledSelect } from './styles'
+import { Container, StyledSelect, StyledDataGrid } from './styles'
 
 export function Table() {
   const columns = [
@@ -155,11 +153,10 @@ export function Table() {
       dataHora: '2023-06-20 14:30',
     },
   ]
-
+  const pageSize = 5
   const [rowData, setRowData] = useState(rows)
   const [page, setPage] = useState(0)
-  const [paginatedRows, setPaginatedRows] = useState(0)
-  const pageSize = 5
+  const [paginatedRows, setPaginatedRows] = useState(rows.slice(0, pageSize))
 
   function handlePageChange(event, value) {
     setPaginatedRows(rowData.slice((value - 1) * pageSize, value * pageSize))
@@ -181,8 +178,10 @@ export function Table() {
 
   return (
     <Container>
-      <DataGrid
+      <StyledDataGrid
         pagination
+        showCellVerticalBorder
+        showColumnVerticalBorder
         page={page}
         onPageChange={handlePageChange}
         pageSize={pageSize}
