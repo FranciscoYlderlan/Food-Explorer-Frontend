@@ -24,5 +24,8 @@ export default createGlobalStyle`
         
     }
 
+    button, select, a, textarea, input, link {
+        font-size: 1.6rem;
+    }
 
 `

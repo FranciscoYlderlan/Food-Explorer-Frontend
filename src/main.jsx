@@ -5,13 +5,13 @@ import { theme } from './styles/theme.js'
 import GlobalStyle from './styles/global.js'
 import { ThemeProvider } from 'styled-components'
 
-import { Table } from './components/Table/index.jsx'
+import { Button } from './components/Button/index.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Table />
+      <Button title="Pedidos (0)" />
     </ThemeProvider>
   </React.StrictMode>,
 )
