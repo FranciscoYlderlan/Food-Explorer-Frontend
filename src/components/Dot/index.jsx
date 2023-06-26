@@ -14,7 +14,7 @@ export function Dot({ color }) {
           width="428"
           height="928"
           transform="translate(-75 -371)"
-          fill="#000A0F"
+          fill="transparent"
         />
         <g id="Frame 3">
           <g id="Frame 7625">
@@ -26,7 +26,7 @@ export function Dot({ color }) {
                   width="315"
                   height="48"
                   rx="5"
-                  fill="#0D1D25"
+                  fill="transparent"
                 />
                 <g id="Frame 7189">
                   <circle
@@ -47,7 +47,7 @@ export function Dot({ color }) {
             width="356"
             height="192"
             rx="7"
-            stroke="#192227"
+            stroke="transparent"
             strokeWidth="2"
           />
         </g>

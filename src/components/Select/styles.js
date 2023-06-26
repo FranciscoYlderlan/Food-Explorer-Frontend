@@ -1,19 +1,42 @@
 import styled from 'styled-components'
-import { Dot } from '../Dot'
 
-export const CustomSelect = styled.div`
+export const Container = styled.div`
   position: relative;
   display: inline-block;
+  border-radius: 0.8rem;
+  background-color: ${({ theme }) => theme.COLORS.DARK_900};
+  &:after {
+    position: absolute;
+    content: '';
+    z-index: 2;
+    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 10L12 14L16 10' stroke='%239C98A6' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+
+    height: 2.4rem;
+    width: 2.4rem;
+
+    right: 5%;
+
+    top: 50%;
+    transform: translateY(-50%) ${({ open }) => (open ? ' scaleY(-1)' : '')};
+  }
 `
 
 export const SelectSelected = styled.div`
-  background-color: #f1f1f1;
-  padding: 8px 16px;
+  appearance: none;
+  border: none;
+  border-radius: 0.8rem;
+  outline: none;
+  background-color: ${({ theme }) => theme.COLORS.DARK_900};
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.6rem;
   cursor: pointer;
 `
 
 export const SelectOptions = styled.ul`
   position: absolute;
+  width: 100%;
   background-color: #f1f1f1;
   list-style-type: none;
   padding: 0;
@@ -34,17 +57,3 @@ export const Icon = styled.span`
   border-radius: 50%;
   margin-right: 8px;
 `
-
-export const IconRed = styled(Dot)`
-  background-color: red;
-`
-
-export const IconBlue = styled(Dot)`
-  background-color: blue;
-`
-
-export const IconGreen = styled(Dot)`
-  background-color: green;
-`
-
-export const Container = styled.div``

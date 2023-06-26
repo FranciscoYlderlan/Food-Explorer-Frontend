@@ -1,12 +1,6 @@
-import {
-  Container,
-  Header,
-  Status,
-  SelectStatus,
-  Description,
-} from './styles.js'
+import { Container, Header, Status, Description } from './styles.js'
 import { Dot } from '../Dot'
-import { CustonSelectComponent } from '../Select'
+import { Select } from '../Select'
 
 export function Card() {
   return (
@@ -23,18 +17,7 @@ export function Card() {
         1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela, 1 x Suco de
         Maracujá
       </Description>
-      <SelectStatus>
-        <option value="Pendente">
-          <Dot color="#AB222E" /> Pendente
-        </option>
-        <option value="Preparando">
-          <Dot color="#AB222E" /> Preparando
-        </option>
-        <option value="Concluído">
-          <Dot color="#AB222E" /> Concluído
-        </option>
-      </SelectStatus>
-      <CustonSelectComponent />
+      <Select />
     </Container>
   )
 }

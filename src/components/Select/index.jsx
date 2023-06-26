@@ -1,15 +1,9 @@
-import {
-  CustomSelect,
-  SelectSelected,
-  SelectOptions,
-  SelectOption,
-  IconRed,
-  IconGreen,
-  IconBlue,
-} from './styles.js'
+import { Container, SelectSelected, SelectOptions } from './styles.js'
 import { useState } from 'react'
+import { SelectOption } from '../SelectOption'
+import { Dot } from '../Dot/index.jsx'
 
-export function CustonSelectComponent() {
+export function Select() {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedOption, setSelectedOption] = useState('Selecione uma opção')
   const [selectedIcon, setSelectedIcon] = useState(null)
@@ -21,45 +15,38 @@ export function CustonSelectComponent() {
   const handleOptionClick = (value, text) => {
     setSelectedOption(text)
     setIsOpen(false)
-
     setSelectedIcon(value)
   }
 
   return (
-    <CustomSelect>
+    <Container open={isOpen}>
       <SelectSelected onClick={handleSelectClick}>
-        {selectedOption}
         {selectedIcon && (
           <>
-            {selectedIcon === 'opcao1' && <IconRed />}
-            {selectedIcon === 'opcao2' && <IconBlue />}
-            {selectedIcon === 'opcao3' && <IconGreen />}
+            {selectedIcon === 'Pendente' && <Dot color="#AB222E" />}
+            {selectedIcon === 'Preparando' && <Dot color="#FBA94C" />}
+            {selectedIcon === 'Entregue' && <Dot color="#04D361" />}
           </>
         )}
+        <>{selectedOption}</>
       </SelectSelected>
       <SelectOptions open={isOpen}>
         <SelectOption
-          data-value="opcao1"
-          onClick={() => handleOptionClick('opcao1', 'Opção 1')}
-        >
-          Opção 1
-          <IconRed />
-        </SelectOption>
+          value="Pendente"
+          text="Pendente"
+          onClick={() => handleOptionClick('Pendente', 'Pendente')}
+        />
         <SelectOption
-          data-value="opcao2"
-          onClick={() => handleOptionClick('opcao2', 'Opção 2')}
-        >
-          Opção 2
-          <IconBlue />
-        </SelectOption>
+          value="Preparando"
+          text="Preparando"
+          onClick={() => handleOptionClick('Preparando', 'Preparando')}
+        />
         <SelectOption
-          data-value="opcao3"
-          onClick={() => handleOptionClick('opcao3', 'Opção 3')}
-        >
-          Opção 3
-          <IconGreen />
-        </SelectOption>
+          value="Entregue"
+          text="Entregue"
+          onClick={() => handleOptionClick('Entregue', 'Entregue')}
+        />
       </SelectOptions>
-    </CustomSelect>
+    </Container>
   )
 }
