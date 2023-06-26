@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { CaretDown } from '@phosphor-icons/react'
 
 export const Container = styled.div`
   display: grid;

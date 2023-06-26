@@ -5,8 +5,8 @@ import {
   SelectStatus,
   Description,
 } from './styles.js'
-import { Dot } from '../Dot/index.jsx'
-import { CaretDown } from '@phosphor-icons/react'
+import { Dot } from '../Dot'
+import { CustonSelectComponent } from '../Select'
 
 export function Card() {
   return (
@@ -14,7 +14,7 @@ export function Card() {
       <Header>
         <span>000004</span>
         <Status>
-          <Dot />
+          <Dot color="#AB222E" />
           <span>Pendente</span>
         </Status>
         <span>20/05 às 18h00</span>
@@ -25,15 +25,16 @@ export function Card() {
       </Description>
       <SelectStatus>
         <option value="Pendente">
-          <span>&#x25CF;</span> Pendente
+          <Dot color="#AB222E" /> Pendente
         </option>
         <option value="Preparando">
-          <span>&#x25CF;</span> Preparando
+          <Dot color="#AB222E" /> Preparando
         </option>
         <option value="Concluído">
-          <span>&#x25CF;</span> Concluído
+          <Dot color="#AB222E" /> Concluído
         </option>
       </SelectStatus>
+      <CustonSelectComponent />
     </Container>
   )
 }

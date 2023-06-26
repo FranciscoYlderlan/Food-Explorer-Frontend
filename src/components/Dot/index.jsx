@@ -1,5 +1,5 @@
 import { Container } from './styles'
-export function Dot(color) {
+export function Dot({ color }) {
   return (
     <Container
       width="8"
@@ -35,7 +35,7 @@ export function Dot(color) {
                     cy="4"
                     r="4"
                     transform="matrix(1 0 0 -1 0 8)"
-                    fill="#AB222E"
+                    fill={color}
                   />
                 </g>
               </g>
