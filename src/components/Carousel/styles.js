@@ -7,20 +7,40 @@ export const Container = styled.div`
   padding: 2.4rem;
 `
 
-export const Image = styled.img`
-  display: block;
-  width: 100%;
-`
-
 export const StyledSwiper = styled(Swiper)`
   width: 100%;
-  height: 100%;
-  box-shadow: 0px 32px 80px rgba(0, 0, 0, 0.35);
+  height: fit-content;
+  position: relative;
+  /* overflow: visible; */
+  &:before {
+    left: 0;
+    content: '';
+    position: absolute;
+    width: inherit;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      rgba(0, 10, 15, 0.9) 0%,
+      rgba(0, 10, 15, 0.1) 20%,
+      rgba(0, 10, 15, 0.1) 80%,
+      rgba(0, 10, 15, 0.9) 100%
+    );
+  }
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: ${({ theme }) => theme.COLORS.LIGHT_100};
+  }
+  .swiper-pagination-bullet-active {
+    background-color: ${({ theme }) => theme.COLORS.LIGHT_100};
+  }
   .swiper-slide {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     align-items: center;
     justify-content: center;
+    gap: 1.6rem;
     position: relative;
 
     img {
@@ -42,8 +62,9 @@ export const StyledSwiper = styled(Swiper)`
         z-index: 2;
       }
 
-      &.swiper-slide-active:first-child img {
-        /* box-shadow: 0px 32px 80px rgba(0, 0, 0, 0.35); */
+      &.swiper-slide-active:first-child {
+        box-shadow: 0px 32px 80px rgba(0, 0, 0, 0.35);
+        z-index: 1;
       }
 
       &:nth-child(2) {
@@ -52,7 +73,8 @@ export const StyledSwiper = styled(Swiper)`
 
       &.swiper-slide-next:nth-child(2) {
         /* transform: translateX(55%); */
-        z-index: 1;
+        box-shadow: 0px 80px 32px rgba(0, 0, 0, 0.75);
+        z-index: 2;
       }
 
       &[dir='rtl'] &.swiper-slide-active:first-child {
@@ -66,5 +88,9 @@ export const StyledSwiper = styled(Swiper)`
   }
 `
 export const StyledSwiperSlide = styled(SwiperSlide)`
-  margin: 0 1.6rem;
+  padding: 0 0.8rem;
+`
+export const Image = styled.img`
+  display: block;
+  width: 100%;
 `

@@ -13,6 +13,8 @@ export function Carousel() {
   return (
     <Container>
       <StyledSwiper
+        rewind={true}
+        slideShadows={true}
         slidesPerView={2}
         centeredSlides={false}
         slidesPerGroupSkip={2}
