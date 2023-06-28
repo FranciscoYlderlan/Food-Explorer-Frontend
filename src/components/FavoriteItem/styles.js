@@ -7,6 +7,7 @@ export const Container = styled.div`
   padding: 1.6rem;
   gap: 1.3rem;
   img {
+    opacity: 0.8;
     height: 7.2rem;
     width: 7.2rem;
     object-fit: cover;
