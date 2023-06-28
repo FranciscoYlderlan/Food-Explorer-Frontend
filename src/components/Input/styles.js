@@ -40,6 +40,7 @@ export const BoxInput = styled.div`
   gap: 1.6rem;
   border-radius: 1rem;
 
+  background-color: ${({ theme }) => theme.COLORS.DARK_900};
   outline: 0.2rem solid ${({ theme }) => theme.COLORS.DARK_700};
   outline-offset: -0.2rem;
 
