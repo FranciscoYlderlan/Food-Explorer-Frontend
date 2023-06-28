@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-export const Container = styled.div`
+export const Container = styled.head`
   display: flex;
   align-items: center;
   gap: 3.2rem;
