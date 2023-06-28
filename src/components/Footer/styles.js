@@ -12,8 +12,13 @@ export const Container = styled.div`
 export const Logo = styled.div`
   display: flex;
   align-items: center;
+  white-space: nowrap;
+
   gap: 1rem;
+
+  color: ${({ theme }) => theme.COLORS.LIGHT_700};
 `
 export const Copyright = styled.div`
   display: flex;
+  color: ${({ theme }) => theme.COLORS.LIGHT_200};
 `

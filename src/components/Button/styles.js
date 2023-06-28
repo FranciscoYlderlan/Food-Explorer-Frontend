@@ -1,12 +1,15 @@
 import styled from 'styled-components'
 
 export const Container = styled.button`
+  width: 100%;
+
   display: flex;
+
   align-items: center;
   justify-content: center;
+
   gap: 0.8rem;
 
-  width: 100%;
   padding: 1.2rem 2.4rem;
 
   border: none;
