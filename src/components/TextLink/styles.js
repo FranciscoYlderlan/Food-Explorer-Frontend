@@ -12,10 +12,6 @@ export const Container = styled.a`
 
   color: ${({ theme }) => theme.COLORS.LIGHT_300};
 
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 21px;
   &:hover {
     cursor: pointer;
   }
