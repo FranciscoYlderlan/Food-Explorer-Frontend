@@ -35,6 +35,11 @@ export const StyledSwiper = styled(Swiper)`
   .swiper-pagination-bullet-active {
     background-color: ${({ theme }) => theme.COLORS.LIGHT_100};
   }
+
+  .swiper-pagination-bullet {
+    background-color: ${({ theme }) => theme.COLORS.LIGHT_700};
+  }
+
   .swiper-slide {
     display: flex;
     /* flex-direction: column; */
@@ -91,6 +96,30 @@ export const StyledSwiperSlide = styled(SwiperSlide)`
   padding: 0 0.8rem;
 `
 export const Image = styled.img`
-  display: block;
+  display: flex;
   width: 100%;
+`
+export const Card = styled.div`
+  width: 100%;
+
+  display: grid;
+  grid-template-rows: auto;
+  gap: 1.5rem;
+  padding: 2.4rem;
+
+  border-radius: 0.8rem;
+  border: 1px solid ${({ theme }) => theme.COLORS.DARK_300};
+  background-color: ${({ theme }) => theme.COLORS.DARK_200};
+
+  img {
+    width: 17rem;
+    height: 17rem;
+    object-fit: cover;
+  }
+  h2 {
+    color: ${({ theme }) => theme.COLORS.LIGHT_300};
+  }
+  p {
+    color: ${({ theme }) => theme.COLORS.LIGHT_400};
+  }
 `

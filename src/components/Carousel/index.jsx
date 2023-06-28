@@ -1,5 +1,6 @@
 import React from 'react'
-import { Container, Image, StyledSwiper, StyledSwiperSlide } from './styles.js'
+import { Container, StyledSwiper, StyledSwiperSlide, Card } from './styles.js'
+import { AddItem } from '../AddItem'
 
 import 'swiper/css'
 import 'swiper/css/scrollbar'
@@ -36,58 +37,103 @@ export function Carousel() {
         className="mySwiper"
       >
         <StyledSwiperSlide>
-          <Image
-            src="https://cdn.magloft.com/github/swiper/images/page-001.jpg"
-            alt="exemplo"
-          />
+          <Card>
+            <img
+              src="https://st.depositphotos.com/1003814/4626/i/600/depositphotos_46267763-stock-photo-fried-chicken-fillets.jpg"
+              alt="prato"
+            />
+            <h2>Frango Grelhado</h2>
+            <p>Frango gratinado ao oleo e sal com uma salada de repolho</p>
+            <AddItem />
+          </Card>
         </StyledSwiperSlide>
         <StyledSwiperSlide>
-          <Image
-            src="https://cdn.magloft.com/github/swiper/images/page-002.jpg"
-            alt="exemplo"
-          />
+          <Card>
+            <img
+              src="https://st.depositphotos.com/1003814/4626/i/600/depositphotos_46267763-stock-photo-fried-chicken-fillets.jpg"
+              alt="prato"
+            />
+            <h2>Frango Grelhado</h2>
+            <p>Frango gratinado ao oleo e sal com uma salada de repolho</p>
+            <AddItem />
+          </Card>
         </StyledSwiperSlide>
         <StyledSwiperSlide>
-          <Image
-            src="https://cdn.magloft.com/github/swiper/images/page-003.jpg"
-            alt="exemplo"
-          />
+          <Card>
+            <img
+              src="https://st.depositphotos.com/1003814/4626/i/600/depositphotos_46267763-stock-photo-fried-chicken-fillets.jpg"
+              alt="prato"
+            />
+            <h2>Frango Grelhado</h2>
+            <p>Frango gratinado ao oleo e sal com uma salada de repolho</p>
+            <AddItem />
+          </Card>
         </StyledSwiperSlide>
         <StyledSwiperSlide>
-          <Image
-            src="https://cdn.magloft.com/github/swiper/images/page-004.jpg"
-            alt="exemplo"
-          />
+          <Card>
+            <img
+              src="https://st.depositphotos.com/1003814/4626/i/600/depositphotos_46267763-stock-photo-fried-chicken-fillets.jpg"
+              alt="prato"
+            />
+            <h2>Frango Grelhado</h2>
+            <p>Frango gratinado ao oleo e sal com uma salada de repolho</p>
+            <AddItem />
+          </Card>
         </StyledSwiperSlide>
         <StyledSwiperSlide>
-          <Image
-            src="https://cdn.magloft.com/github/swiper/images/page-005.jpg"
-            alt="exemplo"
-          />
+          <Card>
+            <img
+              src="https://st.depositphotos.com/1003814/4626/i/600/depositphotos_46267763-stock-photo-fried-chicken-fillets.jpg"
+              alt="prato"
+            />
+            <h2>Frango Grelhado</h2>
+            <p>Frango gratinado ao oleo e sal com uma salada de repolho</p>
+            <AddItem />
+          </Card>
         </StyledSwiperSlide>
         <StyledSwiperSlide>
-          <Image
-            src="https://cdn.magloft.com/github/swiper/images/page-006.jpg"
-            alt="exemplo"
-          />
+          <Card>
+            <img
+              src="https://st.depositphotos.com/1003814/4626/i/600/depositphotos_46267763-stock-photo-fried-chicken-fillets.jpg"
+              alt="prato"
+            />
+            <h2>Frango Grelhado</h2>
+            <p>Frango gratinado ao oleo e sal com uma salada de repolho</p>
+            <AddItem />
+          </Card>
         </StyledSwiperSlide>
         <StyledSwiperSlide>
-          <Image
-            src="https://cdn.magloft.com/github/swiper/images/page-007.jpg"
-            alt="exemplo"
-          />
+          <Card>
+            <img
+              src="https://st.depositphotos.com/1003814/4626/i/600/depositphotos_46267763-stock-photo-fried-chicken-fillets.jpg"
+              alt="prato"
+            />
+            <h2>Frango Grelhado</h2>
+            <p>Frango gratinado ao oleo e sal com uma salada de repolho</p>
+            <AddItem />
+          </Card>
         </StyledSwiperSlide>
         <StyledSwiperSlide>
-          <Image
-            src="https://cdn.magloft.com/github/swiper/images/page-008.jpg"
-            alt="exemplo"
-          />
+          <Card>
+            <img
+              src="https://st.depositphotos.com/1003814/4626/i/600/depositphotos_46267763-stock-photo-fried-chicken-fillets.jpg"
+              alt="prato"
+            />
+            <h2>Frango Grelhado</h2>
+            <p>Frango gratinado ao oleo e sal com uma salada de repolho</p>
+            <AddItem />
+          </Card>
         </StyledSwiperSlide>
         <StyledSwiperSlide>
-          <Image
-            src="https://cdn.magloft.com/github/swiper/images/page-009.jpg"
-            alt="exemplo"
-          />
+          <Card>
+            <img
+              src="https://st.depositphotos.com/1003814/4626/i/600/depositphotos_46267763-stock-photo-fried-chicken-fillets.jpg"
+              alt="prato"
+            />
+            <h2>Frango Grelhado</h2>
+            <p>Frango gratinado ao oleo e sal com uma salada de repolho</p>
+            <AddItem />
+          </Card>
         </StyledSwiperSlide>
       </StyledSwiper>
     </Container>

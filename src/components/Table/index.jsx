@@ -179,6 +179,12 @@ export function Table() {
   return (
     <Container>
       <StyledDataGrid
+        sx={{
+          '.MuiDataGrid-withBorderColor': { border: '2px solid red' },
+          '.MuiDataGrid-root': {
+            borderColor: 'none',
+          },
+        }}
         pagination
         showCellVerticalBorder
         showColumnVerticalBorder

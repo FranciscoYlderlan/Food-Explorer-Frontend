@@ -4,13 +4,13 @@ import ReactDOM from 'react-dom/client'
 import { theme } from './styles/theme.js'
 import GlobalStyle from './styles/global.js'
 import { ThemeProvider } from 'styled-components'
-import { Carousel } from './components/Carousel/index.jsx'
+import { Table } from './components/Table/index.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Carousel />
+      <Table />
     </ThemeProvider>
   </React.StrictMode>,
 )
