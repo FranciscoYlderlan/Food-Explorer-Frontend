@@ -42,6 +42,7 @@ export const SelectOptions = styled.ul`
   padding: 0;
   margin: 0;
   display: ${({ open }) => (open ? 'block' : 'none')};
+  z-index: 9999;
 `
 
 export const SelectOption = styled.li`

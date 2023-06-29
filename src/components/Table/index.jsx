@@ -6,29 +6,40 @@ import PaginationItem from '@mui/material/PaginationItem'
 
 import MenuItem from '@mui/material/MenuItem'
 
-import { Container, StyledSelect, StyledDataGrid } from './styles'
-
+import { Container, StyledSelect, StyledDataGrid, LinkStyled } from './styles'
+import { Dot } from '../Dot'
 export function Table() {
   const columns = [
     {
       field: 'status',
       headerName: 'Status',
-      width: 150,
+      sortable: false,
+      width: 250,
+      padding: 24,
       renderCell: (params) => (
         <StyledSelect
           value={params.value}
           onChange={(event) => handleSelectChange(event, params)}
         >
-          <MenuItem value="Em andamento">Em andamento</MenuItem>
-          <MenuItem value="Concluído">Concluído</MenuItem>
-          <MenuItem value="Pendente">Pendente</MenuItem>
+          <MenuItem value="Pendente">
+            <Dot color="#AB222E" /> Pendente
+          </MenuItem>
+          <MenuItem value="Em andamento">
+            <Dot color="#FBA94C" /> Em andamento
+          </MenuItem>
+          <MenuItem value="Concluído">
+            <Dot color="#04D361" /> Concluído
+          </MenuItem>
         </StyledSelect>
+        // <Select />
       ),
     },
     {
       field: 'codigo',
       headerName: 'Código',
+      sortable: false,
       width: 150,
+      padding: 24,
       // renderCell: (params) => (
       //   <TextField
       //     value={params.value}
@@ -39,7 +50,9 @@ export function Table() {
     {
       field: 'detalhamento',
       headerName: 'Detalhamento',
-      width: 670,
+      sortable: false,
+      width: 500,
+      padding: 24,
       // renderCell: (params) => (
       //   <TextField
       //     value={params.value}
@@ -50,7 +63,9 @@ export function Table() {
     {
       field: 'dataHora',
       headerName: 'Data e Hora',
+      sortable: false,
       width: 150,
+      padding: 24,
       // renderCell: (params) => (
       //   <TextField
       //     value={params.value}
@@ -179,13 +194,10 @@ export function Table() {
   return (
     <Container>
       <StyledDataGrid
-        sx={{
-          '.MuiDataGrid-withBorderColor': { border: '2px solid red' },
-          '.MuiDataGrid-root': {
-            borderColor: 'none',
-          },
-        }}
+        sx={LinkStyled}
         pagination
+        disableColumnMenu
+        disableColumnSelector
         showCellVerticalBorder
         showColumnVerticalBorder
         page={page}
