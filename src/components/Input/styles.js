@@ -1,34 +1,18 @@
-import styled, { keyframes } from 'styled-components'
-
-const shakeHorizontal = keyframes`
-    0%,
-    100% {
-        transform: translateX(0);
-    }
-    10%,
-    30%,
-    50%,
-    70% {
-        transform: translateX(-10px);
-    }
-    20%,
-    40%,
-    60% {
-
-        transform: translateX(10px);
-    }
-    80% {
-
-        transform: translateX(8px);
-    }
-    90% {
-        transform: translateX(-8px);
-    }
-`
+import styled from 'styled-components'
 
 export const Container = styled.div`
-  position: relative;
+  display: grid;
+  gap: 0.8rem;
+
   width: 100%;
+  position: relative;
+
+  > label {
+    ${({ theme }) => theme.FONTS.ROBOTO.SMALL_REGULAR};
+
+    color: ${({ theme }) => theme.COLORS.LIGHT_400};
+    pointer-events: none;
+  }
 `
 
 export const BoxInput = styled.div`
@@ -41,23 +25,15 @@ export const BoxInput = styled.div`
   border-radius: 1rem;
 
   background-color: ${({ theme }) => theme.COLORS.DARK_900};
-  outline: 0.2rem solid ${({ theme }) => theme.COLORS.DARK_700};
-  outline-offset: -0.2rem;
+  /* outline: 0.2rem solid ${({ theme }) => theme.COLORS.DARK_700}; */
+  /* outline-offset: -0.2rem; */
 
-  color: ${({ theme }) => theme.COLORS.LIGTH_500};
-
-  > label {
-    background-color: ${({ theme }) => theme.COLORS.DARK_900};
-    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
-    position: absolute;
-    pointer-events: none;
-    left: 15%;
-  }
+  color: ${({ theme }) => theme.COLORS.LIGHT_100};
 
   > input {
     background-color: ${({ theme }) => theme.COLORS.DARK_900};
 
-    color: ${({ theme }) => theme.COLORS.LIGHT_500};
+    color: ${({ theme }) => theme.COLORS.LIGHT_100};
     border: none;
     padding: 1.5rem 0;
     padding-right: 2rem;
@@ -67,7 +43,7 @@ export const BoxInput = styled.div`
     border-radius: 1rem;
 
     &::placeholder {
-      color: transparent;
+      color: ${({ theme }) => theme.COLORS.LIGHT_500};
     }
 
     &:invalid {
@@ -81,7 +57,7 @@ export const BoxInput = styled.div`
 
     &:focus ~ label,
     &:valid ~ label {
-      transform: translateY(-100%) scale(0.95);
+      /* transform: translateY(-100%) scale(0.95); */
       background-color: none;
       padding: 0 0.2em;
       color: ${({ theme }) => theme.COLORS.MINT_100};
@@ -89,7 +65,7 @@ export const BoxInput = styled.div`
 
     &:invalid:focus ~ label,
     &:invalid:not(:placeholder-shown) ~ label {
-      transform: translateY(-100%) scale(0.95);
+      /* transform: translateY(-100%) scale(0.95); */
       background-color: none;
       padding: 0 0.2em;
       color: ${({ theme }) => theme.COLORS.CARROT};
@@ -114,8 +90,6 @@ export const BoxInput = styled.div`
 
   &:has(input:invalid:focus),
   &:has(input:invalid:not(:placeholder-shown)) {
-    /* animation: ${shakeHorizontal} 0.1s cubic-bezier(0.455, 0.03, 0.515, 0.955) both; */
-
     outline: 0.2rem solid ${({ theme }) => theme.COLORS.CARROT};
     outline-offset: -0.2rem;
   }

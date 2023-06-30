@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled.button`
   /* width: 100%; */
+  ${({ theme }) => theme.FONTS.POPPINS.MEDIUM_100}
 
   display: flex;
 

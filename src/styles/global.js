@@ -14,14 +14,17 @@ export default createGlobalStyle`
     
     body {
 
-        width: 100vw;
         height: 100vh;
 
         font-size: 1.6rem;
         
         background-color: ${({ theme }) => theme.COLORS.DARK_400};
         color: ${({ theme }) => theme.COLORS.LIGHT_300};
-        
+        #root {
+            width: 100%;
+            height: 100%;
+            display: grid;
+        }
     }
 
     button, select, a, textarea, input, link {

@@ -5,11 +5,13 @@ import { AiFillWarning } from 'react-icons/ai'
 export function Input({ icon: Icon, labelPlaceholder, errorMessage, ...rest }) {
   return (
     <Container>
+      <label>{labelPlaceholder}</label>
+
       <BoxInput>
         {Icon && <Icon size={20} />}
         <input {...rest} autoComplete="off" />
-        <label>{labelPlaceholder}</label>
       </BoxInput>
+
       <Warning icon={AiFillWarning} description={errorMessage} />
     </Container>
   )
