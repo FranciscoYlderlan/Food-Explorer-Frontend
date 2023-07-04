@@ -54,7 +54,6 @@ export const Links = styled.div`
 `
 
 export const OptionsIn = styled.div`
-  border: solid red 2px;
   margin-top: 3.6rem;
   position: absolute;
   top: 100%;
@@ -72,16 +71,15 @@ export const OptionsIn = styled.div`
 `
 
 export const OptionsOut = styled.div`
-  grid-area: content;
   margin-top: 3.6rem;
   width: 82.5vw;
-  border: solid red 2px;
+
   position: absolute;
   top: 100%;
 
   display: grid;
-  align-content: center;
   align-items: flex-start;
+  gap: 1rem;
 
   pointer-events: none;
 
