@@ -52,6 +52,13 @@ export const theme = {
         'font-weight': '300',
         'line-height': '140%',
       },
+      SEMIBOLD_600: {
+        'font-size': '1.2rem',
+        'font-family': 'Poppins',
+        'font-style': 'normal',
+        'font-weight': '600',
+        'line-height': '140%',
+      },
       MEDIUM_100: {
         'font-size': '1.4rem',
         'font-family': 'Poppins',
@@ -85,6 +92,13 @@ export const theme = {
         'font-family': 'Poppins',
         'font-style': 'normal',
         'font-weight': '700',
+        'line-height': '140%',
+      },
+      REGULAR_100: {
+        'font-size': '.8rem',
+        'font-family': 'Poppins',
+        'font-style': 'normal',
+        'font-weight': '400',
         'line-height': '140%',
       },
       REGULAR_300: {

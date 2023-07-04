@@ -4,12 +4,12 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 export const Container = styled.div`
   width: 100%;
   height: 100%;
-  padding: 2.4rem;
+  padding: 2.4rem 0 2.4rem 0;
 `
 
 export const StyledSwiper = styled(Swiper)`
   width: 100%;
-  height: fit-content;
+  height: 100%;
   position: relative;
   /* overflow: visible; */
   &:before {
@@ -68,7 +68,7 @@ export const StyledSwiper = styled(Swiper)`
       }
 
       &.swiper-slide-active:first-child {
-        box-shadow: 0px 32px 80px rgba(0, 0, 0, 0.35);
+        /* box-shadow: 0px 32px 80px rgba(0, 0, 0, 0.35); */
         z-index: 1;
       }
 
@@ -78,7 +78,7 @@ export const StyledSwiper = styled(Swiper)`
 
       &.swiper-slide-next:nth-child(2) {
         /* transform: translateX(55%); */
-        box-shadow: 0px 80px 32px rgba(0, 0, 0, 0.75);
+        /* box-shadow: 0px 80px 32px rgba(0, 0, 0, 0.75); */
         z-index: 2;
       }
 
@@ -102,8 +102,8 @@ export const Image = styled.img`
 export const Card = styled.div`
   width: 100%;
 
-  display: grid;
-  grid-template-rows: auto;
+  display: flex;
+  flex-direction: column;
   gap: 1.5rem;
   padding: 2.4rem;
 

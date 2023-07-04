@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  display: grid;
-  gap: 2.4rem;
+  > h2 {
+    ${({ theme }) => theme.FONTS.POPPINS.MEDIUM_400}
+    margin-bottom: 2rem;
+  }
 `

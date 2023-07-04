@@ -23,11 +23,29 @@ export default createGlobalStyle`
         #root {
             width: 100%;
             height: 100%;
-            display: grid;
-
         }
     }
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #4d585e transparent;
+  }
 
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #4d585e;
+    border-radius: 10px;
+    /* border: 3px solid #ffffff; */
+  }
     button, select, a, textarea, input, link {
         font-size: 1.6rem;
     }

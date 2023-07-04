@@ -15,7 +15,6 @@ const rollout = keyframes`
 export const Container = styled.header`
   grid-area: header;
   position: relative;
-  width: 100vw;
   display: flex;
   height: fit-content;
   justify-content: space-between;
