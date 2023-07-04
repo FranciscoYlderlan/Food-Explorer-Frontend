@@ -45,6 +45,13 @@ export const theme = {
   },
   FONTS: {
     POPPINS: {
+      LIGHT_300: {
+        'font-size': '2.4rem',
+        'font-family': 'Poppins',
+        'font-style': 'normal',
+        'font-weight': '300',
+        'line-height': '140%',
+      },
       MEDIUM_100: {
         'font-size': '1.4rem',
         'font-family': 'Poppins',
@@ -59,20 +66,6 @@ export const theme = {
         'font-weight': '500',
         'line-height': '160%',
       },
-      BOLD_300: {
-        'font-size': '2.4rem',
-        'font-family': 'Poppins',
-        'font-style': 'normal',
-        'font-weight': '700',
-        'line-height': '140%',
-      },
-      REGULAR_300: {
-        'font-size': '2.4rem',
-        'font-family': 'Poppins',
-        'font-style': 'normal',
-        'font-weight': '400',
-        'line-height': '140%',
-      },
       MEDIUM_400: {
         'font-size': '3.2rem',
         'font-family': 'Poppins',
@@ -85,6 +78,20 @@ export const theme = {
         'font-family': 'Poppins',
         'font-style': 'normal',
         'font-weight': '500',
+        'line-height': '140%',
+      },
+      BOLD_300: {
+        'font-size': '2.4rem',
+        'font-family': 'Poppins',
+        'font-style': 'normal',
+        'font-weight': '700',
+        'line-height': '140%',
+      },
+      REGULAR_300: {
+        'font-size': '2.4rem',
+        'font-family': 'Poppins',
+        'font-style': 'normal',
+        'font-weight': '400',
         'line-height': '140%',
       },
     },

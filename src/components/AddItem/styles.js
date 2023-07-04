@@ -1,11 +1,12 @@
-import styled from 'styled-components'
+import styled from "styled-components"
+
 
 export const Container = styled.div`
   display: grid;
   width: 100%;
   text-align: center;
   gap: 1.6rem;
-`
+`;
 export const Price = styled.div`
   width: 100%;
   font-size: 1.6rem;
@@ -13,7 +14,7 @@ export const Price = styled.div`
   &:hover {
     cursor: default;
   }
-`
+`;
 
 export const Counter = styled.div`
   display: flex;
@@ -30,10 +31,11 @@ export const Counter = styled.div`
   svg:hover {
     cursor: pointer;
   }
-`
+`;
 export const Add = styled.div`
   width: 100%;
   display: flex;
+  //TODO: Adicionar media query
   align-items: center;
   gap: 1.6rem;
 `

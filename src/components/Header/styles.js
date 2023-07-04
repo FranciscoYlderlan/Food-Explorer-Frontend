@@ -1,9 +1,122 @@
-import styled from 'styled-components'
-export const Container = styled.head`
+import styled, { keyframes } from 'styled-components'
+
+const rollout = keyframes`    
+  0% {
+    transform: translateZ(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateZ(60rem);
+    opacity: 0;
+  }
+
+`
+
+export const Container = styled.header`
+  grid-area: header;
+  position: relative;
+  width: 100vw;
   display: flex;
+  height: fit-content;
+  justify-content: space-between;
   align-items: center;
-  gap: 3.2rem;
-  padding: 2.4rem 12rem;
+  gap: 2rem;
+  /* gap: 3.2rem; */
+  padding: 2.4rem clamp(3rem, 0.7273rem + 7.1023vw, 8rem);
   white-space: nowrap;
   background-color: ${({ theme }) => theme.COLORS.DARK_600};
+  //TODO: ajustar largura do input para tela 1024
+  > a {
+    ${({ theme }) => theme.FONTS.ROBOTO.SMALL_REGULAR}
+  }
+`
+export const Logo = styled.div`
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  > h3 {
+    ${({ theme }) => theme.FONTS.ROBOTO.BIG_BOLD}
+  }
+`
+export const Links = styled.div`
+  margin-top: 3.6rem;
+  display: grid;
+  align-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+  > a {
+    width: 100%;
+    ${({ theme }) => theme.FONTS.POPPINS.LIGHT_300}
+    color: ${({ theme }) => theme.COLORS.LIGHT_300};
+    padding: 1rem;
+    border-bottom: 1px solid ${({ theme }) => theme.COLORS.DARK_1000};
+  }
+`
+
+export const OptionsIn = styled.div`
+  border: solid red 2px;
+  margin-top: 3.6rem;
+  position: absolute;
+  top: 100%;
+  width: 82.5vw;
+
+  display: ${({ isOpen }) => (isOpen ? 'grid' : 'none')};
+  align-items: flex-start;
+  gap: 1rem;
+
+  animation: 0.5s ${rollout} ease-out reverse;
+
+  @media ${({ theme }) => theme.DEVICES.laptop} {
+    animation: none;
+  }
+`
+
+export const OptionsOut = styled.div`
+  grid-area: content;
+  margin-top: 3.6rem;
+  width: 82.5vw;
+  border: solid red 2px;
+  position: absolute;
+  top: 100%;
+
+  display: grid;
+  align-content: center;
+  align-items: flex-start;
+
+  pointer-events: none;
+
+  animation: 0.5s ${rollout} ease-out forwards;
+
+  @media ${({ theme }) => theme.DEVICES.laptop} {
+    animation: none;
+  }
+`
+
+export const ButtomContainer = styled.div`
+  min-width: 3.2rem;
+  position: relative;
+  &:hover {
+    cursor: pointer;
+  }
+`
+
+export const CircleIcon = styled.div`
+  position: absolute;
+  top: -5%;
+  right: -5%;
+  /* transform: translateY(-50%), translateX(-50%); */
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
+  z-index: 1;
+  > span {
+    ${({ theme }) => theme.FONTS.POPPINS.MEDIUM_100}
+    color: ${({ theme }) => theme.COLORS.LIGHT_100};
+  }
 `
