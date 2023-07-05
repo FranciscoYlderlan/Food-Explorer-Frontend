@@ -1,5 +1,5 @@
 import { Container } from './styles.js'
 
-export function ListItems({ children, gap, direction }) {
+export function ListItems({ children }) {
   return <Container>{children}</Container>
 }

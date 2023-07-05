@@ -9,5 +9,7 @@ export const Container = styled.div`
   border-radius: 0.5rem;
   padding: 0.4rem 0.8rem;
 
+  ${({ theme }) => theme.FONTS.POPPINS.MEDIUM_100}
+
   color: ${({ theme }) => theme.COLORS.LIGHT_100};
 `

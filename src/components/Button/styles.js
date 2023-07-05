@@ -25,7 +25,9 @@ export const Container = styled.button`
   line-height: 2.4rem;
 
   transition: all 0.3s;
-
+  > svg {
+    flex-shrink: 0;
+  }
   &:disabled {
     cursor: not-allowed;
     filter: brightness(0.5);

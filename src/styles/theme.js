@@ -66,6 +66,13 @@ export const theme = {
         'font-weight': '500',
         'line-height': '2.4rem',
       },
+      MEDIUM_SPACED: {
+        'font-size': '1.6rem',
+        'font-family': 'Poppins',
+        'font-style': 'normal',
+        'font-weight': '400',
+        'line-height': '140%',
+      },
       MEDIUM_150: {
         'font-size': '1.8rem',
         'font-family': 'Poppins',
@@ -79,6 +86,20 @@ export const theme = {
         'font-style': 'normal',
         'font-weight': '500',
         'line-height': '160%',
+      },
+      MEDIUM_300: {
+        'font-size': '2.4rem',
+        'font-family': 'Poppins',
+        'font-style': 'normal',
+        'font-weight': '500',
+        'line-height': '140%',
+      },
+      MEDIUM_350: {
+        'font-size': '2.7rem',
+        'font-family': 'Poppins',
+        'font-style': 'normal',
+        'font-weight': '500',
+        'line-height': '140%',
       },
       MEDIUM_400: {
         'font-size': '3.2rem',

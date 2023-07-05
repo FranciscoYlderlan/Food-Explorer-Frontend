@@ -1,17 +1,22 @@
 import { Button } from '../Button'
 import { Container, Price, Counter, Add } from './styles'
-import { Minus, Plus } from '@phosphor-icons/react'
-export function AddItem({ price }) {
+import { Receipt, Minus, Plus } from '@phosphor-icons/react'
+
+export function AddItem({ price, isPreview = false }) {
   return (
     <Container>
-      <Price>{`R$ ${79.5}`}</Price>
+      {!isPreview && <Price>{`R$ ${79.5}`}</Price>}
       <Add>
         <Counter>
           <Minus size={24} />
           <span>01</span>
           <Plus size={24} />
         </Counter>
-        <Button title="Incluir" />
+        {!isPreview ? (
+          <Button title="Incluir" />
+        ) : (
+          <Button title={`Incluir - R$ 25,00`} icon={Receipt} />
+        )}
       </Add>
     </Container>
   )

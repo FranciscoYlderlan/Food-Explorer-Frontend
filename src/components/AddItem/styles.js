@@ -44,12 +44,14 @@ export const Counter = styled.div`
 `
 export const Add = styled.div`
   width: 100%;
+  max-width: 31.5rem;
   display: grid;
   align-items: center;
   gap: 1.6rem;
   > button {
+    white-space: nowrap;
     width: 100%;
-    padding: 0.3rem 2.4rem;
+    padding: 0.4rem 2.4rem;
   }
   @media ${({ theme }) => theme.DEVICES.tablet} {
     display: flex;
