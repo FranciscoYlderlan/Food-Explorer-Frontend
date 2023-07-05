@@ -44,6 +44,7 @@ export const StyledSwiper = styled(Swiper)`
     display: flex;
     flex-direction: column;
     width: 21rem;
+    height: 100%;
     align-items: center;
     justify-content: center;
     gap: 1.6rem;
@@ -100,11 +101,13 @@ export const Image = styled.img`
 `
 export const Card = styled.div`
   width: 100%;
-
+  min-height: 30rem;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.2rem;
 
   text-align: center;
 
@@ -115,8 +118,8 @@ export const Card = styled.div`
   background-color: ${({ theme }) => theme.COLORS.DARK_200};
 
   > svg {
+    flex-shrink: 0;
     align-self: end;
-    font-size: 2.4rem;
   }
 
   > img {
@@ -129,28 +132,36 @@ export const Card = styled.div`
     ${({ theme }) => theme.FONTS.POPPINS.MEDIUM_100}
 
     color: ${({ theme }) => theme.COLORS.LIGHT_300};
-
-    > span {
-      ${({ theme }) => theme.FONTS.POPPINS.REGULAR_300}
-    }
   }
   p {
     color: ${({ theme }) => theme.COLORS.LIGHT_400};
     display: none;
   }
   @media ${({ theme }) => theme.DEVICES.tablet} {
-    > svg {
-    }
     > img {
+      width: 16rem;
+      height: 16rem;
     }
+
     h2 {
       ${({ theme }) => theme.FONTS.POPPINS.BOLD_300}
     }
     p {
       ${({ theme }) => theme.FONTS.ROBOTO.SMALLER_REGULAR}
       display: flex;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      width: inherit;
     }
-
+    min-height: 46rem;
+    gap: 1.5rem;
     padding: 1.6rem 2.4rem 4.5rem;
   }
+`
+export const TextIcon = styled.div`
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  ${({ theme }) => theme.FONTS.POPPINS.REGULAR_300}
 `

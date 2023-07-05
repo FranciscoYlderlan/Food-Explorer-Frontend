@@ -92,6 +92,9 @@ export const OptionsOut = styled.div`
 export const ButtomContainer = styled.div`
   min-width: 3.2rem;
   position: relative;
+  > svg {
+    flex-shrink: 0;
+  }
   &:hover {
     cursor: pointer;
   }

@@ -17,7 +17,7 @@ import Polygon from '../../assets/Polygon1.svg'
 
 import { useState, useEffect } from 'react'
 
-export function Header() {
+export function Header({ handleMenuClick }) {
   const [isOpen, setIsOpen] = useState(false)
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
@@ -29,6 +29,7 @@ export function Header() {
   function handleIsOpen() {
     localStorage.setItem('@food-explorer:isActive', !isOpen)
     setIsOpen(!isOpen)
+    handleMenuClick()
   }
   window.addEventListener('resize', checkedOnchangeWindowSize)
 
@@ -54,6 +55,7 @@ export function Header() {
           />
           <TextLink title="Meus Favoritos" />
           <TextLink title="Histórico" />
+          {/* TODO: trocar para carrinho */}
           <Button icon={Receipt} title="Pedidos (0)"></Button>
         </>
       )}
@@ -92,6 +94,7 @@ export function Header() {
           <CircleIcon>
             <span>0</span>
           </CircleIcon>
+          {/* TODO: trocar para carrinho */}
           <Receipt size={40} />
         </ButtomContainer>
       ) : (

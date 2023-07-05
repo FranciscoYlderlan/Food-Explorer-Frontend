@@ -1,5 +1,11 @@
 import React from 'react'
-import { Container, StyledSwiper, StyledSwiperSlide, Card } from './styles.js'
+import {
+  Container,
+  StyledSwiper,
+  StyledSwiperSlide,
+  Card,
+  TextIcon,
+} from './styles.js'
 import { AddItem } from '../AddItem'
 import { RiPencilFill } from 'react-icons/ri'
 // import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
@@ -45,7 +51,7 @@ export function Carousel() {
         <StyledSwiperSlide>
           <Card>
             <RiPencilFill
-              size={32}
+              size={38}
               fill="transparent"
               stroke="white"
               strokeWidth={1}
@@ -56,9 +62,11 @@ export function Carousel() {
               src="https://st.depositphotos.com/1003814/4626/i/600/depositphotos_46267763-stock-photo-fried-chicken-fillets.jpg"
               alt="prato"
             />
-            <h2>
-              Frango Grelhado <span>&#8250;</span>
-            </h2>
+            <TextIcon>
+              <h2>Frango Grelhadassosão com manteiga</h2>
+              <span>&#8250;</span>
+            </TextIcon>
+
             <p>Frango gratinado ao oleo e sal com uma salada de repolho</p>
             <AddItem />
           </Card>
