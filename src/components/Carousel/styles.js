@@ -42,16 +42,12 @@ export const StyledSwiper = styled(Swiper)`
 
   .swiper-slide {
     display: flex;
-    /* flex-direction: column; */
+    flex-direction: column;
+    width: 21rem;
     align-items: center;
     justify-content: center;
     gap: 1.6rem;
     position: relative;
-
-    img {
-      display: block;
-      width: 100%;
-    }
 
     @media only screen and (min-width: 769px) {
       &:first-child {
@@ -90,6 +86,9 @@ export const StyledSwiper = styled(Swiper)`
         transform: translateX(-55%);
       }
     }
+    @media ${({ theme }) => theme.DEVICES.laptop} {
+      width: 30rem;
+    }
   }
 `
 export const StyledSwiperSlide = styled(SwiperSlide)`
@@ -104,22 +103,54 @@ export const Card = styled.div`
 
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1.5rem;
-  padding: 2.4rem;
+
+  text-align: center;
+
+  padding: 1.6rem 1.6rem 2.4rem;
 
   border-radius: 0.8rem;
   border: 1px solid ${({ theme }) => theme.COLORS.DARK_300};
   background-color: ${({ theme }) => theme.COLORS.DARK_200};
 
-  img {
-    width: 17rem;
-    height: 17rem;
+  > svg {
+    align-self: end;
+    font-size: 2.4rem;
+  }
+
+  > img {
+    width: 8rem;
+    height: 8rem;
     object-fit: cover;
   }
+
   h2 {
+    ${({ theme }) => theme.FONTS.POPPINS.MEDIUM_100}
+
     color: ${({ theme }) => theme.COLORS.LIGHT_300};
+
+    > span {
+      ${({ theme }) => theme.FONTS.POPPINS.REGULAR_300}
+    }
   }
   p {
     color: ${({ theme }) => theme.COLORS.LIGHT_400};
+    display: none;
+  }
+  @media ${({ theme }) => theme.DEVICES.tablet} {
+    > svg {
+    }
+    > img {
+    }
+    h2 {
+      ${({ theme }) => theme.FONTS.POPPINS.BOLD_300}
+    }
+    p {
+      ${({ theme }) => theme.FONTS.ROBOTO.SMALLER_REGULAR}
+      display: flex;
+    }
+
+    padding: 1.6rem 2.4rem 4.5rem;
   }
 `

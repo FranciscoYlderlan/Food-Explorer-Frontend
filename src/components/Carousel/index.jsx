@@ -1,7 +1,8 @@
 import React from 'react'
 import { Container, StyledSwiper, StyledSwiperSlide, Card } from './styles.js'
 import { AddItem } from '../AddItem'
-
+import { RiPencilFill } from 'react-icons/ri'
+// import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import 'swiper/css'
 import 'swiper/css/scrollbar'
 import 'swiper/css/navigation'
@@ -15,18 +16,23 @@ export function Carousel() {
     <Container>
       <StyledSwiper
         rewind={true}
-        slideShadows={true}
-        slidesPerView={2}
-        centeredSlides={false}
+        slidesPerView="auto"
+        centeredSlides={true}
         slidesPerGroupSkip={2}
         grabCursor={true}
         keyboard={{
           enabled: true,
         }}
         breakpoints={{
-          769: {
-            slidesPerView: 5,
-            slidesPerGroup: 5,
+          680: {
+            slidesPerView: 3,
+            slidesPerGroup: 3,
+            centeredSlides: false,
+          },
+          1140: {
+            slidesPerView: 4,
+            slidesPerGroup: 4,
+            centeredSlides: false,
           },
         }}
         scrollbar={true}
@@ -38,6 +44,35 @@ export function Carousel() {
       >
         <StyledSwiperSlide>
           <Card>
+            <RiPencilFill
+              size={32}
+              fill="transparent"
+              stroke="white"
+              strokeWidth={1}
+            />
+            {/* <AiFillHeart size={32} /> */}
+            {/* <AiOutlineHeart size={32} /> */}
+            <img
+              src="https://st.depositphotos.com/1003814/4626/i/600/depositphotos_46267763-stock-photo-fried-chicken-fillets.jpg"
+              alt="prato"
+            />
+            <h2>
+              Frango Grelhado <span>&#8250;</span>
+            </h2>
+            <p>Frango gratinado ao oleo e sal com uma salada de repolho</p>
+            <AddItem />
+          </Card>
+        </StyledSwiperSlide>
+        <StyledSwiperSlide>
+          <Card>
+            <RiPencilFill
+              size={32}
+              fill="transparent"
+              stroke="white"
+              strokeWidth={1}
+            />
+            {/* <AiFillHeart size={32} />
+            <AiOutlineHeart size={32} /> */}
             <img
               src="https://st.depositphotos.com/1003814/4626/i/600/depositphotos_46267763-stock-photo-fried-chicken-fillets.jpg"
               alt="prato"
@@ -49,6 +84,14 @@ export function Carousel() {
         </StyledSwiperSlide>
         <StyledSwiperSlide>
           <Card>
+            <RiPencilFill
+              size={32}
+              fill="transparent"
+              stroke="white"
+              strokeWidth={1}
+            />
+            {/* <AiFillHeart size={32} />
+            <AiOutlineHeart size={32} /> */}
             <img
               src="https://st.depositphotos.com/1003814/4626/i/600/depositphotos_46267763-stock-photo-fried-chicken-fillets.jpg"
               alt="prato"
@@ -60,6 +103,14 @@ export function Carousel() {
         </StyledSwiperSlide>
         <StyledSwiperSlide>
           <Card>
+            <RiPencilFill
+              size={32}
+              fill="transparent"
+              stroke="white"
+              strokeWidth={1}
+            />
+            {/* <AiFillHeart size={32} />
+            <AiOutlineHeart size={32} /> */}
             <img
               src="https://st.depositphotos.com/1003814/4626/i/600/depositphotos_46267763-stock-photo-fried-chicken-fillets.jpg"
               alt="prato"
@@ -71,6 +122,14 @@ export function Carousel() {
         </StyledSwiperSlide>
         <StyledSwiperSlide>
           <Card>
+            <RiPencilFill
+              size={32}
+              fill="transparent"
+              stroke="white"
+              strokeWidth={1}
+            />
+            {/* <AiFillHeart size={32} />
+            <AiOutlineHeart size={32} /> */}
             <img
               src="https://st.depositphotos.com/1003814/4626/i/600/depositphotos_46267763-stock-photo-fried-chicken-fillets.jpg"
               alt="prato"
@@ -82,6 +141,14 @@ export function Carousel() {
         </StyledSwiperSlide>
         <StyledSwiperSlide>
           <Card>
+            <RiPencilFill
+              size={32}
+              fill="transparent"
+              stroke="white"
+              strokeWidth={1}
+            />
+            {/* <AiFillHeart size={32} />
+            <AiOutlineHeart size={32} /> */}
             <img
               src="https://st.depositphotos.com/1003814/4626/i/600/depositphotos_46267763-stock-photo-fried-chicken-fillets.jpg"
               alt="prato"
@@ -93,6 +160,14 @@ export function Carousel() {
         </StyledSwiperSlide>
         <StyledSwiperSlide>
           <Card>
+            <RiPencilFill
+              size={32}
+              fill="transparent"
+              stroke="white"
+              strokeWidth={1}
+            />
+            {/* <AiFillHeart size={32} />
+            <AiOutlineHeart size={32} /> */}
             <img
               src="https://st.depositphotos.com/1003814/4626/i/600/depositphotos_46267763-stock-photo-fried-chicken-fillets.jpg"
               alt="prato"
@@ -104,6 +179,14 @@ export function Carousel() {
         </StyledSwiperSlide>
         <StyledSwiperSlide>
           <Card>
+            <RiPencilFill
+              size={32}
+              fill="transparent"
+              stroke="white"
+              strokeWidth={1}
+            />
+            {/* <AiFillHeart size={32} />
+            <AiOutlineHeart size={32} /> */}
             <img
               src="https://st.depositphotos.com/1003814/4626/i/600/depositphotos_46267763-stock-photo-fried-chicken-fillets.jpg"
               alt="prato"
@@ -115,6 +198,14 @@ export function Carousel() {
         </StyledSwiperSlide>
         <StyledSwiperSlide>
           <Card>
+            <RiPencilFill
+              size={32}
+              fill="transparent"
+              stroke="white"
+              strokeWidth={1}
+            />
+            {/* <AiFillHeart size={32} />
+            <AiOutlineHeart size={32} /> */}
             <img
               src="https://st.depositphotos.com/1003814/4626/i/600/depositphotos_46267763-stock-photo-fried-chicken-fillets.jpg"
               alt="prato"
@@ -126,6 +217,14 @@ export function Carousel() {
         </StyledSwiperSlide>
         <StyledSwiperSlide>
           <Card>
+            <RiPencilFill
+              size={32}
+              fill="transparent"
+              stroke="white"
+              strokeWidth={1}
+            />
+            {/* <AiFillHeart size={32} />
+            <AiOutlineHeart size={32} /> */}
             <img
               src="https://st.depositphotos.com/1003814/4626/i/600/depositphotos_46267763-stock-photo-fried-chicken-fillets.jpg"
               alt="prato"

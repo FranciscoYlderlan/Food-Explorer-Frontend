@@ -66,6 +66,13 @@ export const theme = {
         'font-weight': '500',
         'line-height': '2.4rem',
       },
+      MEDIUM_150: {
+        'font-size': '1.8rem',
+        'font-family': 'Poppins',
+        'font-style': 'normal',
+        'font-weight': '500',
+        'line-height': '140%',
+      },
       MEDIUM_200: {
         'font-size': '2rem',
         'font-family': 'Poppins',
