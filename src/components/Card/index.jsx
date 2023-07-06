@@ -16,7 +16,10 @@ export function Card() {
         1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela, 1 x Suco de
         Maracujá
       </Description>
-      <Select />
+      <Select
+        options={['Pendente', 'Preparando', 'Entregue']}
+        selected="Entregue"
+      />
     </Container>
   )
 }

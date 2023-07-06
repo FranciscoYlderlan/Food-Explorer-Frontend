@@ -1,10 +1,26 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
+  display: grid;
+  gap: 1.6rem;
+
+  width: 100%;
   position: relative;
-  display: inline-block;
+
+  > label {
+    ${({ theme }) => theme.FONTS.ROBOTO.SMALL_REGULAR};
+
+    color: ${({ theme }) => theme.COLORS.LIGHT_400};
+    pointer-events: none;
+  }
+`
+export const SelectBox = styled.div`
+  position: relative;
+
   border-radius: 0.8rem;
+  color: ${({ theme }) => theme.COLORS.LIGHT_400};
   background-color: ${({ theme }) => theme.COLORS.DARK_900};
+  ${({ theme }) => theme.FONTS.ROBOTO.SMALLER_REGULAR}
   &:after {
     position: absolute;
     content: '';

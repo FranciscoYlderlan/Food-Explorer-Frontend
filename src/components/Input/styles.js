@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   display: grid;
-  gap: 0.8rem;
+  gap: 1.6rem;
 
   width: 100%;
   position: relative;
@@ -31,6 +31,8 @@ export const BoxInput = styled.div`
   color: ${({ theme }) => theme.COLORS.LIGHT_100};
 
   > input {
+    appearance: none;
+    ${({ theme }) => theme.FONTS.ROBOTO.SMALL_REGULAR};
     background-color: ${({ theme }) => theme.COLORS.DARK_900};
 
     color: ${({ theme }) => theme.COLORS.LIGHT_100};

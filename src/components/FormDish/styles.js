@@ -34,3 +34,15 @@ export const Buttons = styled.div`
   @media ${({ theme }) => theme.DEVICES.laptop} {
   }
 `
+
+export const IngredientsArea = styled.div`
+  display: flex;
+  gap: 1.6rem;
+  padding: 0.8rem;
+  background-color: ${({ theme }) => theme.COLORS.DARK_900};
+  border: none;
+  border-radius: 0.8rem;
+  height: fit-content;
+  width: 100%;
+  flex-wrap: wrap;
+`
