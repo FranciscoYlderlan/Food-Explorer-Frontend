@@ -1,7 +1,6 @@
 import { Container, Header, Status, Description } from './styles.js'
 import { Dot } from '../Dot'
 import { Select } from '../Select'
-
 export function Card() {
   return (
     <Container>

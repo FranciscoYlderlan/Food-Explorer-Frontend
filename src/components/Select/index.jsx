@@ -3,11 +3,10 @@ import { useState } from 'react'
 import { SelectOption } from '../SelectOption'
 import { Dot } from '../Dot/index.jsx'
 
-export function Select() {
+export function Select({ options }) {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedOption, setSelectedOption] = useState('Selecione uma opção')
   const [selectedIcon, setSelectedIcon] = useState(null)
-
   const handleSelectClick = () => {
     setIsOpen(!isOpen)
   }
@@ -30,22 +29,19 @@ export function Select() {
         )}
         <>{selectedOption}</>
       </SelectSelected>
+
       <SelectOptions open={isOpen}>
-        <SelectOption
-          value="Pendente"
-          text="Pendente"
-          onClick={() => handleOptionClick('Pendente', 'Pendente')}
-        />
-        <SelectOption
-          value="Preparando"
-          text="Preparando"
-          onClick={() => handleOptionClick('Preparando', 'Preparando')}
-        />
-        <SelectOption
-          value="Entregue"
-          text="Entregue"
-          onClick={() => handleOptionClick('Entregue', 'Entregue')}
-        />
+        {options &&
+          options.map((option, i) => {
+            return (
+              <SelectOption
+                key={i}
+                value={option}
+                text={option}
+                onClick={() => handleOptionClick({ option }, { option })}
+              />
+            )
+          })}
       </SelectOptions>
     </Container>
   )

@@ -45,17 +45,22 @@ export const Main = styled.main`
 `
 
 export const Container = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
   width: 100%;
   height: fit-content;
 
   display: grid;
   justify-items: center;
+  justify-self: center;
   gap: 7rem;
-
-  place-self: center;
 
   @media ${({ theme }) => theme.DEVICES.laptop} {
     display: flex;
+
     justify-content: center;
     align-items: center;
     > ${Logo} {

@@ -32,6 +32,7 @@ export const Content = styled.div`
   }
   @media ${({ theme }) => theme.DEVICES.laptop} {
     display: flex;
+    align-items: center;
     gap: 4.7rem;
     > img {
       width: 39rem;

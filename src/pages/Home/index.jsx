@@ -30,6 +30,9 @@ export function Home() {
             <ListItems>
               <Section title="Refeições">
                 <Carousel />
+                {
+                  // TODO: generalizar a altura dos cards dentro do
+                }
               </Section>
               <Section title="Bebidas">
                 <Carousel />
