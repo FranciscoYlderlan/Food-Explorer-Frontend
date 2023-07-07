@@ -15,8 +15,12 @@ export function FormDish({ children }) {
         placeholder="Selecione imagem"
         errorMessage="Este campo é obrigatório."
         type="file"
-        icon={UploadSimple}
-      />
+      >
+        <span>
+          <UploadSimple size={32} />
+          <span>Selecione imagem</span>
+        </span>
+      </InputFile>
       <Input
         labelPlaceholder="Nome"
         placeholder="Exemplo: Salada Ceasar"

@@ -13,7 +13,32 @@ export const Container = styled.form`
     }
   }
 `
-export const InputFile = styled(Input)``
+export const InputFile = styled(Input)`
+  > div {
+    position: relative;
+
+    input {
+      opacity: 0;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    > span {
+      margin-left: 3.2rem;
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 0;
+      pointer-events: NONE;
+      cursor: pointer;
+      z-index: 0;
+      ${({ theme }) => theme.FONTS.ROBOTO.SMALL_REGULAR};
+    }
+  }
+`
 export const Select = styled.select``
 
 export const Col3 = styled.div`

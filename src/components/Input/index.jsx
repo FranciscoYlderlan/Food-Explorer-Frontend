@@ -7,6 +7,7 @@ export function Input({
   icon: Icon,
   labelPlaceholder,
   errorMessage,
+  children,
   ...rest
 }) {
   return (
@@ -16,6 +17,7 @@ export function Input({
       <BoxInput>
         {Icon && <Icon size={20} />}
         <input {...rest} autoComplete="off" />
+        {children}
       </BoxInput>
 
       <Warning icon={AiFillWarning} description={errorMessage} />
