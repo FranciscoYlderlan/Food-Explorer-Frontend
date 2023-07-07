@@ -8,7 +8,7 @@ export const Container = styled.div`
   gap: 0.8rem;
   align-items: center;
 
-  padding: 0.6rem 1.2rem;
+  padding: 0.8rem 1.4rem;
 
   border-radius: 0.8rem;
 
@@ -16,7 +16,7 @@ export const Container = styled.div`
     isNew ? 'transparent' : theme.COLORS.LIGHT_600};
   color: ${({ theme }) => theme.COLORS.LIGHT_500};
   border: ${({ theme, isNew }) =>
-    isNew ? `4px dashed ${theme.COLORS.LIGHT_500}` : '4px solid transparent'};
+    isNew ? `2px dashed ${theme.COLORS.LIGHT_500}` : '2px solid transparent'};
 
   > button {
     display: flex;

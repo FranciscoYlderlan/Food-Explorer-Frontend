@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-
+import { Input } from '../Input'
 export const Container = styled.form`
   display: grid;
   gap: 3.2rem;
@@ -13,8 +13,7 @@ export const Container = styled.form`
     }
   }
 `
-export const InputFile = styled.div``
-
+export const InputFile = styled(Input)``
 export const Select = styled.select``
 
 export const Col3 = styled.div`

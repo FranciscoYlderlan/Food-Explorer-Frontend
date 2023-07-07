@@ -51,9 +51,12 @@ export const SelectSelected = styled.div`
 `
 
 export const SelectOptions = styled.ul`
+  border-radius: 0 0 10px 10px;
+  border: solid ${({ theme }) => theme.COLORS.LIGHT_100} 1px;
+  /* border-top: none; */
   position: absolute;
   width: 100%;
-  background-color: #f1f1f1;
+  background-color: ${({ theme }) => theme.COLORS.DARK_900};
   list-style-type: none;
   padding: 0;
   margin: 0;

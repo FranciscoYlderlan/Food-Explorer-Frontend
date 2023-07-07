@@ -2,9 +2,15 @@ import { Warning } from '../Warning/index.jsx'
 import { Container, BoxInput } from './styles.js'
 import { AiFillWarning } from 'react-icons/ai'
 
-export function Input({ icon: Icon, labelPlaceholder, errorMessage, ...rest }) {
+export function Input({
+  className,
+  icon: Icon,
+  labelPlaceholder,
+  errorMessage,
+  ...rest
+}) {
   return (
-    <Container>
+    <Container className={className}>
       <label>{labelPlaceholder}</label>
 
       <BoxInput>

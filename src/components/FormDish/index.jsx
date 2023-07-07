@@ -1,4 +1,5 @@
-import { Container, IngredientsArea } from './styles'
+import { Container, IngredientsArea, InputFile } from './styles'
+import { UploadSimple } from '@phosphor-icons/react'
 import { Select } from '../Select'
 import { Input } from '../Input'
 import { TextArea } from '../TextArea'
@@ -9,6 +10,13 @@ export function FormDish({ children }) {
     // TODO: Adicionar required
     <Container>
       <h1>Novo prato</h1>
+      <InputFile
+        labelPlaceholder="Imagem do prato"
+        placeholder="Selecione imagem"
+        errorMessage="Este campo é obrigatório."
+        type="file"
+        icon={UploadSimple}
+      />
       <Input
         labelPlaceholder="Nome"
         placeholder="Exemplo: Salada Ceasar"
@@ -23,7 +31,7 @@ export function FormDish({ children }) {
         errorMessage="Informe valores numéricos."
       />
       <Select
-        options={['Refeições', 'Sobremesas', 'Bebidas', 'Entregue']}
+        options={['Refeições', 'Sobremesas', 'Bebidas']}
         selected="Bebidas"
         labelName={'Categoria'}
       />

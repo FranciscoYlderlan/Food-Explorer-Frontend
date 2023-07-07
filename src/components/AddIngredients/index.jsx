@@ -1,7 +1,13 @@
 import { Container } from './styles'
 import { FiPlus, FiX } from 'react-icons/fi'
 import { useState, useEffect } from 'react'
-export function AddIngredients({ isNew, value = '', onClick, ...rest }) {
+export function AddIngredients({
+  isNew,
+  value = '',
+  onClick,
+  onChange = () => {},
+  ...rest
+}) {
   const [inputValue, setInputValue] = useState('')
 
   function getInputWidth() {
@@ -15,6 +21,7 @@ export function AddIngredients({ isNew, value = '', onClick, ...rest }) {
       <input
         type="text"
         value={value}
+        onChange={onChange}
         readOnly={!isNew}
         style={{ width: getInputWidth() }}
         {...rest}
