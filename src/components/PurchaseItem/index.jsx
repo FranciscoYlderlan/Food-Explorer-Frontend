@@ -9,7 +9,7 @@ export function PurchaseItem() {
       />
       <Col1>
         <Row1>
-          <h3>Frango Grelhado</h3>
+          <h4>Frango Grelhado</h4>
           <span>R$ 200,00</span>
         </Row1>
         <p>Remover</p>
