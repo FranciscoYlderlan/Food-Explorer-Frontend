@@ -12,7 +12,7 @@ export function Input({
 }) {
   return (
     <Container className={className}>
-      <label>{labelPlaceholder}</label>
+      {labelPlaceholder && <label>{labelPlaceholder}</label>}
 
       <BoxInput>
         {Icon && <Icon size={20} />}
