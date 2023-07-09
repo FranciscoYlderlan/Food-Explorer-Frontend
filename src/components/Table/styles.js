@@ -1,61 +1,80 @@
 import styled from 'styled-components'
-import Select from '@mui/material/Select'
-import { DataGrid } from '@mui/x-data-grid'
-import { styled as styled_ } from '@mui/material/styles'
-
-export const StyledSelect = styled(Select)`
-  color: ${({ theme }) => theme.COLORS.LIGHT_400} !important;
-  font-size: 1.4rem !important;
-  padding: 0;
-  min-width: 20rem;
-  .MuiList-root .MuiList-padding .MuiMenu-list .MuiList-root-MuiMenu-list {
-    background-color: ${({ theme }) => theme.COLORS.DARK_900} !important;
-  }
-  .MuiSelect-icon {
-    color: ${({ theme }) => theme.COLORS.LIGHT_400} !important;
-  }
-  background-color: ${({ theme }) => theme.COLORS.DARK_900} !important;
-
-  &::placeholder {
-    color: ${({ theme }) => theme.COLORS.LIGHT_400} !important;
-  }
-`
-
-export const StyledDataGrid = styled_(DataGrid)(({ theme }) => ({
-  color: '#E1E1E6',
-  fontSize: 14,
-
-  '& .MuiDataGrid-cell': {
-    color: '#C4C4CC',
-  },
-  '& .MuiDataGrid-footer': {
-    backgroundColor: '#192227',
-  },
-  '& .MuiPaginationItem-root, .MuiPaginationItem-page': {
-    color: '#E1E1E6',
-  },
-  '& .MuiDataGrid-colCellTitle .MuiDataGrid-iconSeparator': {
-    color: '#E1E1E6',
-    fontWeight: 'bold',
-  },
-  '& .MuiDataGrid-columnHeaderTitle': {
-    fontWeight: 'bold',
-  },
-}))
-
+import { SelectOption } from '../SelectOption'
 export const Container = styled.div`
-  margin: 15rem auto 0;
-  max-width: 100rem;
-  height: 37rem;
-  .caTcPF .MuiDataGrid-root {
-    border-color: green;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  border: 2px solid ${({ theme }) => theme.COLORS.DARK_1000};
+  max-height: 30rem;
+`
+
+export const TableHeader = styled.div`
+  display: flex;
+  border-bottom: 2px solid ${({ theme }) => theme.COLORS.DARK_1000};
+  padding-right: 0.6rem;
+
+  ${({ theme }) => theme.FONTS.ROBOTO.SMALLER_BOLD};
+  color: ${({ theme }) => theme.COLORS.LIGHT_300};
+
+  > div:first-child {
+    width: 35%;
+  }
+  > div:nth-child(2) {
+    width: 25%;
+  }
+  > div:nth-child(3) {
+    width: 100%;
+  }
+  > div:last-child {
+    width: 25%;
+    border: none;
+  }
+  position: sticky;
+  top: 0;
+`
+//  .wrapper-table::-webkit-scrollbar-track {
+//   margin-block-start: 3rem;
+// }
+export const TableCell = styled.div`
+  display: flex;
+  justify-content: start;
+  width: 100%;
+  padding: 2.1rem 2.4rem;
+
+  border-right: 2px solid ${({ theme }) => theme.COLORS.DARK_1000};
+`
+
+export const TableBody = styled.div`
+  ${({ theme }) => theme.FONTS.ROBOTO.SMALLER_REGULAR};
+  color: ${({ theme }) => theme.COLORS.LIGHT_400};
+
+  display: grid;
+  > div:last-child {
+    border: none;
+  }
+  overflow-y: auto;
+`
+
+export const TableRow = styled.div`
+  display: flex;
+  border-bottom: 2px solid ${({ theme }) => theme.COLORS.DARK_1000};
+  > div:first-child {
+    width: 35%;
+    //TODO: se for admin diminuir o paddin para 1 padding: 1rem 2.4rem;
+  }
+  > div:nth-child(2) {
+    width: 25%;
+  }
+  > div:nth-child(3) {
+    width: 100%;
+  }
+  > div:last-child {
+    width: 25%;
   }
 `
-export const LinkStyled = {
-  margin: '15rem auto 0',
-  maxWidth: '112.5rem',
-  height: '37rem',
-  '.MuiDataGrid-root': { border: '2px solid #192227' },
-  '.MuiDataGrid-withBorderColor': { border: '2px solid #192227' },
-  '.MuiDataGrid-actionsCell': { color: 'red' },
-}
+export const Status = styled(SelectOption)`
+  ${({ theme }) => theme.FONTS.ROBOTO.REGULAR};
+  background-color: transparent;
+  color: ${({ theme }) => theme.COLORS.LIGHT_400};
+  height: fit-content;
+  padding: 0;
+`
