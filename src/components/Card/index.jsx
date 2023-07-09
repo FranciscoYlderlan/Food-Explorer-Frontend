@@ -1,25 +1,16 @@
 import { Container, Header, Status, Description } from './styles.js'
-import { Dot } from '../Dot'
+
 import { Select } from '../Select'
-export function Card() {
+export function Card({ row, isAdmin, options, ...rest }) {
   return (
     <Container>
       <Header>
-        <span>000004</span>
-        <Status>
-          <Dot color="#AB222E" />
-          <span>Pendente</span>
-        </Status>
-        <span>20/05 às 18h00</span>
+        <span>{row.codigo}</span>
+        {!isAdmin && <Status value={row.status} text={row.status} />}
+        <span>{row.dataHora}</span>
       </Header>
-      <Description>
-        1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela, 1 x Suco de
-        Maracujá
-      </Description>
-      <Select
-        options={['Pendente', 'Preparando', 'Entregue']}
-        selected="Entregue"
-      />
+      <Description>{row.detalhamento}</Description>
+      {isAdmin && <Select options={options} selected={row.status} />}
     </Container>
   )
 }

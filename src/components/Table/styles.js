@@ -1,6 +1,12 @@
 import styled from 'styled-components'
 import { SelectOption } from '../SelectOption'
-export const Container = styled.div`
+
+export const CardContainer = styled.div`
+  display: grid;
+  gap: 1.7rem;
+`
+
+export const TableContainer = styled.div`
   display: grid;
   grid-template-rows: auto 1fr;
   border: 2px solid ${({ theme }) => theme.COLORS.DARK_1000};

@@ -1,13 +1,14 @@
 import {
-  Container,
-  TableBody,
-  TableHeader,
-  TableCell,
-  TableRow,
-  Status,
+  CardContainer,
+  // TableContainer,
+  // TableBody,
+  // TableHeader,
+  // TableCell,
+  // TableRow,
+  // Status,
 } from './styles'
-import { Select } from '../Select'
-
+// import { Select } from '../Select'
+import { Card } from '../Card'
 export function Table() {
   const rows = [
     {
@@ -21,7 +22,8 @@ export function Table() {
       id: 2,
       status: 'Entregue',
       codigo: 'DEF456',
-      detalhamento: 'Outros detalhes...',
+      detalhamento:
+        'Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... Outros detalhes... ',
       dataHora: '2023-06-21 09:45',
     },
     {
@@ -103,34 +105,45 @@ export function Table() {
     },
   ]
   return (
-    <Container>
-      {false && rows}
+    <CardContainer>
+      {rows?.map((row, index) => {
+        return (
+          <Card
+            row={row}
+            key={index}
+            options={['Pendente', 'Preparando', 'Entregue']}
+          />
+        )
+      })}
+    </CardContainer>
+    // <TableContainer>
+    //   {false && rows}
 
-      <TableHeader>
-        <TableCell>Status</TableCell>
-        <TableCell>Código</TableCell>
-        <TableCell>Detalhamento</TableCell>
-        <TableCell>Data e Hora</TableCell>
-      </TableHeader>
-      <TableBody>
-        {rows?.map((row, index) => {
-          return (
-            <TableRow key={index}>
-              <TableCell>
-                <Select
-                  options={['Pendente', 'Preparando', 'Entregue']}
-                  selected={row.status}
-                />
+    //   <TableHeader>
+    //     <TableCell>Status</TableCell>
+    //     <TableCell>Código</TableCell>
+    //     <TableCell>Detalhamento</TableCell>
+    //     <TableCell>Data e Hora</TableCell>
+    //   </TableHeader>
+    //   <TableBody>
+    //     {rows?.map((row, index) => {
+    //       return (
+    //         <TableRow key={index}>
+    //           <TableCell>
+    //             <Select
+    //               options={['Pendente', 'Preparando', 'Entregue']}
+    //               selected={row.status}
+    //             />
 
-                <Status value={row.status} text={row.status} />
-              </TableCell>
-              <TableCell>{row.codigo}</TableCell>
-              <TableCell>{row.detalhamento}</TableCell>
-              <TableCell>{row.dataHora}</TableCell>
-            </TableRow>
-          )
-        })}
-      </TableBody>
-    </Container>
+    //             <Status value={row.status} text={row.status} />
+    //           </TableCell>
+    //           <TableCell>{row.codigo}</TableCell>
+    //           <TableCell>{row.detalhamento}</TableCell>
+    //           <TableCell>{row.dataHora}</TableCell>
+    //         </TableRow>
+    //       )
+    //     })}
+    //   </TableBody>
+    // </TableContainer>
   )
 }
