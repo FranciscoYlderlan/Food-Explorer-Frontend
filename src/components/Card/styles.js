@@ -5,7 +5,6 @@ export const Container = styled.div`
   ${({ theme }) => theme.FONTS.ROBOTO.SMALLER_REGULAR};
   color: ${({ theme }) => theme.COLORS.LIGHT_400};
   display: grid;
-  justify-content: center;
 
   padding: 1.5rem;
   gap: 1.6rem;
@@ -16,7 +15,6 @@ export const Container = styled.div`
 export const Header = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 1.5rem;
   > span:last-child {
     white-space: nowrap;

@@ -1,7 +1,7 @@
 import { Container, Header, Status, Description } from './styles.js'
 
 import { Select } from '../Select'
-export function Card({ row, isAdmin, options, ...rest }) {
+export function Card({ row, isAdmin = false, options, ...rest }) {
   return (
     <Container>
       <Header>

@@ -112,6 +112,7 @@ export function Table() {
             row={row}
             key={index}
             options={['Pendente', 'Preparando', 'Entregue']}
+            isAdmin
           />
         )
       })}
