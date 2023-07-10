@@ -5,6 +5,7 @@ export const Container = styled.div`
   gap: 1.6rem;
 
   width: 100%;
+  height: fit-content;
   position: relative;
 
   > label {

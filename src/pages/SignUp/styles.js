@@ -33,7 +33,8 @@ export const Main = styled.main`
 
   @media ${({ theme }) => theme.DEVICES.laptop} {
     margin-right: 10rem;
-    padding: 6.4rem;
+    padding: 3rem;
+    gap: 1rem;
     border-radius: 1.6rem;
 
     background-color: ${({ theme }) => theme.COLORS.DARK_700};
