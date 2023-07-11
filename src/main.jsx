@@ -5,12 +5,15 @@ import { theme } from './styles/theme.js'
 import GlobalStyle from './styles/global.js'
 import { ThemeProvider } from 'styled-components'
 import { Routes } from './routes'
+import { AuthProvider } from './hooks/auth.jsx'
 // TODO: Alinhar todos os css organizadamente e agrupados por função
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Routes />
+      <AuthProvider>
+        <Routes />
+      </AuthProvider>
     </ThemeProvider>
   </React.StrictMode>,
 )

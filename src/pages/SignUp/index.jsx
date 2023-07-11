@@ -11,7 +11,7 @@ import { api } from '../../services/api'
 
 import { useNavigate } from 'react-router-dom'
 
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { toastConfig } from '../../services/toast'
 
@@ -86,18 +86,6 @@ export function SignUp() {
 
   return (
     <Container>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
       <Logo>
         <img src={logotipo} alt="Logotipo" />
       </Logo>
