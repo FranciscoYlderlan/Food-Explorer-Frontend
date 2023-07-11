@@ -41,6 +41,7 @@ export default createGlobalStyle`
   * {
     scrollbar-width: auto;
     scrollbar-color: #4d585e transparent;
+ 
   }
 
   /* Chrome, Edge, and Safari */

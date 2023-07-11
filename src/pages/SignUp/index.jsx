@@ -9,6 +9,8 @@ import { useState } from 'react'
 
 import { api } from '../../services/api'
 
+import { useNavigate } from 'react-router-dom'
+
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { toastConfig } from '../../services/toast'
@@ -20,6 +22,8 @@ export function SignUp() {
     password: '',
     confirmPassword: '',
   })
+  const navigate = useNavigate()
+
   const [validatePassword, setValidatePassword] = useState({
     password: null,
     confirmPassword: null,
@@ -44,7 +48,7 @@ export function SignUp() {
       input.setCustomValidity('No mínimo 6 caracteres')
     }
   }
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
 
     const { name, email, password, confirmPassword } = record
@@ -64,26 +68,20 @@ export function SignUp() {
       }
     }
 
-    toast
-      .promise(api.post('/user', { name, email, password }), {
+    try {
+      await toast.promise(api.post('/user', { name, email, password }), {
         pending: 'Por favor aguarde...',
         success: 'Usuário cadastrado!',
         error: 'Não foi possível cadastrar usuário.',
         ...toastConfig,
       })
-      .then(
-        (result) => {
-          console.log(result.text)
-        },
-        (error) => {
-          if (error.response) {
-            toast.error(error.response.data.description)
-          }
-        },
-      )
-      .finally(() => {
-        e.target.reset()
-      })
+    } catch (error) {
+      if (error.response) {
+        toast.error(error.response.data.description)
+      }
+    } finally {
+      e.target.reset()
+    }
   }
 
   return (
@@ -144,7 +142,7 @@ export function SignUp() {
           />
           <Button type="submit" title="Criar conta" />
         </Form>
-        <TextLink title="Já tenho uma conta" />
+        <TextLink title="Já tenho uma conta" onClick={() => navigate('/')} />
       </Main>
     </Container>
   )
