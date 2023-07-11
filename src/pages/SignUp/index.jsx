@@ -7,6 +7,12 @@ import { TextLink } from '../../components/TextLink'
 
 import { useState } from 'react'
 
+import { api } from '../../services/api'
+
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { toastConfig } from '../../services/toast'
+
 export function SignUp() {
   const [record, setRecord] = useState({
     name: '',
@@ -40,9 +46,11 @@ export function SignUp() {
   }
   function handleSubmit(e) {
     e.preventDefault()
-    const { password, confirmPassword } = record
-    const inputFilled = password.length > 0 && password.length > 0
+
+    const { name, email, password, confirmPassword } = record
+    const inputFilled = password && confirmPassword
     const equalPasswords = password === confirmPassword
+
     if (inputFilled) {
       if (equalPasswords) {
         validatePassword.password.setCustomValidity('')
@@ -52,12 +60,46 @@ export function SignUp() {
         validatePassword.confirmPassword.setCustomValidity(
           'Senhas não coincidem',
         )
+        return null
       }
     }
+
+    toast
+      .promise(api.post('/user', { name, email, password }), {
+        pending: 'Por favor aguarde...',
+        success: 'Usuário cadastrado!',
+        error: 'Não foi possível cadastrar usuário.',
+        ...toastConfig,
+      })
+      .then(
+        (result) => {
+          console.log(result.text)
+        },
+        (error) => {
+          if (error.response) {
+            toast.error(error.response.data.description)
+          }
+        },
+      )
+      .finally(() => {
+        e.target.reset()
+      })
   }
 
   return (
     <Container>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <Logo>
         <img src={logotipo} alt="Logotipo" />
       </Logo>
@@ -100,7 +142,7 @@ export function SignUp() {
             onChange={handleConfirmPassword}
             required
           />
-          <Button type="submit" title="Entrar" />
+          <Button type="submit" title="Criar conta" />
         </Form>
         <TextLink title="Já tenho uma conta" />
       </Main>
