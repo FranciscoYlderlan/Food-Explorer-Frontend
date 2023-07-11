@@ -1,5 +1,5 @@
 import { Container } from './styles'
 
-export function Form({ children }) {
-  return <Container>{children}</Container>
+export function Form({ children, ...rest }) {
+  return <Container {...rest}>{children}</Container>
 }
