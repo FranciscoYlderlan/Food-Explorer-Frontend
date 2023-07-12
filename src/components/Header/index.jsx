@@ -1,6 +1,7 @@
 import {
   Container,
   Logo,
+  Text,
   OptionsIn,
   OptionsOut,
   Links,
@@ -22,7 +23,7 @@ import { useAuth } from '../../hooks/auth'
 export function Header({ handleMenuClick }) {
   const [isOpen, setIsOpen] = useState(false)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
-  const { signOut } = useAuth()
+  const { signOut, isAnAdmin } = useAuth()
 
   function checkedOnchangeWindowSize() {
     const width = window.innerWidth
@@ -41,13 +42,17 @@ export function Header({ handleMenuClick }) {
   }, [])
 
   return (
+    // TODO: decidir se mudo a view header do menu mobile ou não
     <Container>
       {windowWidth < 1024 && (
         <Hamburger toggled={isOpen} toggle={handleIsOpen} />
       )}
-      <Logo>
+      <Logo isAdmin={isAnAdmin()}>
         <img src={Polygon} alt="Logomarca" />
-        <h3>food explorer</h3>
+        <Text>
+          <h3>food explorer</h3>
+          <p>admin</p>
+        </Text>
       </Logo>
 
       {windowWidth >= 1024 && (

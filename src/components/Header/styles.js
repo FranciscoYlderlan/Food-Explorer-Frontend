@@ -29,12 +29,32 @@ export const Container = styled.header`
     ${({ theme }) => theme.FONTS.ROBOTO.SMALL_REGULAR}
   }
 `
+export const Text = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  @media ${({ theme }) => theme.DEVICES.laptop} {
+    display: grid;
+    justify-items: end;
+    gap: 0;
+  }
+`
 export const Logo = styled.div`
   display: flex;
   gap: 1rem;
   align-items: center;
-  > h3 {
+  h3 {
     ${({ theme }) => theme.FONTS.ROBOTO.BIG_BOLD}
+    line-height: 100%;
+  }
+  p {
+    ${({ theme }) => theme.FONTS.ROBOTO.SMALLEST_REGULAR}
+    line-height: 100%;
+    color: ${({ theme }) => theme.COLORS.CAKE_100};
+    display: ${({ isAdmin }) => (isAdmin ? 'flex' : 'none')};
+  }
+  @media ${({ theme }) => theme.DEVICES.laptop} {
+    align-items: flex-start;
   }
 `
 export const Links = styled.div`
