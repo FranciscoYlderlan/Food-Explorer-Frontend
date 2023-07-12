@@ -54,7 +54,7 @@ export const Logo = styled.div`
     display: ${({ isAdmin }) => (isAdmin ? 'flex' : 'none')};
   }
   @media ${({ theme }) => theme.DEVICES.laptop} {
-    align-items: flex-start;
+    align-items: ${({ isAdmin }) => (isAdmin ? 'flex-start' : 'center')};
   }
 `
 export const Links = styled.div`
