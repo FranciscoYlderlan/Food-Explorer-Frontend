@@ -34,7 +34,8 @@ export function Header({ handleMenuClick }) {
   window.addEventListener('resize', checkedOnchangeWindowSize)
 
   useEffect(() => {
-    setIsOpen(JSON.parse(localStorage.getItem('@food-explorer:isActive')))
+    const isActive = localStorage.getItem('@food-explorer:isActive')
+    setIsOpen(JSON.parse(isActive))
   }, [])
 
   return (

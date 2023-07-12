@@ -10,6 +10,13 @@ import { useState, useEffect } from 'react'
 
 export function Update() {
   const [isOpenMenu, setIsOpenMenu] = useState(false)
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+
+  function checkedOnchangeWindowSize() {
+    const width = window.innerWidth
+    setWindowWidth(width)
+  }
+  window.addEventListener('resize', checkedOnchangeWindowSize)
   function handleMenuClick() {
     setIsOpenMenu(JSON.parse(localStorage.getItem('@food-explorer:isActive')))
   }
@@ -20,7 +27,7 @@ export function Update() {
     <Container>
       <Header handleMenuClick={handleMenuClick} />
       <Main>
-        {!isOpenMenu && (
+        {(!isOpenMenu || windowWidth > 1024) && (
           <>
             <TextLinkStyled title="voltar" icon={PiCaretLeftBold} />
             <FormDish />

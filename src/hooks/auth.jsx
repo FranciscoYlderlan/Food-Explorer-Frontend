@@ -1,4 +1,4 @@
-import { useState, createContext, useContext } from 'react'
+import { useState, createContext, useContext, useEffect } from 'react'
 import { api } from '../services/api'
 import decode from 'jwt-decode'
 import { ToastContainer, toast } from 'react-toastify'
@@ -15,11 +15,13 @@ function AuthProvider({ children }) {
         api.post('/sessions', { email, password }),
         {
           pending: 'Por favor aguarde...',
-          error: 'Não foi possível efetuar login.',
           ...toastConfig,
         },
       )
       const { user, token } = response.data
+
+      localStorage.setItem('@food-explorer:user', JSON.stringify(user))
+      localStorage.setItem('@food-explorer:token', token)
 
       api.defaults.headers.common.Authorization = `Bearer ${token}`
 
@@ -39,6 +41,15 @@ function AuthProvider({ children }) {
       return isAdmin
     }
   }
+  useEffect(() => {
+    const user = localStorage.getItem('@food-explorer:user')
+    const token = localStorage.getItem('@food-explorer:token')
+
+    setData({
+      user: JSON.parse(user),
+      token,
+    })
+  }, [])
   return (
     <AuthContext.Provider value={{ signIn, isAnAdmin, user: data.user }}>
       <ToastContainer
