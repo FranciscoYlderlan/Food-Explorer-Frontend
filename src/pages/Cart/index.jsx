@@ -42,7 +42,7 @@ export function Cart() {
             <TextLinkStyled title="voltar" icon={PiCaretLeftBold} />
             <CartStyled>
               <Itens>
-                <h2>Carrinho</h2>
+                <h2>Pedidos</h2>
 
                 <ListItemsStyled>
                   <PurchaseItem />

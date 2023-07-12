@@ -105,46 +105,46 @@ export function Table() {
     },
   ]
   return (
-    // <CardContainer>
-    //   {rows?.map((row, index) => {
-    //     return (
-    //       <Card
-    //         row={row}
-    //         key={index}
-    //         options={['Pendente', 'Preparando', 'Entregue']}
-    //         isAdmin
-    //       />
-    //     )
-    //   })}
-    // </CardContainer>
-    <TableContainer>
-      {false && rows}
+    <CardContainer>
+      {rows?.map((row, index) => {
+        return (
+          <Card
+            row={row}
+            key={index}
+            options={['Pendente', 'Preparando', 'Entregue']}
+            isAdmin
+          />
+        )
+      })}
+    </CardContainer>
+    // <TableContainer>
+    //   {false && rows}
 
-      <TableHeader>
-        <TableCell>Status</TableCell>
-        <TableCell>Código</TableCell>
-        <TableCell>Detalhamento</TableCell>
-        <TableCell>Data e Hora</TableCell>
-      </TableHeader>
-      <TableBody>
-        {rows?.map((row, index) => {
-          return (
-            <TableRow key={index}>
-              <TableCell>
-                <Select
-                  options={['Pendente', 'Preparando', 'Entregue']}
-                  selected={row.status}
-                />
+    //   <TableHeader>
+    //     <TableCell>Status</TableCell>
+    //     <TableCell>Código</TableCell>
+    //     <TableCell>Detalhamento</TableCell>
+    //     <TableCell>Data e Hora</TableCell>
+    //   </TableHeader>
+    //   <TableBody>
+    //     {rows?.map((row, index) => {
+    //       return (
+    //         <TableRow key={index}>
+    //           <TableCell>
+    //             <Select
+    //               options={['Pendente', 'Preparando', 'Entregue']}
+    //               selected={row.status}
+    //             />
 
-                {/* <Status value={row.status} text={row.status} /> */}
-              </TableCell>
-              <TableCell>{row.codigo}</TableCell>
-              <TableCell>{row.detalhamento}</TableCell>
-              <TableCell>{row.dataHora}</TableCell>
-            </TableRow>
-          )
-        })}
-      </TableBody>
-    </TableContainer>
+    //             {/* <Status value={row.status} text={row.status} /> */}
+    //           </TableCell>
+    //           <TableCell>{row.codigo}</TableCell>
+    //           <TableCell>{row.detalhamento}</TableCell>
+    //           <TableCell>{row.dataHora}</TableCell>
+    //         </TableRow>
+    //       )
+    //     })}
+    //   </TableBody>
+    // </TableContainer>
   )
 }

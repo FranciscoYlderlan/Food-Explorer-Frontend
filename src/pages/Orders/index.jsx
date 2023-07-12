@@ -30,7 +30,7 @@ export function Orders() {
         {(!isOpenMenu || windowWidth > 1024) && (
           <>
             <TextLinkStyled title="voltar" icon={PiCaretLeftBold} />
-            <h2>Histórico de Pedidos</h2>
+            <h2>Histórico de pedidos</h2>
             <Table />
           </>
         )}

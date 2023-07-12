@@ -9,6 +9,7 @@ const AuthContext = createContext({})
 
 function AuthProvider({ children }) {
   const [data, setData] = useState({})
+
   async function signIn({ email, password }) {
     try {
       const response = await toast.promise(
@@ -32,6 +33,11 @@ function AuthProvider({ children }) {
       }
     }
   }
+  function signOut() {
+    localStorage.removeItem('@food-explorer:user')
+    localStorage.removeItem('@food-explorer:token')
+    setData({})
+  }
   function isAnAdmin() {
     const notIsEmpty = Object.keys(data).length !== 0
     if (notIsEmpty) {
@@ -51,7 +57,14 @@ function AuthProvider({ children }) {
     })
   }, [])
   return (
-    <AuthContext.Provider value={{ signIn, isAnAdmin, user: data.user }}>
+    <AuthContext.Provider
+      value={{
+        signIn,
+        isAnAdmin,
+        signOut,
+        user: data.user,
+      }}
+    >
       <ToastContainer
         position="top-right"
         autoClose={5000}

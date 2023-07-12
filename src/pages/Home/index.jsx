@@ -40,7 +40,7 @@ export function Home() {
               <Section title="Refeições">
                 <Carousel />
                 {
-                  // TODO: generalizar a altura dos cards dentro do
+                  // TODO: generalizar a altura dos cards dentro do carousel
                 }
               </Section>
               <Section title="Bebidas">

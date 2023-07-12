@@ -17,10 +17,12 @@ import Polygon from '../../assets/Polygon1.svg'
 
 import { useState, useEffect } from 'react'
 
+import { useAuth } from '../../hooks/auth'
+
 export function Header({ handleMenuClick }) {
   const [isOpen, setIsOpen] = useState(false)
-
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+  const { signOut } = useAuth()
 
   function checkedOnchangeWindowSize() {
     const width = window.innerWidth
@@ -72,7 +74,7 @@ export function Header({ handleMenuClick }) {
               <Links>
                 <TextLink title="Meus Favoritos" />
                 <TextLink title="Histórico de pedidos" />
-                <TextLink title="Sair" />
+                <TextLink title="Sair" onClick={signOut} />
               </Links>
             </OptionsIn>
           ) : (
@@ -84,7 +86,7 @@ export function Header({ handleMenuClick }) {
               <Links>
                 <TextLink title="Meus Favoritos" />
                 <TextLink title="Histórico de pedidos" />
-                <TextLink title="Sair" />
+                <TextLink title="Sair" onClick={signOut} />
               </Links>
             </OptionsOut>
           )}
@@ -100,7 +102,7 @@ export function Header({ handleMenuClick }) {
         </ButtomContainer>
       ) : (
         <ButtomContainer>
-          <SignOut size={40} />
+          <SignOut size={40} onClick={signOut} />
         </ButtomContainer>
       )}
     </Container>
