@@ -40,6 +40,10 @@ export function Header({ handleMenuClick }) {
     navigate('/cart')
   }
 
+  function handleClickCreatePage() {
+    navigate('/create')
+  }
+
   function handleClickHomePage() {
     navigate('/')
   }
@@ -62,7 +66,7 @@ export function Header({ handleMenuClick }) {
   }, [])
 
   return (
-    // TODO: decidir se mudo a view header do menu mobile ou não
+    // TODO: decidir se utilizo o header do menu do figma mobile ou não
     <Container>
       {windowWidth < 1024 && (
         <Hamburger toggled={isOpen} toggle={handleIsOpen} />
@@ -81,14 +85,22 @@ export function Header({ handleMenuClick }) {
             icon={MagnifyingGlass}
             placeholder="Busque por pratos ou ingredientes"
           />
-          <TextLink title="Meus Favoritos" onClick={handleClickFavoritePage} />
+          {!isAnAdmin() && (
+            <TextLink
+              title="Meus Favoritos"
+              onClick={handleClickFavoritePage}
+            />
+          )}
           <TextLink title="Histórico" onClick={handleClickHistoryPage} />
-          {/* TODO: trocar para carrinho */}
-          <Button
-            icon={Receipt}
-            title="Pedidos (0)"
-            onClick={handleClickOrderPage}
-          ></Button>
+          {!isAnAdmin() ? (
+            <Button
+              icon={Receipt}
+              title="Pedidos (0)"
+              onClick={handleClickOrderPage}
+            />
+          ) : (
+            <Button title="Novo Prato" onClick={handleClickCreatePage} />
+          )}
         </>
       )}
 
@@ -101,10 +113,17 @@ export function Header({ handleMenuClick }) {
                 placeholder="Busque por pratos ou ingredientes"
               />
               <Links>
-                <TextLink
-                  title="Meus Favoritos"
-                  onClick={handleClickFavoritePage}
-                />
+                {!isAnAdmin() ? (
+                  <TextLink
+                    title="Meus Favoritos"
+                    onClick={handleClickFavoritePage}
+                  />
+                ) : (
+                  <TextLink
+                    title="Novo prato"
+                    onClick={handleClickCreatePage}
+                  />
+                )}
                 <TextLink
                   title="Histórico de pedidos"
                   onClick={handleClickHistoryPage}
@@ -119,7 +138,17 @@ export function Header({ handleMenuClick }) {
                 placeholder="Busque por pratos ou ingredientes"
               />
               <Links>
-                <TextLink title="Meus Favoritos" />
+                {!isAnAdmin() ? (
+                  <TextLink
+                    title="Meus Favoritos"
+                    onClick={handleClickFavoritePage}
+                  />
+                ) : (
+                  <TextLink
+                    title="Novo prato"
+                    onClick={handleClickCreatePage}
+                  />
+                )}
                 <TextLink
                   title="Histórico de pedidos"
                   onClick={handleClickHistoryPage}
@@ -131,13 +160,16 @@ export function Header({ handleMenuClick }) {
         </>
       )}
       {windowWidth < 1024 ? (
-        <ButtomContainer onClick={handleClickOrderPage}>
-          <CircleIcon>
-            <span>0</span>
-          </CircleIcon>
-          {/* TODO: trocar para carrinho */}
-          <Receipt size={40} />
-        </ButtomContainer>
+        !isAnAdmin() ? (
+          <ButtomContainer onClick={handleClickOrderPage}>
+            <CircleIcon>
+              <span>0</span>
+            </CircleIcon>
+            <Receipt size={40} />
+          </ButtomContainer>
+        ) : (
+          <span />
+        )
       ) : (
         <ButtomContainer>
           <SignOut size={40} onClick={signOut} />
