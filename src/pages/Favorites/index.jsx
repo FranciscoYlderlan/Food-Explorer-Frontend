@@ -7,11 +7,15 @@ import { PurchaseItem } from '../../components/PurchaseItem'
 import { PiCaretLeftBold } from 'react-icons/pi'
 
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export function Favorites() {
   const [isOpenMenu, setIsOpenMenu] = useState(false)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
-
+  const navigate = useNavigate()
+  function handleComeBack() {
+    navigate(-1)
+  }
   function checkedOnchangeWindowSize() {
     const width = window.innerWidth
     setWindowWidth(width)
@@ -29,7 +33,11 @@ export function Favorites() {
       <Main>
         {(!isOpenMenu || windowWidth > 1024) && (
           <>
-            <TextLinkStyled title="voltar" icon={PiCaretLeftBold} />
+            <TextLinkStyled
+              title="voltar"
+              icon={PiCaretLeftBold}
+              onClick={handleComeBack}
+            />
             <h2>Meus Favoritos</h2>
             <ListItemsStyled>
               <PurchaseItem />

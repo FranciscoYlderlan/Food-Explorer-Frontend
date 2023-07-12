@@ -9,6 +9,7 @@ const AuthContext = createContext({})
 
 function AuthProvider({ children }) {
   const [data, setData] = useState({})
+  // const [search, setSearch] = useState('')
 
   async function signIn({ email, password }) {
     try {
@@ -50,6 +51,11 @@ function AuthProvider({ children }) {
       return isAdmin
     }
   }
+  // function handleSearchChange() {
+  //   if (search) {
+  //   }
+  // }
+
   useEffect(() => {
     const user = localStorage.getItem('@food-explorer:user')
     const token = localStorage.getItem('@food-explorer:token')

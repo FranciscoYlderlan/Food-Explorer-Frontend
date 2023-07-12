@@ -53,6 +53,9 @@ export const Logo = styled.div`
     color: ${({ theme }) => theme.COLORS.CAKE_100};
     display: ${({ isAdmin }) => (isAdmin ? 'flex' : 'none')};
   }
+  &:hover {
+    cursor: pointer;
+  }
   @media ${({ theme }) => theme.DEVICES.laptop} {
     align-items: ${({ isAdmin }) => (isAdmin ? 'flex-start' : 'center')};
   }

@@ -40,6 +40,10 @@ export function Header({ handleMenuClick }) {
     navigate('/cart')
   }
 
+  function handleClickHomePage() {
+    navigate('/')
+  }
+
   function checkedOnchangeWindowSize() {
     const width = window.innerWidth
     setWindowWidth(width)
@@ -49,6 +53,7 @@ export function Header({ handleMenuClick }) {
     setIsOpen(!isOpen)
     handleMenuClick()
   }
+
   window.addEventListener('resize', checkedOnchangeWindowSize)
 
   useEffect(() => {
@@ -62,7 +67,7 @@ export function Header({ handleMenuClick }) {
       {windowWidth < 1024 && (
         <Hamburger toggled={isOpen} toggle={handleIsOpen} />
       )}
-      <Logo isAdmin={isAnAdmin()}>
+      <Logo isAdmin={isAnAdmin()} onClick={handleClickHomePage}>
         <img src={Polygon} alt="Logomarca" />
         <Text>
           <h3>food explorer</h3>

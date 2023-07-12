@@ -15,10 +15,15 @@ import { Tag } from '../../components/Tag'
 
 import { PiCaretLeftBold } from 'react-icons/pi'
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+
 export function Preview() {
   const [isOpenMenu, setIsOpenMenu] = useState(false)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
-
+  const navigate = useNavigate()
+  function handleComeBack() {
+    navigate(-1)
+  }
   function checkedOnchangeWindowSize() {
     const width = window.innerWidth
     setWindowWidth(width)
@@ -36,7 +41,11 @@ export function Preview() {
       <Main>
         {(!isOpenMenu || windowWidth > 1024) && (
           <>
-            <TextLinkStyled title="voltar" icon={PiCaretLeftBold} />
+            <TextLinkStyled
+              title="voltar"
+              icon={PiCaretLeftBold}
+              onClick={handleComeBack}
+            />
             <Content>
               <img
                 src="https://st.depositphotos.com/1003814/4626/i/600/depositphotos_46267763-stock-photo-fried-chicken-fillets.jpg"
