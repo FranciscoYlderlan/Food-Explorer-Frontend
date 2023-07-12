@@ -34,6 +34,9 @@ function AuthProvider({ children }) {
     }
   }
   function signOut() {
+    const rootUrl = window.location.protocol + '//' + window.location.host + '/'
+    window.location.href = rootUrl
+
     localStorage.removeItem('@food-explorer:user')
     localStorage.removeItem('@food-explorer:token')
     setData({})

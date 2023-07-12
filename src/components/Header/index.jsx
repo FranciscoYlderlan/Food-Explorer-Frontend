@@ -18,12 +18,27 @@ import Polygon from '../../assets/Polygon1.svg'
 
 import { useState, useEffect } from 'react'
 
+import { useNavigate } from 'react-router-dom'
+
 import { useAuth } from '../../hooks/auth'
 
 export function Header({ handleMenuClick }) {
   const [isOpen, setIsOpen] = useState(false)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
-  const { signOut, isAnAdmin } = useAuth()
+  const { signOut, isAnAdmin, user } = useAuth()
+  const navigate = useNavigate()
+
+  function handleClickHistoryPage() {
+    navigate(`/orders`)
+  }
+
+  function handleClickFavoritePage() {
+    navigate('/favorites')
+  }
+
+  function handleClickOrderPage() {
+    navigate('/cart')
+  }
 
   function checkedOnchangeWindowSize() {
     const width = window.innerWidth
@@ -61,10 +76,14 @@ export function Header({ handleMenuClick }) {
             icon={MagnifyingGlass}
             placeholder="Busque por pratos ou ingredientes"
           />
-          <TextLink title="Meus Favoritos" />
-          <TextLink title="Histórico" />
+          <TextLink title="Meus Favoritos" onClick={handleClickFavoritePage} />
+          <TextLink title="Histórico" onClick={handleClickHistoryPage} />
           {/* TODO: trocar para carrinho */}
-          <Button icon={Receipt} title="Pedidos (0)"></Button>
+          <Button
+            icon={Receipt}
+            title="Pedidos (0)"
+            onClick={handleClickOrderPage}
+          ></Button>
         </>
       )}
 
@@ -77,8 +96,14 @@ export function Header({ handleMenuClick }) {
                 placeholder="Busque por pratos ou ingredientes"
               />
               <Links>
-                <TextLink title="Meus Favoritos" />
-                <TextLink title="Histórico de pedidos" />
+                <TextLink
+                  title="Meus Favoritos"
+                  onClick={handleClickFavoritePage}
+                />
+                <TextLink
+                  title="Histórico de pedidos"
+                  onClick={handleClickHistoryPage}
+                />
                 <TextLink title="Sair" onClick={signOut} />
               </Links>
             </OptionsIn>
@@ -90,7 +115,10 @@ export function Header({ handleMenuClick }) {
               />
               <Links>
                 <TextLink title="Meus Favoritos" />
-                <TextLink title="Histórico de pedidos" />
+                <TextLink
+                  title="Histórico de pedidos"
+                  onClick={handleClickHistoryPage}
+                />
                 <TextLink title="Sair" onClick={signOut} />
               </Links>
             </OptionsOut>
@@ -98,7 +126,7 @@ export function Header({ handleMenuClick }) {
         </>
       )}
       {windowWidth < 1024 ? (
-        <ButtomContainer>
+        <ButtomContainer onClick={handleClickOrderPage}>
           <CircleIcon>
             <span>0</span>
           </CircleIcon>

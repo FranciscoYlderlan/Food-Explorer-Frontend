@@ -14,7 +14,7 @@ export function AppUserRoutes() {
       <Route path="/preview/:id" element={<Preview />} />
       <Route path="/favorites" element={<Favorites />} />
       <Route path="/cart" element={<Cart />} />
-      <Route path="/orders/:id" element={<Orders />} />
+      <Route path="/orders" element={<Orders />} />
     </Routes>
   )
 }
