@@ -1,6 +1,6 @@
 import { useState, createContext, useContext } from 'react'
 import { api } from '../services/api'
-import jwt_decode from 'jwt-decode'
+import decode from 'jwt-decode'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { toastConfig } from '../services/toast'
@@ -23,11 +23,6 @@ function AuthProvider({ children }) {
 
       api.defaults.headers.common.Authorization = `Bearer ${token}`
 
-      const decodedToken = await jwt_decode(token)
-
-      const isAdmin = decodedToken ? decodedToken.isAdmin : null
-      console.log(isAdmin)
-
       setData({ user, token })
     } catch (error) {
       if (error.response) {
@@ -35,9 +30,17 @@ function AuthProvider({ children }) {
       }
     }
   }
+  function isAnAdmin() {
+    const notIsEmpty = Object.keys(data).length !== 0
+    if (notIsEmpty) {
+      const decodedToken = decode(data.token)
 
+      const isAdmin = decodedToken ? decodedToken.isAdmin : null
+      return isAdmin
+    }
+  }
   return (
-    <AuthContext.Provider value={{ signIn, user: data.user }}>
+    <AuthContext.Provider value={{ signIn, isAnAdmin, user: data.user }}>
       <ToastContainer
         position="top-right"
         autoClose={5000}

@@ -6,8 +6,10 @@ import { Button } from '../../components/Button'
 import { TextLink } from '../../components/TextLink'
 
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
 export function SignIn() {
+  const navigate = useNavigate()
   const { signIn } = useAuth()
   const [login, setLogin] = useState({
     email: '',
@@ -21,6 +23,9 @@ export function SignIn() {
     e.preventDefault()
     const { password, email } = login
     signIn({ password, email })
+  }
+  function handleClickSignUp() {
+    navigate('/register')
   }
   return (
     <Container>
@@ -50,7 +55,7 @@ export function SignIn() {
           />
           <Button type="submit" title="Entrar" />
         </Form>
-        <TextLink title="Criar uma conta" />
+        <TextLink title="Criar uma conta" onClick={handleClickSignUp} />
       </Main>
     </Container>
   )
