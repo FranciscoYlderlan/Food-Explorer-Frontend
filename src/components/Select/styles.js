@@ -21,7 +21,7 @@ export const SelectBox = styled.div`
   border-radius: 0.8rem;
   color: ${({ theme }) => theme.COLORS.LIGHT_400};
   background-color: ${({ theme }) => theme.COLORS.DARK_900};
-  ${({ theme }) => theme.FONTS.ROBOTO.SMALLER_REGULAR}
+  ${({ theme }) => theme.FONTS.ROBOTO.SMALL_REGULAR};
   &:after {
     position: absolute;
     content: '';

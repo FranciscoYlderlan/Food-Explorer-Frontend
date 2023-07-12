@@ -8,7 +8,13 @@ import { useState, useEffect } from 'react'
 import { SelectOption } from '../SelectOption'
 import { Dot } from '../Dot/index.jsx'
 
-export function Select({ options, selected = null, labelName = null }) {
+export function Select({
+  options,
+  selected = null,
+  labelName = null,
+  onChange,
+  ...rest
+}) {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedOption, setSelectedOption] = useState('Selecione uma opção')
   const [selectedIcon, setSelectedIcon] = useState(null)
@@ -20,6 +26,7 @@ export function Select({ options, selected = null, labelName = null }) {
     setSelectedOption(text)
     setIsOpen(false)
     setSelectedIcon(value)
+    onChange(value)
   }
   useEffect(() => {
     function isSelected(selected) {

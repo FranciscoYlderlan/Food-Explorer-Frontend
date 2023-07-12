@@ -24,6 +24,10 @@ export const InputFile = styled(Input)`
         cursor: pointer;
       }
     }
+    &:has(input:invalid:focus) + div {
+      position: absolute;
+    }
+
     > span {
       margin-left: 3.2rem;
       display: flex;
@@ -33,7 +37,7 @@ export const InputFile = styled(Input)`
       top: 50%;
       transform: translateY(-50%);
       left: 0;
-      pointer-events: NONE;
+      pointer-events: none;
       cursor: pointer;
       z-index: 0;
       ${({ theme }) => theme.FONTS.ROBOTO.SMALL_REGULAR};

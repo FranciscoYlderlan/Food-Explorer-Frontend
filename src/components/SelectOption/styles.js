@@ -8,7 +8,7 @@ export const Container = styled.div`
   gap: 0.8rem;
   padding: 1.6rem;
   cursor: pointer;
-  ${({ theme }) => theme.FONTS.ROBOTO.SMALLER_REGULAR}
+  ${({ theme }) => theme.FONTS.ROBOTO.SMALL_REGULAR};
   color: ${({ theme }) => theme.COLORS.LIGHT_400};
   background-color: ${({ theme }) => theme.COLORS.DARK_900};
 `
