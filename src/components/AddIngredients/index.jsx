@@ -2,10 +2,9 @@ import { Container } from './styles'
 import { FiPlus, FiX } from 'react-icons/fi'
 import { useState, useEffect } from 'react'
 export function AddIngredients({
-  isNew,
+  isNew = false,
   value = '',
   onClick,
-  onChange = () => {},
   ...rest
 }) {
   const [inputValue, setInputValue] = useState('')
@@ -17,11 +16,10 @@ export function AddIngredients({
     setInputValue(value)
   }, [value])
   return (
-    <Container isNew={isNew}>
+    <Container {...rest} isNew={isNew}>
       <input
         type="text"
         value={value}
-        onChange={onChange}
         readOnly={!isNew}
         style={{ width: getInputWidth() }}
         {...rest}

@@ -15,34 +15,101 @@ import { AddIngredients } from '../AddIngredients'
 import { Button } from '../Button'
 
 import { useState } from 'react'
+import { validateInput } from '../../utils/validations'
+
+import { toast } from 'react-toastify'
+
+import { api } from '../../services/api'
+
+// eslint-disable-next-line no-useless-escape
+const regexSpecialCharacter = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/
+
 export function FormDish({ dishData, isNew = false }) {
+  const picture = isNew ? dishData.picture : null
+  const [dishPicture, setDishPicture] = useState(picture)
+  // TODO: tratar captura do nome do arquivo para ser semelhante ao arquivo do estado
+
   const [dish, setDish] = useState({
     name: isNew ? dishData.name : '',
     ingredients: isNew ? dishData.ingredients : [],
     price: isNew ? dishData.price : '',
     description: isNew ? dishData.description : '',
   })
-  const picture = isNew ? dishData.picture : ''
 
-  const [dishFile, setDishFile] = useState(picture)
+  const [newIngredient, setNewIngredient] = useState('')
 
-  function handleValue() {}
+  function handleAddIngredient() {
+    const newIngredientIsEmpty = newIngredient === ''
+    const containsIngredient = dish.ingredients.some(
+      (ingredient) => ingredient.toLowerCase() === newIngredient.toLowerCase(),
+    )
+    const containsNumber =
+      newIngredient.replace(/\d/g, '').length !== newIngredient.length
+    const containsSpecialCharacters = regexSpecialCharacter.test(newIngredient)
+
+    // TODO: alterar para mensagem em baixo do input ao invés de um toast nas próximas versões
+    if (newIngredientIsEmpty)
+      return toast.info('Informe o ingrediente antes de adicionar')
+    if (containsIngredient)
+      return toast.info('Este ingrediente já foi inserido.')
+    if (containsNumber)
+      return toast.info('Não é possível inserir valores númericos.')
+    if (containsSpecialCharacters)
+      return toast.info('Não é possível inserir caracteres especiais.')
+
+    setDish((prevState) => ({
+      ...prevState,
+      ingredients: [
+        ...prevState.ingredients,
+        newIngredient.replace(/\s+$/, ''),
+      ],
+    }))
+    setNewIngredient('')
+  }
+  function handleRemoveIngredient(deleted) {
+    setDish((prevState) => ({
+      ...prevState,
+      ingredients: prevState.ingredients.filter(
+        (ingredient) => ingredient !== deleted,
+      ),
+    }))
+  }
 
   function handleChange(e) {
     setDish({ ...dish, [e.target.name]: e.target.value })
   }
 
   function handleInputImage(e) {
-    const file = event.target.files[0]
-    setDishFile(file)
+    const picture_ = event.target.files[0]
+    setDishPicture(picture_)
+    setDish((prevState) => ({ ...prevState, picture: picture_ }))
   }
 
   function handleCategorySelected(item) {
-    setDish({ ...dish, category: item })
+    setDish((prevState) => ({ ...prevState, category: item }))
   }
 
+  function handleNewIngredient(e) {
+    const { value } = e.target
+    if (validateInput(value)) {
+      setNewIngredient(value)
+    }
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    try {
+      if (newIngredient)
+        return toast.info('Ingrediente informado não foi adicionado')
+
+      if (dish.ingredients.length === 0)
+        return toast.info('Informe pelo menos um ingredient.')
+
+      console.log(dish)
+    } catch (error) {}
+  }
   return (
-    <Container>
+    <Container onSubmit={handleSubmit}>
       {isNew ? <h1>Novo prato</h1> : <h1>Editar Prato</h1>}
       <Col3>
         <InputFile
@@ -55,8 +122,8 @@ export function FormDish({ dishData, isNew = false }) {
         >
           <span>
             <UploadSimple size={32} />
-            {dishFile ? (
-              <span> {dishFile.name} </span>
+            {dishPicture ? (
+              <span> {dishPicture.name} </span>
             ) : (
               <span>Selecione imagem</span>
             )}
@@ -82,15 +149,21 @@ export function FormDish({ dishData, isNew = false }) {
         <WrapperAddIngredients>
           <label>Ingredientes</label>
           <IngredientsArea>
-            {dish.ingredients.map(({ ingredient, index }) => {
-              return <AddIngredients key={index} value={ingredient} />
+            {dish.ingredients.map((ingredient, index) => {
+              return (
+                <AddIngredients
+                  key={index}
+                  value={ingredient}
+                  onClick={() => handleRemoveIngredient(ingredient)}
+                />
+              )
             })}
             <AddIngredients
               isNew
               placeholder="Adicionar"
-              // onChange={(e) => handleNewTag(e)}
-              // value={newTag}
-              // onClick={handleAddTag}
+              onChange={(e) => handleNewIngredient(e)}
+              value={newIngredient}
+              onClick={handleAddIngredient}
             />
           </IngredientsArea>
         </WrapperAddIngredients>
@@ -115,7 +188,7 @@ export function FormDish({ dishData, isNew = false }) {
       />
       <Buttons>
         {!isNew && <Button title="Excluir prato" />}
-        <Button title="Salvar Alterações" />
+        <Button type="submit" title="Salvar Alterações" />
       </Buttons>
     </Container>
   )

@@ -25,7 +25,7 @@ import { useAuth } from '../../hooks/auth'
 export function Header({ handleMenuClick }) {
   const [isOpen, setIsOpen] = useState(false)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
-  const { signOut, isAnAdmin, user } = useAuth()
+  const { signOut, isAnAdmin } = useAuth()
   const navigate = useNavigate()
 
   function handleClickHistoryPage() {

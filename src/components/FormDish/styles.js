@@ -56,6 +56,7 @@ export const Col3 = styled.div`
   @media ${({ theme }) => theme.DEVICES.laptop} {
     display: flex;
     gap: 3.2rem;
+    align-items: flex-start;
   }
 `
 export const Col2 = styled.div`
@@ -65,9 +66,11 @@ export const Col2 = styled.div`
   @media ${({ theme }) => theme.DEVICES.laptop} {
     display: flex;
     gap: 3.2rem;
+
     > div:last-child {
       width: 30%;
     }
+    align-items: flex-start;
   }
 `
 export const Buttons = styled.div`
