@@ -57,9 +57,9 @@ export function Select({
               return (
                 <SelectOption
                   key={i}
-                  value={option}
-                  text={option}
-                  onClick={() => handleOptionClick(option, option)}
+                  value={option.id}
+                  text={option.name}
+                  onClick={() => handleOptionClick(option.id, option.name)}
                 />
               )
             })}

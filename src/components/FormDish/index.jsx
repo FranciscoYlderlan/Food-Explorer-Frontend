@@ -14,10 +14,11 @@ import { TextArea } from '../TextArea'
 import { AddIngredients } from '../AddIngredients'
 import { Button } from '../Button'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { validateInput } from '../../utils/validations'
 
 import { toast } from 'react-toastify'
+import { toastConfig } from '../../services/toast'
 
 import { api } from '../../services/api'
 
@@ -25,6 +26,8 @@ import { api } from '../../services/api'
 const regexSpecialCharacter = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/
 
 export function FormDish({ dishData, isNew = false }) {
+  const [categories, setCategories] = useState([])
+
   const picture = isNew ? dishData.picture : null
   const [dishPicture, setDishPicture] = useState(picture)
   // TODO: tratar captura do nome do arquivo para ser semelhante ao arquivo do estado
@@ -86,7 +89,7 @@ export function FormDish({ dishData, isNew = false }) {
   }
 
   function handleCategorySelected(item) {
-    setDish((prevState) => ({ ...prevState, category: item }))
+    setDish((prevState) => ({ ...prevState, category_id: item }))
   }
 
   function handleNewIngredient(e) {
@@ -96,18 +99,65 @@ export function FormDish({ dishData, isNew = false }) {
     }
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
+    console.log('entrei')
+    if (newIngredient)
+      return toast.info('Ingrediente informado não foi adicionado')
+
+    if (dish.ingredients.length === 0)
+      return toast.info('Informe pelo menos um ingredient.')
+
+    const formattedIngrediets = dish.ingredients.map((item) => ({
+      name: item,
+    }))
+
     try {
-      if (newIngredient)
-        return toast.info('Ingrediente informado não foi adicionado')
+      const formData = new FormData()
+      formData.append('picture', dish.picture)
+      formData.append('name', dish.name)
+      formData.append('category_id', dish.category_id)
+      formData.append('ingredients', JSON.stringify(formattedIngrediets))
+      formData.append('price', dish.price)
+      formData.append('description', dish.description)
 
-      if (dish.ingredients.length === 0)
-        return toast.info('Informe pelo menos um ingredient.')
+      // console.log([...formData])
+      // console.log(formData.get('ingredients'))
 
-      console.log(dish)
-    } catch (error) {}
+      await toast.promise(
+        api.post('/dish', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }),
+        {
+          pending: 'Por favor aguarde...',
+          success: 'Novo prato cadastrado com sucesso!',
+          ...toastConfig,
+        },
+      )
+    } catch (error) {
+      if (error.response) {
+        toast.error(error.response.data.description)
+      }
+    }
   }
+
+  useEffect(() => {
+    async function handleLoadingSelectOptions() {
+      try {
+        const response = await toast.promise(api.get('/category'), {
+          ...toastConfig,
+        })
+        setCategories(response.data)
+      } catch (error) {
+        if (error.response) toast.error(error.response.data.description)
+        else toast.error('Erro ao tentar carregar categorias.')
+      }
+    }
+    handleLoadingSelectOptions()
+  }, [])
+
   return (
     <Container onSubmit={handleSubmit}>
       {isNew ? <h1>Novo prato</h1> : <h1>Editar Prato</h1>}
@@ -139,7 +189,7 @@ export function FormDish({ dishData, isNew = false }) {
           required
         />
         <Select
-          options={['Refeições', 'Sobremesas', 'Bebidas']}
+          options={categories}
           selected="Bebidas"
           labelName={'Categoria'}
           onChange={handleCategorySelected}
