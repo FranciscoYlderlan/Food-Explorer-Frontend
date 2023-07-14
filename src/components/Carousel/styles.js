@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Swiper, SwiperSlide } from 'swiper/react'
-
+import { RiPencilFill } from 'react-icons/ri'
 export const Container = styled.div`
   width: 100%;
   height: 100%;
@@ -153,12 +153,64 @@ export const Card = styled.div`
       white-space: nowrap;
       overflow: hidden;
       width: inherit;
+      text-align: center;
     }
     min-height: 46rem;
     gap: 1.5rem;
     padding: 1.6rem 2.4rem 4.5rem;
   }
 `
+
+export const StyledRiPencilFill = styled(RiPencilFill)`
+  fill: transparent; /* Cor de preenchimento */
+  width: 3.4rem; /* Tamanho */
+  height: 3.4rem; /* Tamanho */
+  stroke-width: 1px; /* Largura do contorno */
+  stroke: white; /* Cor do contorno */
+  transition: all 0.3s;
+  &:hover {
+    stroke-width: 0;
+    fill: white;
+    cursor: pointer;
+  }
+`
+export const HeartContainer = styled.div`
+  display: flex;
+  position: relative;
+  align-self: end;
+
+  > svg:first-child {
+    fill: ${({ theme, isFavorite }) =>
+      isFavorite ? 'transparent' : theme.COLORS.LIGHT_300};
+    order: 1;
+    z-index: 2;
+    transition: fill 0.3s;
+    /* pointer-events: none; */
+  }
+
+  > svg:last-child {
+    fill: ${({ theme, isFavorite }) =>
+      isFavorite ? theme.COLORS.TOMATO_300 : 'transparent'};
+    order: 2;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    transition: fill 0.3s;
+  }
+
+  &:hover {
+    cursor: pointer;
+    > svg:first-child {
+      fill: transparent;
+    }
+    > svg:last-child {
+      fill: ${({ theme }) => theme.COLORS.TOMATO_300};
+    }
+  }
+`
+
 export const TextIcon = styled.div`
   display: flex;
   gap: 0.4rem;

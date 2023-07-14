@@ -8,9 +8,16 @@ import { Carousel } from '../../components/Carousel'
 import Macarons from '../../assets/Macarons.png'
 import { useState, useEffect } from 'react'
 
-export function Home() {
-  const [isOpenMenu, setIsOpenMenu] = useState(false)
+import { toast } from 'react-toastify'
+import { toastConfig } from '../../services/toast'
 
+import { api } from '../../services/api'
+
+export function Home() {
+  const [keyword, setKeyword] = useState('')
+  const [categories, setCategories] = useState([])
+  const [dishes, setDishes] = useState([])
+  const [isOpenMenu, setIsOpenMenu] = useState(false)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
   function checkedOnchangeWindowSize() {
@@ -24,6 +31,32 @@ export function Home() {
   }
   useEffect(() => {
     localStorage.setItem('@food-explorer:isActive', false)
+    async function handleLoadingSelectOptions() {
+      try {
+        const response = await toast.promise(api.get('/category'), {
+          ...toastConfig,
+        })
+        setCategories(response.data)
+      } catch (error) {
+        if (error.response) toast.error(error.response.data.description)
+        else toast.error('Erro ao tentar carregar categorias.')
+      }
+    }
+    async function fetchSearchDishes() {
+      try {
+        const response = await toast.promise(
+          api.get(`/dish/?keyword=${keyword}`),
+          {
+            ...toastConfig,
+          },
+        )
+        setDishes(response.data)
+      } catch (error) {
+        if (error.response) toast.error(error.response.data.description)
+        else toast.error('Erro ao tentar carregar os pratos.')
+      }
+    }
+    handleLoadingSelectOptions().then(fetchSearchDishes())
   }, [])
   return (
     <Container>
@@ -37,18 +70,14 @@ export function Home() {
               <p>Sinta o cuidado do preparo com ingredientes selecionados</p>
             </Frame>
             <ListItems>
-              <Section title="Refeições">
-                <Carousel />
-                {
-                  // TODO: generalizar a altura dos cards dentro do carousel
-                }
-              </Section>
-              <Section title="Bebidas">
-                <Carousel />
-              </Section>
-              <Section title="Sobremesas">
-                <Carousel />
-              </Section>
+              {categories.length > 0 &&
+                categories.map((category, index) => {
+                  return (
+                    <Section key={index} title={category.name}>
+                      {dishes && <Carousel data={dishes[category.id]} />}
+                    </Section>
+                  )
+                })}
             </ListItems>
           </>
         )}
