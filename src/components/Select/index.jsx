@@ -12,7 +12,7 @@ export function Select({
   options,
   selected = null,
   labelName = null,
-  onChange,
+  onChange = () => {},
   ...rest
 }) {
   const [isOpen, setIsOpen] = useState(false)
@@ -25,7 +25,7 @@ export function Select({
   function handleOptionClick(value, text) {
     setSelectedOption(text)
     setIsOpen(false)
-    setSelectedIcon(value)
+    setSelectedIcon(text)
     onChange(value)
   }
   useEffect(() => {
@@ -35,7 +35,7 @@ export function Select({
       }
     }
     isSelected(selected)
-  }, [selected])
+  }, [])
   return (
     <Container>
       {labelName && <label>{labelName}</label>}

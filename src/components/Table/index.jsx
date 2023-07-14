@@ -9,7 +9,16 @@ import {
 } from './styles'
 import { Select } from '../Select'
 import { Card } from '../Card'
+
+import { api } from '../../services/api'
+
+import { toast } from 'react-toastify'
+import { toastConfig } from '../../services/toast'
+
+import { useState, useEffect } from 'react'
+
 export function Table() {
+  const [status, setStatus] = useState([])
   const rows = [
     {
       id: 1,
@@ -104,17 +113,24 @@ export function Table() {
       dataHora: '2023-06-20 14:30',
     },
   ]
+  useEffect(() => {
+    async function handleLoadingSelectOptions() {
+      try {
+        const response = await toast.promise(api.get('/status'), {
+          ...toastConfig,
+        })
+        setStatus(response.data)
+      } catch (error) {
+        if (error.response) toast.error(error.response.data.description)
+        else toast.error('Erro ao tentar carregar status.')
+      }
+    }
+    handleLoadingSelectOptions()
+  }, [])
   return (
     <CardContainer>
       {rows?.map((row, index) => {
-        return (
-          <Card
-            row={row}
-            key={index}
-            options={['Pendente', 'Preparando', 'Entregue']}
-            isAdmin
-          />
-        )
+        return <Card row={row} key={index} options={status} isAdmin />
       })}
     </CardContainer>
     // <TableContainer>

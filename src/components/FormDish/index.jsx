@@ -157,20 +157,20 @@ export function FormDish({ dishData, isNew = false }) {
     }
   }
 
-  useEffect(() => {
-    async function handleLoadingSelectOptions() {
-      try {
-        const response = await toast.promise(api.get('/category'), {
-          ...toastConfig,
-        })
-        setCategories(response.data)
-      } catch (error) {
-        if (error.response) toast.error(error.response.data.description)
-        else toast.error('Erro ao tentar carregar categorias.')
+    useEffect(() => {
+      async function handleLoadingSelectOptions() {
+        try {
+          const response = await toast.promise(api.get('/category'), {
+            ...toastConfig,
+          })
+          setCategories(response.data)
+        } catch (error) {
+          if (error.response) toast.error(error.response.data.description)
+          else toast.error('Erro ao tentar carregar categorias.')
+        }
       }
-    }
-    handleLoadingSelectOptions()
-  }, [])
+      handleLoadingSelectOptions()
+    }, [])
 
   return (
     <Container onSubmit={handleSubmit}>
