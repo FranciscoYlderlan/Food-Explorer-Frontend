@@ -129,9 +129,10 @@ export function Table() {
   }, [])
   return (
     <CardContainer>
-      {rows?.map((row, index) => {
-        return <Card row={row} key={index} options={status} isAdmin />
-      })}
+      {status.length > 0 &&
+        rows?.map((row, index) => {
+          return <Card row={row} key={index} options={status} isAdmin />
+        })}
     </CardContainer>
     // <TableContainer>
     //   {false && rows}
