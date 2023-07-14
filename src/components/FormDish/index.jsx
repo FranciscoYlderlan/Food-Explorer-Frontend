@@ -101,7 +101,7 @@ export function FormDish({ dishData, isNew = false }) {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    console.log('entrei')
+
     if (newIngredient)
       return toast.info('Ingrediente informado não foi adicionado')
 
@@ -123,19 +123,33 @@ export function FormDish({ dishData, isNew = false }) {
 
       // console.log([...formData])
       // console.log(formData.get('ingredients'))
-
-      await toast.promise(
-        api.post('/dish', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
+      if (isNew) {
+        await toast.promise(
+          api.post('/dish', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          }),
+          {
+            pending: 'Por favor aguarde...',
+            success: 'Novo prato cadastrado com sucesso!',
+            ...toastConfig,
           },
-        }),
-        {
-          pending: 'Por favor aguarde...',
-          success: 'Novo prato cadastrado com sucesso!',
-          ...toastConfig,
-        },
-      )
+        )
+      } else {
+        await toast.promise(
+          api.post('/dish', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          }),
+          {
+            pending: 'Por favor aguarde...',
+            success: 'Prato editado com sucesso!',
+            ...toastConfig,
+          },
+        )
+      }
     } catch (error) {
       if (error.response) {
         toast.error(error.response.data.description)
@@ -160,7 +174,7 @@ export function FormDish({ dishData, isNew = false }) {
 
   return (
     <Container onSubmit={handleSubmit}>
-      {isNew ? <h1>Novo prato</h1> : <h1>Editar Prato</h1>}
+      {!isNew ? <h1>Novo prato</h1> : <h1>Editar Prato</h1>}
       <Col3>
         <InputFile
           labelPlaceholder="Imagem do prato"
@@ -188,12 +202,14 @@ export function FormDish({ dishData, isNew = false }) {
           onChange={handleChange}
           required
         />
-        <Select
-          options={categories}
-          selected="Bebidas"
-          labelName={'Categoria'}
-          onChange={handleCategorySelected}
-        />
+        {categories.length > 0 && (
+          <Select
+            options={categories}
+            selected={categories[0].name}
+            labelName={'Categoria'}
+            onChange={handleCategorySelected}
+          />
+        )}
       </Col3>
       <Col2>
         <WrapperAddIngredients>
@@ -237,7 +253,7 @@ export function FormDish({ dishData, isNew = false }) {
         required
       />
       <Buttons>
-        {!isNew && <Button title="Excluir prato" />}
+        {isNew && <Button title="Excluir prato" />}
         <Button type="submit" title="Salvar Alterações" />
       </Buttons>
     </Container>
