@@ -56,7 +56,8 @@ export function Home() {
         else toast.error('Erro ao tentar carregar os pratos.')
       }
     }
-    handleLoadingSelectOptions().then(fetchSearchDishes())
+    // TODO: mudar nome da função para category
+    fetchSearchDishes().then(handleLoadingSelectOptions())
   }, [])
   return (
     <Container>
@@ -73,7 +74,11 @@ export function Home() {
               {categories.length > 0 &&
                 categories.map((category, index) => {
                   return (
-                    <Section key={index} title={category.name}>
+                    <Section
+                      key={index}
+                      title={category.name}
+                      hasData={dishes[category.id]}
+                    >
                       {dishes && <Carousel data={dishes[category.id]} />}
                     </Section>
                   )

@@ -7,4 +7,9 @@ function currencyInputFormatter(value) {
   return formattedValue
 }
 
-export { currencyInputFormatter }
+function TwoDigitsFormatter(value) {
+  // Converte o valor para string e adiciona zeros à esquerda, se necessário
+  return String(value).padStart(2, '0')
+}
+
+export { currencyInputFormatter, TwoDigitsFormatter }

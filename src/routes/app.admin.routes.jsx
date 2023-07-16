@@ -15,8 +15,8 @@ export function AppAdminRoutes() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/preview/:id" element={<Preview />} />
-      <Route path="/favorites" element={<Favorites />} />
-      <Route path="/cart" element={<Cart />} />
+      {/* <Route path="/favorites" element={<Favorites />} /> */}
+      {/* <Route path="/cart" element={<Cart />} /> */}
       <Route path="/orders" element={<Orders />} />
       <Route path="/create" element={<Create />} />
       <Route path="/update/:id" element={<Update />} />

@@ -64,9 +64,8 @@ export function Header({ handleMenuClick }) {
     const isActive = localStorage.getItem('@food-explorer:isActive')
     setIsOpen(JSON.parse(isActive))
   }, [])
-
+  // TODO: quando já tiver na página do menu fechar o menu para exibir a tela
   return (
-    // TODO: decidir se utilizo o header do menu do figma mobile ou não
     <Container>
       {windowWidth < 1024 && (
         <Hamburger toggled={isOpen} toggle={handleIsOpen} />

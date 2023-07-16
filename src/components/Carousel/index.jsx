@@ -22,7 +22,6 @@ SwiperCore.use([Keyboard, Scrollbar, Navigation, Pagination])
 
 export function Carousel({ data }) {
   const { isAnAdmin } = useAuth()
-  console.log(data)
   return (
     <Container>
       <StyledSwiper
@@ -77,7 +76,7 @@ export function Carousel({ data }) {
                   </TextIcon>
 
                   <p>{dish.description}</p>
-                  <AddItem isAdmin={isAnAdmin()} />
+                  <AddItem item={dish} isAdmin={isAnAdmin()} />
                 </Card>
               </StyledSwiperSlide>
             )

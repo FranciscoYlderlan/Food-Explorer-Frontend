@@ -1,22 +1,48 @@
 import { Button } from '../Button'
 import { Container, Price, Counter, Add } from './styles'
 import { Receipt, Minus, Plus } from '@phosphor-icons/react'
+import {
+  currencyInputFormatter,
+  TwoDigitsFormatter,
+} from '../../utils/formatting'
+import { useState, useEffect } from 'react'
 
-export function AddItem({ price, isPreview = false, isAdmin = false }) {
+export function AddItem({ item, isPreview = false, isAdmin = false }) {
+  const { price, id } = item
+  const [amount, setAmount] = useState(price)
+  const [qty, setQty] = useState(1)
+
+  function handleIncrementQty() {
+    setQty((prevState) => prevState + 1)
+  }
+  function handleDecrementQty() {
+    if (qty > 1) setQty((prevState) => prevState - 1)
+  }
+  function handleAmountCalculation() {
+    return price * qty
+  }
+
+  useEffect(() => {
+    setAmount(handleAmountCalculation)
+  }, [qty])
+
   return (
     <Container>
-      {!isPreview && <Price>{`R$ ${79.5}`}</Price>}
+      {!isPreview && <Price>{`${currencyInputFormatter(amount)}`}</Price>}
       {!isAdmin && (
         <Add>
           <Counter>
-            <Minus size={24} />
-            <span>01</span>
-            <Plus size={24} />
+            <Minus size={24} onClick={handleDecrementQty} />
+            <span>{TwoDigitsFormatter(qty)}</span>
+            <Plus size={24} onClick={handleIncrementQty} />
           </Counter>
           {!isPreview ? (
             <Button title="Incluir" />
           ) : (
-            <Button title={`Incluir - R$ 25,00`} icon={Receipt} />
+            <Button
+              title={`Incluir - ${currencyInputFormatter(amount)}`}
+              icon={Receipt}
+            />
           )}
         </Add>
       )}
