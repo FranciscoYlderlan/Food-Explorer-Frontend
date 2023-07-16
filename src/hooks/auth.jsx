@@ -11,6 +11,13 @@ function AuthProvider({ children }) {
   const [data, setData] = useState({})
   // const [search, setSearch] = useState('')
 
+  // function isObjectInLocalStorage(key) {
+  //   const storedValue = localStorage.getItem(key)
+
+  //   //Se o valor não existir no localStorage ou for igual a null, o objeto não existe
+  //   return storedValue !== null
+  // }
+
   async function signIn({ email, password }) {
     try {
       const response = await toast.promise(
@@ -42,10 +49,11 @@ function AuthProvider({ children }) {
     localStorage.removeItem('@food-explorer:token')
     setData({})
   }
+
   function isAnAdmin() {
-    const notIsEmpty = Object.keys(data).length !== 0
-    if (notIsEmpty) {
-      const decodedToken = decode(data.token)
+    const token = localStorage.getItem('@food-explorer:token')
+    if (token) {
+      const decodedToken = decode(token)
 
       const isAdmin = decodedToken ? decodedToken.isAdmin : null
       return isAdmin
@@ -59,7 +67,7 @@ function AuthProvider({ children }) {
   useEffect(() => {
     const user = localStorage.getItem('@food-explorer:user')
     const token = localStorage.getItem('@food-explorer:token')
-
+    api.defaults.headers.common.Authorization = `Bearer ${token}`
     setData({
       user: JSON.parse(user),
       token,

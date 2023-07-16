@@ -8,7 +8,7 @@ import { AppAdminRoutes } from './app.admin.routes'
 
 export function Routes() {
   const { user, isAnAdmin } = useAuth()
-
+  // console.log(user, isAnAdmin())
   return (
     <BrowserRouter>
       {!user ? (
