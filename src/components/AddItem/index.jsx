@@ -25,7 +25,7 @@ export function AddItem({ item, isPreview = false, isAdmin = false }) {
     return price * qty
   }
   function handleClickIncludeItem() {
-    handleAddItem({ id, qty })
+    handleAddItem({ id, qty, amount })
   }
 
   useEffect(() => {

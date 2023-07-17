@@ -59,7 +59,7 @@ function AuthProvider({ children }) {
   //   }
   // }
 
-  function handleAddItem({ id, qty }) {
+  function handleAddItem({ id, qty, amount }) {
     const currentOrder = JSON.parse(
       localStorage.getItem('@food-explorer:order'),
     )
@@ -67,14 +67,15 @@ function AuthProvider({ children }) {
 
     if (existingItem) {
       existingItem.qty += qty
+      existingItem.amount += amount
       localStorage.setItem('@food-explorer:order', JSON.stringify(currentOrder))
       setOrderList(currentOrder)
     } else {
       localStorage.setItem(
         '@food-explorer:order',
-        JSON.stringify([...currentOrder, { id, qty }]),
+        JSON.stringify([...currentOrder, { id, qty, amount }]),
       )
-      setOrderList((prevState) => [...prevState, { id, qty }])
+      setOrderList((prevState) => [...prevState, { id, qty, amount }])
     }
   }
 
