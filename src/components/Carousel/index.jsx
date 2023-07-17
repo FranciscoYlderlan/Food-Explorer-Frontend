@@ -20,11 +20,18 @@ import { useAuth } from '../../hooks/auth'
 import { api } from '../../services/api'
 import { toast } from 'react-toastify'
 import { toastConfig } from '../../services/toast'
+import { useNavigate } from 'react-router-dom'
 
 SwiperCore.use([Keyboard, Scrollbar, Navigation, Pagination])
 
 export function Carousel({ data, updatedData }) {
   const { isAnAdmin } = useAuth()
+  const navigate = useNavigate()
+
+  function handleClickUpdatePage() {
+    navigate('/update/:id')
+  }
+
   async function handleClickOnFavorite(id) {
     try {
       await toast.promise(api.patch(`/favorite_dishes/${id}`), {
@@ -74,7 +81,7 @@ export function Carousel({ data, updatedData }) {
               <StyledSwiperSlide key={index}>
                 <Card>
                   {isAnAdmin() ? (
-                    <StyledRiPencilFill />
+                    <StyledRiPencilFill onClick={handleClickUpdatePage} />
                   ) : (
                     <HeartContainer
                       isFavorite={!!dish.isFavorite}
