@@ -7,7 +7,10 @@ import {
 } from '../../utils/formatting'
 import { useState, useEffect } from 'react'
 
+import { useAuth } from '../../hooks/auth'
+
 export function AddItem({ item, isPreview = false, isAdmin = false }) {
+  const { handleAddItem } = useAuth()
   const { price, id } = item
   const [amount, setAmount] = useState(price)
   const [qty, setQty] = useState(1)
@@ -20,6 +23,9 @@ export function AddItem({ item, isPreview = false, isAdmin = false }) {
   }
   function handleAmountCalculation() {
     return price * qty
+  }
+  function handleClickIncludeItem() {
+    handleAddItem({ id, qty })
   }
 
   useEffect(() => {
@@ -37,11 +43,12 @@ export function AddItem({ item, isPreview = false, isAdmin = false }) {
             <Plus size={24} onClick={handleIncrementQty} />
           </Counter>
           {!isPreview ? (
-            <Button title="Incluir" />
+            <Button title="Incluir" onClick={handleClickIncludeItem} />
           ) : (
             <Button
               title={`Incluir - ${currencyInputFormatter(amount)}`}
               icon={Receipt}
+              onClick={handleClickIncludeItem}
             />
           )}
         </Add>

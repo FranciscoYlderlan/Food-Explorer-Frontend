@@ -125,11 +125,16 @@ export const ButtomContainer = styled.div`
 
 export const CircleIcon = styled.div`
   position: absolute;
-  top: -5%;
-  right: -5%;
-  /* transform: translateY(-50%), translateX(-50%); */
-  width: 2rem;
-  height: 2rem;
+  right: -10%;
+  top: -10%;
+
+  width: fit-content;
+  height: fit-content;
+  min-width: 2rem;
+  min-height: 2rem;
+  /* transform: translateY(5%), translateX(5%); */
+  padding: 10%;
+
   border-radius: 50%;
 
   display: flex;
@@ -141,5 +146,6 @@ export const CircleIcon = styled.div`
   > span {
     ${({ theme }) => theme.FONTS.POPPINS.MEDIUM_100}
     color: ${({ theme }) => theme.COLORS.LIGHT_100};
+    line-height: 90%;
   }
 `

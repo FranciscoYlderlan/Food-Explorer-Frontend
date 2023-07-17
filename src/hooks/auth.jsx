@@ -9,14 +9,8 @@ const AuthContext = createContext({})
 
 function AuthProvider({ children }) {
   const [data, setData] = useState({})
+  const [orderList, setOrderList] = useState([])
   // const [search, setSearch] = useState('')
-
-  // function isObjectInLocalStorage(key) {
-  //   const storedValue = localStorage.getItem(key)
-
-  //   //Se o valor não existir no localStorage ou for igual a null, o objeto não existe
-  //   return storedValue !== null
-  // }
 
   async function signIn({ email, password }) {
     try {
@@ -31,6 +25,7 @@ function AuthProvider({ children }) {
 
       localStorage.setItem('@food-explorer:user', JSON.stringify(user))
       localStorage.setItem('@food-explorer:token', token)
+      localStorage.setItem('@food-explorer:order', JSON.stringify([]))
 
       api.defaults.headers.common.Authorization = `Bearer ${token}`
 
@@ -64,6 +59,25 @@ function AuthProvider({ children }) {
   //   }
   // }
 
+  function handleAddItem({ id, qty }) {
+    const currentOrder = JSON.parse(
+      localStorage.getItem('@food-explorer:order'),
+    )
+    const existingItem = currentOrder.find((item) => item.id === id)
+
+    if (existingItem) {
+      existingItem.qty += qty
+      localStorage.setItem('@food-explorer:order', JSON.stringify(currentOrder))
+      setOrderList(currentOrder)
+    } else {
+      localStorage.setItem(
+        '@food-explorer:order',
+        JSON.stringify([...currentOrder, { id, qty }]),
+      )
+      setOrderList((prevState) => [...prevState, { id, qty }])
+    }
+  }
+
   useEffect(() => {
     const user = localStorage.getItem('@food-explorer:user')
     const token = localStorage.getItem('@food-explorer:token')
@@ -78,6 +92,12 @@ function AuthProvider({ children }) {
       value={{
         signIn,
         isAnAdmin,
+        handleAddItem,
+        orderQty:
+          orderList.reduce(
+            (accumulator, current) => accumulator + current.qty,
+            0,
+          ) || 0,
         signOut,
         user: data.user,
       }}

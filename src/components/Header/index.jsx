@@ -25,7 +25,7 @@ import { useAuth } from '../../hooks/auth'
 export function Header({ handleMenuClick }) {
   const [isOpen, setIsOpen] = useState(false)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
-  const { signOut, isAnAdmin } = useAuth()
+  const { signOut, isAnAdmin, orderQty } = useAuth()
   const navigate = useNavigate()
 
   function handleClickHistoryPage() {
@@ -94,7 +94,7 @@ export function Header({ handleMenuClick }) {
           {!isAnAdmin() ? (
             <Button
               icon={Receipt}
-              title="Pedidos (0)"
+              title={`Pedidos (${orderQty})`}
               onClick={handleClickOrderPage}
             />
           ) : (
@@ -162,7 +162,7 @@ export function Header({ handleMenuClick }) {
         !isAnAdmin() ? (
           <ButtomContainer onClick={handleClickOrderPage}>
             <CircleIcon>
-              <span>0</span>
+              <span>{orderQty}</span>
             </CircleIcon>
             <Receipt size={40} />
           </ButtomContainer>
