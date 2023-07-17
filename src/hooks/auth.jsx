@@ -10,6 +10,7 @@ const AuthContext = createContext({})
 function AuthProvider({ children }) {
   const [data, setData] = useState({})
   const [orderList, setOrderList] = useState([])
+  const [orderQty, setOrderQty] = useState([])
   // const [search, setSearch] = useState('')
 
   async function signIn({ email, password }) {
@@ -25,7 +26,9 @@ function AuthProvider({ children }) {
 
       localStorage.setItem('@food-explorer:user', JSON.stringify(user))
       localStorage.setItem('@food-explorer:token', token)
+
       localStorage.setItem('@food-explorer:order', JSON.stringify([]))
+      setOrderQty(0)
 
       api.defaults.headers.common.Authorization = `Bearer ${token}`
 
@@ -77,6 +80,13 @@ function AuthProvider({ children }) {
       )
       setOrderList((prevState) => [...prevState, { id, qty, amount }])
     }
+
+    setOrderQty(
+      JSON.parse(localStorage.getItem('@food-explorer:order')).reduce(
+        (accumulator, current) => accumulator + current.qty,
+        0,
+      ),
+    )
   }
 
   useEffect(() => {
@@ -87,6 +97,13 @@ function AuthProvider({ children }) {
       user: JSON.parse(user),
       token,
     })
+    setOrderList(JSON.parse(localStorage.getItem('@food-explorer:order')))
+    setOrderQty(
+      JSON.parse(localStorage.getItem('@food-explorer:order')).reduce(
+        (accumulator, current) => accumulator + current.qty,
+        0,
+      ),
+    )
   }, [])
   return (
     <AuthContext.Provider
@@ -94,11 +111,7 @@ function AuthProvider({ children }) {
         signIn,
         isAnAdmin,
         handleAddItem,
-        orderQty:
-          orderList.reduce(
-            (accumulator, current) => accumulator + current.qty,
-            0,
-          ) || 0,
+        orderQty,
         signOut,
         user: data.user,
       }}
