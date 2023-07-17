@@ -53,7 +53,7 @@ export const Add = styled.div`
     width: 100%;
     padding: 0.4rem 2.4rem;
   }
-  @media ${({ theme }) => theme.DEVICES.tablet} {
+  @media ${({ theme }) => theme.DEVICES.laptop} {
     display: flex;
     > button {
       padding: 1.2rem 2.4rem;
