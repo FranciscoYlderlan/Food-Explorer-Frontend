@@ -29,6 +29,20 @@ export function Home() {
   function handleMenuClick() {
     setIsOpenMenu(JSON.parse(localStorage.getItem('@food-explorer:isActive')))
   }
+  async function fetchSearchDishes() {
+    try {
+      const response = await toast.promise(
+        api.get(`/dish/?keyword=${keyword}`),
+        {
+          ...toastConfig,
+        },
+      )
+      setDishes(response.data)
+    } catch (error) {
+      if (error.response) toast.error(error.response.data.description)
+      else toast.error('Erro ao tentar carregar os pratos.')
+    }
+  }
   useEffect(() => {
     localStorage.setItem('@food-explorer:isActive', false)
     async function handleLoadingSelectOptions() {
@@ -40,20 +54,6 @@ export function Home() {
       } catch (error) {
         if (error.response) toast.error(error.response.data.description)
         else toast.error('Erro ao tentar carregar categorias.')
-      }
-    }
-    async function fetchSearchDishes() {
-      try {
-        const response = await toast.promise(
-          api.get(`/dish/?keyword=${keyword}`),
-          {
-            ...toastConfig,
-          },
-        )
-        setDishes(response.data)
-      } catch (error) {
-        if (error.response) toast.error(error.response.data.description)
-        else toast.error('Erro ao tentar carregar os pratos.')
       }
     }
     // TODO: mudar nome da função para category
@@ -79,7 +79,12 @@ export function Home() {
                       title={category.name}
                       hasData={dishes[category.id]}
                     >
-                      {dishes && <Carousel data={dishes[category.id]} />}
+                      {dishes && (
+                        <Carousel
+                          data={dishes[category.id]}
+                          updatedData={fetchSearchDishes}
+                        />
+                      )}
                     </Section>
                   )
                 })}

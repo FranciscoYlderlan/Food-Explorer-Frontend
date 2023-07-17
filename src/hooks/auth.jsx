@@ -9,7 +9,6 @@ const AuthContext = createContext({})
 
 function AuthProvider({ children }) {
   const [data, setData] = useState({})
-  const [orderList, setOrderList] = useState([])
   const [orderQty, setOrderQty] = useState([])
   // const [search, setSearch] = useState('')
 
@@ -72,13 +71,11 @@ function AuthProvider({ children }) {
       existingItem.qty += qty
       existingItem.amount += amount
       localStorage.setItem('@food-explorer:order', JSON.stringify(currentOrder))
-      setOrderList(currentOrder)
     } else {
       localStorage.setItem(
         '@food-explorer:order',
         JSON.stringify([...currentOrder, { id, qty, amount }]),
       )
-      setOrderList((prevState) => [...prevState, { id, qty, amount }])
     }
 
     setOrderQty(
@@ -97,7 +94,7 @@ function AuthProvider({ children }) {
       user: JSON.parse(user),
       token,
     })
-    setOrderList(JSON.parse(localStorage.getItem('@food-explorer:order')))
+
     setOrderQty(
       JSON.parse(localStorage.getItem('@food-explorer:order')).reduce(
         (accumulator, current) => accumulator + current.qty,

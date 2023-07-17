@@ -17,11 +17,27 @@ import 'swiper/css/pagination'
 import SwiperCore, { Keyboard, Scrollbar, Navigation, Pagination } from 'swiper'
 
 import { useAuth } from '../../hooks/auth'
+import { api } from '../../services/api'
+import { toast } from 'react-toastify'
+import { toastConfig } from '../../services/toast'
 
 SwiperCore.use([Keyboard, Scrollbar, Navigation, Pagination])
 
-export function Carousel({ data }) {
+export function Carousel({ data, updatedData }) {
   const { isAnAdmin } = useAuth()
+  async function handleClickOnFavorite(id) {
+    try {
+      await toast.promise(api.patch(`/favorite_dishes/${id}`), {
+        pending: 'Por favor aguarde...',
+        ...toastConfig,
+      })
+      updatedData()
+    } catch (error) {
+      if (error.response) toast.error(error.response.data.description)
+      else toast.error('Erro ao tentar favoritar prato.')
+    }
+  }
+
   return (
     <Container>
       <StyledSwiper
@@ -60,7 +76,10 @@ export function Carousel({ data }) {
                   {isAnAdmin() ? (
                     <StyledRiPencilFill />
                   ) : (
-                    <HeartContainer isFavorite={!!dish.isFavorite}>
+                    <HeartContainer
+                      isFavorite={!!dish.isFavorite}
+                      onClick={() => handleClickOnFavorite(dish.id)}
+                    >
                       <AiOutlineHeart size={32} />
                       <AiFillHeart size={32} />
                     </HeartContainer>
