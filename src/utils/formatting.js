@@ -1,10 +1,24 @@
-function currencyInputFormatter(value) {
+function currencyInputFormatter(value, type = 'string') {
+  if (type === 'string') {
+    const validString = value.toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+      minimumFractionDigits: 2,
+    })
+    return validString
+  }
+
   const formattedValue = value.toLocaleString('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
     minimumFractionDigits: 2,
   })
-  return formattedValue
+
+  // Remove todos os caracteres que não são números ou ponto decimal
+  const cleanedValue = formattedValue.replace(/[^0-9,.]/g, '')
+
+  // Substitui a vírgula por ponto (formato válido para números)
+  const validNumber = cleanedValue.replace(',', '.')
+
+  return validNumber
 }
 
 function TwoDigitsFormatter(value) {
@@ -12,4 +26,9 @@ function TwoDigitsFormatter(value) {
   return String(value).padStart(2, '0')
 }
 
-export { currencyInputFormatter, TwoDigitsFormatter }
+function removeHashFileName(name) {
+  const [, result] = name.split('-')
+  return result
+}
+
+export { currencyInputFormatter, TwoDigitsFormatter, removeHashFileName }

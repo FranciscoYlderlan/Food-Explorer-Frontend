@@ -39,7 +39,7 @@ export function Create() {
               icon={PiCaretLeftBold}
               onClick={handleComeBack}
             />
-            <FormDish />
+            <FormDish isNew />
           </>
         )}
       </Main>

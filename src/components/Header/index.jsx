@@ -29,7 +29,7 @@ export function Header({ handleMenuClick }) {
   const navigate = useNavigate()
 
   function handleClickHistoryPage() {
-    navigate(`/orders`)
+    isAnAdmin() ? navigate(`/orders`) : navigate(`/orders/history`)
   }
 
   function handleClickFavoritePage() {

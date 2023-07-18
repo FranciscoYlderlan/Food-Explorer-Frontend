@@ -22,23 +22,29 @@ import { toastConfig } from '../../services/toast'
 
 import { api } from '../../services/api'
 
+import { useParams } from 'react-router-dom'
+
+import {
+  removeHashFileName,
+  currencyInputFormatter,
+} from '../../utils/formatting'
+
 // eslint-disable-next-line no-useless-escape
 const regexSpecialCharacter = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/
 
 export function FormDish({ dishData, isNew = false }) {
+  const params = useParams()
   const [categories, setCategories] = useState([])
 
-  const picture = isNew ? dishData.picture : null
+  const picture = !isNew ? dishData.picture : null
   const [dishPicture, setDishPicture] = useState(picture)
   // TODO: tratar captura do nome do arquivo para ser semelhante ao arquivo do estado
-
   const [dish, setDish] = useState({
-    name: isNew ? dishData.name : '',
-    ingredients: isNew ? dishData.ingredients : [],
-    price: isNew ? dishData.price : '',
-    description: isNew ? dishData.description : '',
+    name: !isNew ? dishData.name : '',
+    ingredients: !isNew ? dishData.ingredients : [],
+    price: !isNew ? dishData.price : '',
+    description: !isNew ? dishData.description : '',
   })
-
   const [newIngredient, setNewIngredient] = useState('')
 
   function handleAddIngredient() {
@@ -88,8 +94,18 @@ export function FormDish({ dishData, isNew = false }) {
     setDish((prevState) => ({ ...prevState, picture: picture_ }))
   }
 
-  function handleCategorySelected(item) {
+  function handleInputCategory(item) {
     setDish((prevState) => ({ ...prevState, category_id: item }))
+  }
+
+  function handleCategorySelected() {
+    if (!isNew) {
+      const category = categories.find(
+        (item) => item.id === dishData.category_id,
+      )
+      return [category.id, category.name]
+    }
+    return [categories[0].id, categories[0].name]
   }
 
   function handleNewIngredient(e) {
@@ -123,16 +139,16 @@ export function FormDish({ dishData, isNew = false }) {
 
       // console.log([...formData])
       // console.log(formData.get('ingredients'))
-      if (isNew) {
+      if (!isNew) {
         await toast.promise(
-          api.post('/dish', formData, {
+          api.put(`/dish/${params.id}`, formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
             },
           }),
           {
             pending: 'Por favor aguarde...',
-            success: 'Novo prato cadastrado com sucesso!',
+            success: 'Prato atualizado sucesso!',
             ...toastConfig,
           },
         )
@@ -157,8 +173,28 @@ export function FormDish({ dishData, isNew = false }) {
     }
   }
 
+  async function handleDelete(e) {
+    e.preventDefault()
+
+    try {
+      if (!isNew) {
+        if (confirm('Tem certeza que deseja apagar este prato?')) {
+          await toast.promise(api.delete(`/dish/${params.id}`), {
+            pending: 'Por favor aguarde...',
+            success: 'Prato deletado com sucesso',
+            ...toastConfig,
+          })
+        }
+      }
+    } catch (error) {
+      if (error.response) {
+        toast.error(error.response.data.description)
+      }
+    }
+  }
+
   useEffect(() => {
-    async function handleLoadingSelectOptions() {
+    async function fetchCategoryOptions() {
       try {
         const response = await toast.promise(api.get('/category'), {
           ...toastConfig,
@@ -169,9 +205,8 @@ export function FormDish({ dishData, isNew = false }) {
         else toast.error('Erro ao tentar carregar categorias.')
       }
     }
-    handleLoadingSelectOptions()
+    fetchCategoryOptions().then(() => console.log(dishData))
   }, [])
-
   return (
     <Container onSubmit={handleSubmit}>
       {!isNew ? <h1>Novo prato</h1> : <h1>Editar Prato</h1>}
@@ -187,7 +222,9 @@ export function FormDish({ dishData, isNew = false }) {
           <span>
             <UploadSimple size={32} />
             {dishPicture ? (
-              <span> {dishPicture.name} </span>
+              <span>
+                {!isNew ? removeHashFileName(dishPicture) : dishPicture.name}
+              </span>
             ) : (
               <span>Selecione imagem</span>
             )}
@@ -199,15 +236,16 @@ export function FormDish({ dishData, isNew = false }) {
           type="text"
           errorMessage="Este campo é obrigatório."
           name="name"
+          value={dish.name}
           onChange={handleChange}
           required
         />
         {categories.length > 0 && (
           <Select
             options={categories}
-            selected={categories[0].name}
+            selected={handleCategorySelected()}
             labelName={'Categoria'}
-            onChange={handleCategorySelected}
+            onChange={handleInputCategory}
           />
         )}
       </Col3>
@@ -219,7 +257,7 @@ export function FormDish({ dishData, isNew = false }) {
               return (
                 <AddIngredients
                   key={index}
-                  value={ingredient}
+                  value={ingredient.name}
                   onClick={() => handleRemoveIngredient(ingredient)}
                 />
               )
@@ -239,6 +277,7 @@ export function FormDish({ dishData, isNew = false }) {
           type="number"
           name="price"
           step="0.01"
+          value={currencyInputFormatter(dish.price, 'number')}
           errorMessage="Informe valores numéricos."
           onChange={handleChange}
           required
@@ -249,11 +288,12 @@ export function FormDish({ dishData, isNew = false }) {
         placeholder="Fale brevemente sobre o prato, seus ingredientes e composição"
         name="description"
         errorMessage="Este campo é obrigatório."
+        value={dish.description}
         onChange={handleChange}
         required
       />
       <Buttons>
-        {isNew && <Button title="Excluir prato" />}
+        {!isNew && <Button title="Excluir prato" onClick={handleDelete} />}
         <Button type="submit" title="Salvar Alterações" />
       </Buttons>
     </Container>

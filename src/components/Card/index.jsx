@@ -10,7 +10,7 @@ export function Card({ row, isAdmin = false, options, ...rest }) {
         <span>{row.dataHora}</span>
       </Header>
       <Description>{row.detalhamento}</Description>
-      {isAdmin && <Select options={options} selected={row.status} />}
+      {isAdmin && <Select options={options} selected={[row.id, row.status]} />}
     </Container>
   )
 }

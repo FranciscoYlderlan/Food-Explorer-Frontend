@@ -31,7 +31,9 @@ export function Select({
   useEffect(() => {
     function isSelected(selected) {
       if (selected) {
-        handleOptionClick(selected, selected)
+        const value = selected[0]
+        const text = selected[1]
+        handleOptionClick(value, text)
       }
     }
     isSelected(selected)

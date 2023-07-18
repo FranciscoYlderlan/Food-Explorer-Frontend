@@ -45,7 +45,7 @@ export function Home() {
   }
   useEffect(() => {
     localStorage.setItem('@food-explorer:isActive', false)
-    async function handleLoadingSelectOptions() {
+    async function fetchCategoryOptions() {
       try {
         const response = await toast.promise(api.get('/category'), {
           ...toastConfig,
@@ -56,8 +56,7 @@ export function Home() {
         else toast.error('Erro ao tentar carregar categorias.')
       }
     }
-    // TODO: mudar nome da função para category
-    fetchSearchDishes().then(handleLoadingSelectOptions())
+    fetchSearchDishes().then(fetchCategoryOptions())
   }, [])
   return (
     <Container>

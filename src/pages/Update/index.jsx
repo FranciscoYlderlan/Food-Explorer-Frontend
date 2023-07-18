@@ -8,12 +8,20 @@ import { PiCaretLeftBold } from 'react-icons/pi'
 
 import { useState, useEffect } from 'react'
 
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+
+import { toast } from 'react-toastify'
+import { toastConfig } from '../../services/toast'
+
+import { api } from '../../services/api'
 
 export function Update() {
   const [isOpenMenu, setIsOpenMenu] = useState(false)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+  const [dish, setDish] = useState(null)
   const navigate = useNavigate()
+  const params = useParams()
+
   function handleComeBack() {
     navigate(-1)
   }
@@ -27,6 +35,21 @@ export function Update() {
   }
   useEffect(() => {
     localStorage.setItem('@food-explorer:isActive', false)
+
+    async function fetchSearchDish() {
+      try {
+        const response = await toast.promise(api.get(`/dish/${params.id}`), {
+          pending: 'Por favor aguarde...',
+          ...toastConfig,
+        })
+        setDish(response.data)
+      } catch (error) {
+        if (error.response) toast.error(error.response.data.description)
+        else toast.error('Erro ao tentar carregar informações do prato.')
+      }
+    }
+
+    fetchSearchDish()
   }, [])
   return (
     <Container>
@@ -39,7 +62,7 @@ export function Update() {
               icon={PiCaretLeftBold}
               onClick={handleComeBack}
             />
-            <FormDish />
+            {dish && <FormDish dishData={dish} />}
           </>
         )}
       </Main>

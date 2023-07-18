@@ -28,8 +28,8 @@ export function Carousel({ data, updatedData }) {
   const { isAnAdmin } = useAuth()
   const navigate = useNavigate()
 
-  function handleClickUpdatePage() {
-    navigate('/update/:id')
+  function handleClickUpdatePage(id) {
+    navigate(`/update/${id}`)
   }
 
   async function handleClickOnFavorite(id) {
@@ -81,7 +81,9 @@ export function Carousel({ data, updatedData }) {
               <StyledSwiperSlide key={index}>
                 <Card>
                   {isAnAdmin() ? (
-                    <StyledRiPencilFill onClick={handleClickUpdatePage} />
+                    <StyledRiPencilFill
+                      onClick={() => handleClickUpdatePage(dish.id)}
+                    />
                   ) : (
                     <HeartContainer
                       isFavorite={!!dish.isFavorite}
@@ -98,6 +100,7 @@ export function Carousel({ data, updatedData }) {
                   />
                   <TextIcon>
                     <h2>{dish.name}</h2>
+                    {/* //TODO: consertar esse ícone */}
                     <span>&#8250;</span>
                   </TextIcon>
 

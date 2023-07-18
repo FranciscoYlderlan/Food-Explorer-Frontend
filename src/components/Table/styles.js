@@ -65,7 +65,7 @@ export const TableRow = styled.div`
   border-bottom: 2px solid ${({ theme }) => theme.COLORS.DARK_1000};
   > div:first-child {
     width: 35%;
-    //TODO: se for admin diminuir o paddin para 1 padding: 1rem 2.4rem;
+    //TODO: se for admin diminuir o padding para 1 padding: 1rem 2.4rem;
   }
   > div:nth-child(2) {
     width: 25%;
