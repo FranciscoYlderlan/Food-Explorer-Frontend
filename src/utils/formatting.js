@@ -27,8 +27,11 @@ function TwoDigitsFormatter(value) {
 }
 
 function removeHashFileName(name) {
-  const [, result] = name.split('-')
-  return result
+  const index = name.indexOf('-')
+  if (index !== -1) {
+    return name.slice(index + 1)
+  }
+  return name
 }
 
 export { currencyInputFormatter, TwoDigitsFormatter, removeHashFileName }
