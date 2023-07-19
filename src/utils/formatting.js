@@ -1,3 +1,5 @@
+import { api } from '../services/api'
+
 function currencyInputFormatter(value, type = 'string') {
   if (type === 'string') {
     const validString = value.toLocaleString('pt-BR', {
@@ -33,5 +35,16 @@ function removeHashFileName(name) {
   }
   return name
 }
+function URLImageFormatter(filename, placeholderImage) {
+  const url = filename
+    ? `${api.defaults.baseURL}/files/${filename}`
+    : placeholderImage
+  return url
+}
 
-export { currencyInputFormatter, TwoDigitsFormatter, removeHashFileName }
+export {
+  currencyInputFormatter,
+  TwoDigitsFormatter,
+  removeHashFileName,
+  URLImageFormatter,
+}

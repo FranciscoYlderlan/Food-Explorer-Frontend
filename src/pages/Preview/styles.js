@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 import { TextLink } from '../../components/TextLink'
+import { AddItem } from '../../components/AddItem'
+
 export const Container = styled.div``
 
 export const ListItems = styled.div`
@@ -29,6 +31,7 @@ export const Content = styled.div`
     width: 26rem;
     height: 26rem;
     object-fit: cover;
+    border-radius: 50%;
   }
   @media ${({ theme }) => theme.DEVICES.laptop} {
     display: flex;
@@ -57,6 +60,7 @@ export const Text = styled.div`
     ${({ theme }) => theme.FONTS.POPPINS.MEDIUM_350}
   }
   > p {
+    text-align: center;
     ${({ theme }) => theme.FONTS.POPPINS.MEDIUM_SPACED}
   }
   @media ${({ theme }) => theme.DEVICES.laptop} {
@@ -71,5 +75,11 @@ export const Action = styled.div`
   align-self: center;
   @media ${({ theme }) => theme.DEVICES.laptop} {
     align-self: start;
+  }
+`
+export const AddItemStyled = styled(AddItem)`
+  display: flex;
+  > button {
+    padding: 1.2rem 2.4rem;
   }
 `

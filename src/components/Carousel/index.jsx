@@ -21,6 +21,9 @@ import { api } from '../../services/api'
 import { toast } from 'react-toastify'
 import { toastConfig } from '../../services/toast'
 import { useNavigate } from 'react-router-dom'
+import { URLImageFormatter } from '../../utils/formatting.js'
+
+import dishPlaceholder from '../../assets/placeholder-dish.svg'
 
 SwiperCore.use([Keyboard, Scrollbar, Navigation, Pagination])
 
@@ -30,6 +33,10 @@ export function Carousel({ data, updatedData }) {
 
   function handleClickUpdatePage(id) {
     navigate(`/update/${id}`)
+  }
+
+  function handleClickPreviewPage(id) {
+    navigate(`/preview/${id}`)
   }
 
   async function handleClickOnFavorite(id) {
@@ -95,10 +102,10 @@ export function Carousel({ data, updatedData }) {
                   )}
 
                   <img
-                    src="https://st.depositphotos.com/1003814/4626/i/600/depositphotos_46267763-stock-photo-fried-chicken-fillets.jpg"
-                    alt="prato"
+                    src={URLImageFormatter(dish.picture, dishPlaceholder)}
+                    alt={`${dish.name}`}
                   />
-                  <TextIcon>
+                  <TextIcon onClick={() => handleClickPreviewPage(dish.id)}>
                     <h2>{dish.name}</h2>
                     {/* //TODO: consertar esse ícone */}
                     <span>&#8250;</span>

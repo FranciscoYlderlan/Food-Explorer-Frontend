@@ -182,7 +182,7 @@ export function FormDish({ dishData, isNew = false }) {
 
     try {
       if (!isNew) {
-        if (confirm('Tem certeza que deseja apagar este prato?')) {
+        if (confirm('Tem certeza que deseja excluir este prato?')) {
           await toast.promise(api.delete(`/dish/${params.id}`), {
             pending: 'Por favor aguarde...',
             success: 'Prato deletado com sucesso',

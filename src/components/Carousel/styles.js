@@ -126,6 +126,7 @@ export const Card = styled.div`
     width: 8rem;
     height: 8rem;
     object-fit: cover;
+    border-radius: 50%;
   }
 
   h2 {
@@ -215,5 +216,18 @@ export const TextIcon = styled.div`
   display: flex;
   gap: 0.4rem;
   align-items: center;
+  > span {
+    flex-shrink: 0;
+    font-size: 2.4rem;
+    line-height: 100%;
+  }
+  &:hover {
+    cursor: pointer;
+  }
   ${({ theme }) => theme.FONTS.POPPINS.REGULAR_300}
+  @media ${({ theme }) => theme.DEVICES.laptop} {
+    > span {
+      font-size: 4.8rem;
+    }
+  }
 `

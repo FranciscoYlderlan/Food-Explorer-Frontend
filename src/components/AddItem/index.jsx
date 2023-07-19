@@ -9,7 +9,7 @@ import { useState, useEffect } from 'react'
 
 import { useAuth } from '../../hooks/auth'
 
-export function AddItem({ item, isPreview = false, isAdmin = false }) {
+export function AddItem({ item, isPreview = false, isAdmin = false, ...rest }) {
   const { handleAddItem } = useAuth()
   const { price, id } = item
   const [amount, setAmount] = useState(price)
@@ -36,7 +36,7 @@ export function AddItem({ item, isPreview = false, isAdmin = false }) {
     <Container>
       {!isPreview && <Price>{`${currencyInputFormatter(amount)}`}</Price>}
       {!isAdmin && (
-        <Add>
+        <Add {...rest}>
           <Counter>
             <Minus size={24} onClick={handleDecrementQty} />
             <span>{TwoDigitsFormatter(qty)}</span>
