@@ -7,7 +7,12 @@ import {
 
 import dishPlaceholder from '../../assets/placeholder-dish.svg'
 
-export function PurchaseItem({ item = null, removeItem, ...rest }) {
+export function PurchaseItem({
+  item = null,
+  removeItem,
+  isFavoritePage = false,
+  ...rest
+}) {
   return (
     <Container {...rest}>
       <img
@@ -16,8 +21,14 @@ export function PurchaseItem({ item = null, removeItem, ...rest }) {
       />
       <Col1>
         <Row1>
-          <h4>{`${item.qty} X ${item.name}`}</h4>
-          <span>{currencyInputFormatter(item.amount)}</span>
+          {isFavoritePage ? (
+            <h4>{item.name}</h4>
+          ) : (
+            <>
+              <h4>{`${item.qty} X ${item.name}`}</h4>
+              <span>{currencyInputFormatter(item.amount)}</span>
+            </>
+          )}
         </Row1>
         <ButtonRemove onClick={() => removeItem(item.id)}>Remover</ButtonRemove>
       </Col1>

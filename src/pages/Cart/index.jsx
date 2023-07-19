@@ -26,7 +26,9 @@ import { currencyInputFormatter } from '../../utils/formatting.js'
 
 export function Cart() {
   const { totalPurchasePrice, handleRemoveItem } = useAuth()
-  const [orders, setOrders] = useState([])
+  const [orders, setOrders] = useState(
+    JSON.parse(localStorage.getItem('@food-explorer:order')),
+  )
   const [isOpenMenu, setIsOpenMenu] = useState(false)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const navigate = useNavigate()
@@ -45,15 +47,13 @@ export function Cart() {
   }
 
   function handleUpdatePuchaseItem(id) {
-    handleRemoveItem(id).then(() =>
-      setOrders(JSON.parse(localStorage.getItem('@food-explorer:order'))),
-    )
+    handleRemoveItem(id)
+    setOrders(JSON.parse(localStorage.getItem('@food-explorer:order')))
   }
 
   useEffect(() => {
     localStorage.setItem('@food-explorer:isActive', false)
-    setOrders(JSON.parse(localStorage.getItem('@food-explorer:order')))
-  }, [orders])
+  }, [])
   return (
     <Container>
       <Header handleMenuClick={handleMenuClick} />
