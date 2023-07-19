@@ -150,11 +150,10 @@ export const Card = styled.div`
     p {
       ${({ theme }) => theme.FONTS.ROBOTO.SMALLER_REGULAR}
       display: flex;
-      text-overflow: ellipsis;
+      text-align: center;
       white-space: nowrap;
       overflow: hidden;
       width: inherit;
-      text-align: center;
     }
     min-height: 46rem;
     gap: 1.5rem;
@@ -216,6 +215,14 @@ export const TextIcon = styled.div`
   display: flex;
   gap: 0.4rem;
   align-items: center;
+  justify-content: center;
+  width: inherit;
+  > h2 {
+    overflow: hidden;
+    white-space: nowrap;
+    width: fit-content;
+    text-overflow: ellipsis;
+  }
   > span {
     flex-shrink: 0;
     font-size: 2.4rem;
