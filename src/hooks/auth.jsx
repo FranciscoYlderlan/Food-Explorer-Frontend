@@ -10,6 +10,7 @@ const AuthContext = createContext({})
 function AuthProvider({ children }) {
   const [data, setData] = useState({})
   const [orderQty, setOrderQty] = useState([])
+  const [totalPurchasePrice, setTotalPurchasePrice] = useState(0)
   // const [search, setSearch] = useState('')
 
   async function signIn({ email, password }) {
@@ -28,6 +29,7 @@ function AuthProvider({ children }) {
 
       localStorage.setItem('@food-explorer:order', JSON.stringify([]))
       setOrderQty(0)
+      setTotalPurchasePrice(0)
 
       api.defaults.headers.common.Authorization = `Bearer ${token}`
 
@@ -61,7 +63,7 @@ function AuthProvider({ children }) {
   //   }
   // }
 
-  function handleAddItem({ id, qty, amount }) {
+  function handleAddItem({ id, picture, name, qty, amount }) {
     const currentOrder = JSON.parse(
       localStorage.getItem('@food-explorer:order'),
     )
@@ -74,13 +76,45 @@ function AuthProvider({ children }) {
     } else {
       localStorage.setItem(
         '@food-explorer:order',
-        JSON.stringify([...currentOrder, { id, qty, amount }]),
+        JSON.stringify([...currentOrder, { id, picture, name, qty, amount }]),
       )
     }
 
     setOrderQty(
       JSON.parse(localStorage.getItem('@food-explorer:order')).reduce(
         (accumulator, current) => accumulator + current.qty,
+        0,
+      ),
+    )
+    setTotalPurchasePrice(
+      JSON.parse(localStorage.getItem('@food-explorer:order')).reduce(
+        (accumulator, current) => accumulator + current.amount,
+        0,
+      ),
+    )
+  }
+
+  function handleRemoveItem(id) {
+    const currentOrder = JSON.parse(
+      localStorage.getItem('@food-explorer:order'),
+    )
+    let updatedOrder = []
+    const existingItem = currentOrder.find((item) => item.id === id)
+
+    if (existingItem) {
+      updatedOrder = currentOrder.filter((dish) => dish.id !== id)
+      localStorage.setItem('@food-explorer:order', JSON.stringify(updatedOrder))
+    }
+
+    setOrderQty(
+      JSON.parse(localStorage.getItem('@food-explorer:order')).reduce(
+        (accumulator, current) => accumulator + current.qty,
+        0,
+      ),
+    )
+    setTotalPurchasePrice(
+      JSON.parse(localStorage.getItem('@food-explorer:order')).reduce(
+        (accumulator, current) => accumulator + current.amount,
         0,
       ),
     )
@@ -101,6 +135,12 @@ function AuthProvider({ children }) {
         0,
       ),
     )
+    setTotalPurchasePrice(
+      JSON.parse(localStorage.getItem('@food-explorer:order')).reduce(
+        (accumulator, current) => accumulator + current.amount,
+        0,
+      ),
+    )
   }, [])
   return (
     <AuthContext.Provider
@@ -108,7 +148,9 @@ function AuthProvider({ children }) {
         signIn,
         isAnAdmin,
         handleAddItem,
+        handleRemoveItem,
         orderQty,
+        totalPurchasePrice,
         signOut,
         user: data.user,
       }}

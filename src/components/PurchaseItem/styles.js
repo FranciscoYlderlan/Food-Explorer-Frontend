@@ -10,15 +10,13 @@ export const Container = styled.div`
     height: 7.2rem;
     width: 7.2rem;
     object-fit: cover;
+    border-radius: 50%;
   }
   h4 {
     color: ${({ theme }) => theme.COLORS.LIGHT_300};
     ${({ theme }) => theme.FONTS.POPPINS.MEDIUM_200}
   }
   span {
-    ${({ theme }) => theme.FONTS.ROBOTO.SMALLEST_REGULAR}
-  }
-  p {
     ${({ theme }) => theme.FONTS.ROBOTO.SMALLEST_REGULAR}
   }
 `
@@ -31,10 +29,17 @@ export const Row1 = styled.div`
 export const Col1 = styled.div`
   display: grid;
 
-  p {
-    color: ${({ theme }) => theme.COLORS.TOMATO_400};
-  }
   span {
     color: ${({ theme }) => theme.COLORS.LIGHT_500};
+  }
+`
+export const ButtonRemove = styled.button`
+  ${({ theme }) => theme.FONTS.ROBOTO.SMALLEST_REGULAR}
+  color: ${({ theme }) => theme.COLORS.TOMATO_400};
+  border: none;
+  background-color: transparent;
+  width: fit-content;
+  &:hover {
+    cursor: pointer;
   }
 `

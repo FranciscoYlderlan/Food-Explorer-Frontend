@@ -20,7 +20,13 @@ import { useState, useEffect } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 
+import { useAuth } from '../../hooks/auth'
+
+import { currencyInputFormatter } from '../../utils/formatting.js'
+
 export function Cart() {
+  const { totalPurchasePrice, handleRemoveItem } = useAuth()
+  const [orders, setOrders] = useState([])
   const [isOpenMenu, setIsOpenMenu] = useState(false)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const navigate = useNavigate()
@@ -38,9 +44,16 @@ export function Cart() {
     setIsOpenMenu(JSON.parse(localStorage.getItem('@food-explorer:isActive')))
   }
 
+  function handleUpdatePuchaseItem(id) {
+    handleRemoveItem(id).then(() =>
+      setOrders(JSON.parse(localStorage.getItem('@food-explorer:order'))),
+    )
+  }
+
   useEffect(() => {
     localStorage.setItem('@food-explorer:isActive', false)
-  }, [])
+    setOrders(JSON.parse(localStorage.getItem('@food-explorer:order')))
+  }, [orders])
   return (
     <Container>
       <Header handleMenuClick={handleMenuClick} />
@@ -56,12 +69,20 @@ export function Cart() {
               <Itens>
                 <h2>Pedidos</h2>
 
-                <ListItemsStyled>
-                  <PurchaseItem />
-                  <PurchaseItem />
-                  <PurchaseItem />
-                </ListItemsStyled>
-                <h3>Total: R$ 600,00</h3>
+                {orders.length > 0 && (
+                  <ListItemsStyled>
+                    {orders.map((order, index) => (
+                      <PurchaseItem
+                        key={index}
+                        item={order}
+                        removeItem={handleUpdatePuchaseItem}
+                      />
+                    ))}
+                  </ListItemsStyled>
+                )}
+                <h3>{`Total: ${currencyInputFormatter(
+                  totalPurchasePrice,
+                )}`}</h3>
               </Itens>
               <PaymentMethods>
                 <h2>Pagamento</h2>

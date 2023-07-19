@@ -11,7 +11,7 @@ import { useAuth } from '../../hooks/auth'
 
 export function AddItem({ item, isPreview = false, isAdmin = false, ...rest }) {
   const { handleAddItem } = useAuth()
-  const { price, id } = item
+  const { price, id, picture, name } = item
   const [amount, setAmount] = useState(price)
   const [qty, setQty] = useState(1)
 
@@ -25,7 +25,7 @@ export function AddItem({ item, isPreview = false, isAdmin = false, ...rest }) {
     return price * qty
   }
   function handleClickIncludeItem() {
-    handleAddItem({ id, qty, amount })
+    handleAddItem({ id, picture, name, qty, amount })
   }
 
   useEffect(() => {

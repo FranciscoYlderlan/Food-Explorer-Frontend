@@ -1,18 +1,25 @@
-import { Container, Col1, Row1 } from './styles.js'
+import { Container, Col1, Row1, ButtonRemove } from './styles.js'
 
-export function PurchaseItem() {
+import {
+  URLImageFormatter,
+  currencyInputFormatter,
+} from '../../utils/formatting.js'
+
+import dishPlaceholder from '../../assets/placeholder-dish.svg'
+
+export function PurchaseItem({ item = null, removeItem, ...rest }) {
   return (
-    <Container>
+    <Container {...rest}>
       <img
-        src="https://st.depositphotos.com/1003814/4626/i/600/depositphotos_46267763-stock-photo-fried-chicken-fillets.jpg"
-        alt="prato"
+        src={URLImageFormatter(item.picture, dishPlaceholder)}
+        alt={item.name}
       />
       <Col1>
         <Row1>
-          <h4>Frango Grelhado</h4>
-          <span>R$ 200,00</span>
+          <h4>{`${item.qty} X ${item.name}`}</h4>
+          <span>{currencyInputFormatter(item.amount)}</span>
         </Row1>
-        <p>Remover</p>
+        <ButtonRemove onClick={() => removeItem(item.id)}>Remover</ButtonRemove>
       </Col1>
     </Container>
   )
