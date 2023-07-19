@@ -10,7 +10,7 @@ export const TableContainer = styled.div`
   display: grid;
   grid-template-rows: auto 1fr;
   border: 2px solid ${({ theme }) => theme.COLORS.DARK_1000};
-  max-height: 30rem;
+  max-height: 45rem;
 `
 
 export const TableHeader = styled.div`

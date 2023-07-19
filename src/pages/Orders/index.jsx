@@ -39,7 +39,7 @@ export function Orders() {
               onClick={handleComeBack}
             />
             <h2>Histórico de pedidos</h2>
-            <Table />
+            <Table isDesktop={windowWidth > 1024} />
           </>
         )}
       </Main>

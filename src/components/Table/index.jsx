@@ -16,8 +16,10 @@ import { toast } from 'react-toastify'
 import { toastConfig } from '../../services/toast'
 
 import { useState, useEffect } from 'react'
-
-export function Table() {
+import { useAuth } from '../../hooks/auth'
+export function Table({ isDesktop = false, ...rest }) {
+  const { isAnAdmin } = useAuth()
+  const [orders, setOrders] = useState([])
   const [status, setStatus] = useState([])
   const rows = [
     {
@@ -113,6 +115,22 @@ export function Table() {
       dataHora: '2023-06-20 14:30',
     },
   ]
+  async function fetchOrders(e) {
+    let resource = ''
+    try {
+      resource = !isAnAdmin() ? '/orders/history' : '/orders'
+      const response = await toast.promise(api.get(resource), {
+        pending: 'Por favor aguarde...',
+        ...toastConfig,
+      })
+      setOrders(response.data)
+    } catch (error) {
+      if (error.response) {
+        toast.error(error.response.data.description)
+      }
+    }
+  }
+
   useEffect(() => {
     async function handleLoadingSelectOptions() {
       try {
@@ -125,43 +143,56 @@ export function Table() {
         else toast.error('Erro ao tentar carregar status.')
       }
     }
-    handleLoadingSelectOptions()
+    fetchOrders().then(() => handleLoadingSelectOptions())
   }, [])
   return (
-    <CardContainer>
-      {status.length > 0 &&
-        rows?.map((row, index) => {
-          return <Card row={row} key={index} options={status} isAdmin />
-        })}
-    </CardContainer>
-    // <TableContainer>
-    //   {false && rows}
-
-    //   <TableHeader>
-    //     <TableCell>Status</TableCell>
-    //     <TableCell>Código</TableCell>
-    //     <TableCell>Detalhamento</TableCell>
-    //     <TableCell>Data e Hora</TableCell>
-    //   </TableHeader>
-    //   <TableBody>
-    //     {rows?.map((row, index) => {
-    //       return (
-    //         <TableRow key={index}>
-    //           <TableCell>
-    //             <Select
-    //               options={['Pendente', 'Preparando', 'Entregue']}
-    //               selected={row.status}
-    //             />
-
-    //             {/* <Status value={row.status} text={row.status} /> */}
-    //           </TableCell>
-    //           <TableCell>{row.codigo}</TableCell>
-    //           <TableCell>{row.detalhamento}</TableCell>
-    //           <TableCell>{row.dataHora}</TableCell>
-    //         </TableRow>
-    //       )
-    //     })}
-    //   </TableBody>
-    // </TableContainer>
+    <>
+      {orders.length > 0 && !isDesktop ? (
+        <CardContainer {...rest}>
+          {status.length > 0 &&
+            orders.map((order, index) => {
+              return (
+                <Card
+                  row={order}
+                  key={index}
+                  options={status}
+                  isAdmin={isAnAdmin()}
+                />
+              )
+            })}
+        </CardContainer>
+      ) : (
+        <TableContainer>
+          <TableHeader>
+            <TableCell>Status</TableCell>
+            <TableCell>Código</TableCell>
+            <TableCell>Detalhamento</TableCell>
+            <TableCell>Data e Hora</TableCell>
+          </TableHeader>
+          <TableBody>
+            {orders.map((order, index) => {
+              return (
+                <TableRow key={index}>
+                  <TableCell>
+                    {isAnAdmin() ? (
+                      <Select
+                        options={status}
+                        selected={[order.id, order.status]}
+                        isAdmin
+                      />
+                    ) : (
+                      <Status value={order.status_id} text={order.status_id} />
+                    )}
+                  </TableCell>
+                  <TableCell>{order.code}</TableCell>
+                  <TableCell>{order.details}</TableCell>
+                  <TableCell>{order.create_at}</TableCell>
+                </TableRow>
+              )
+            })}
+          </TableBody>
+        </TableContainer>
+      )}
+    </>
   )
 }
