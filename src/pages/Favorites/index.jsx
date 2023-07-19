@@ -46,6 +46,19 @@ export function Favorites() {
     }
   }
 
+  async function handleRemoveFavorite(id) {
+    try {
+      await toast.promise(api.patch(`/favorite_dishes/${id}`), {
+        pending: 'Por favor aguarde...',
+        ...toastConfig,
+      })
+      fetchSearchFavorites()
+    } catch (error) {
+      if (error.response) toast.error(error.response.data.description)
+      else toast.error('Erro ao tentar favoritar prato.')
+    }
+  }
+
   useEffect(() => {
     localStorage.setItem('@food-explorer:isActive', false)
     fetchSearchFavorites()
@@ -69,7 +82,9 @@ export function Favorites() {
                     key={index}
                     item={dish}
                     isFavoritePage
-                    removeItem={() => {}}
+                    removeItem={() => {
+                      handleRemoveFavorite(dish.id)
+                    }}
                   />
                 ))}
             </ListItemsStyled>
