@@ -68,6 +68,9 @@ export const Text = styled.div`
     > h1 {
       ${({ theme }) => theme.FONTS.POPPINS.MEDIUM_500}
     }
+    > p {
+      text-align: left;
+    }
   }
 `
 

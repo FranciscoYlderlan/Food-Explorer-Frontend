@@ -9,6 +9,17 @@ export default createGlobalStyle`
     }
     
     :root {
+      --toastify-color-dark: ${({ theme }) => theme.COLORS.DARK_200};
+
+        --toastify-color-info: ${({ theme }) => theme.COLORS.CAKE_100};
+        --toastify-color-success: ${({ theme }) => theme.COLORS.MINT};
+        --toastify-color-warning: ${({ theme }) => theme.COLORS.CARROT_100};
+        --toastify-color-error: ${({ theme }) => theme.COLORS.TOMATO_300};
+        
+        --toastify-font-family: 'Poppins';
+        --toastify-text-color-dark: ${({ theme }) => theme.COLORS.LIGHT_300};
+
+
         font-size: 62.5%;
     }
     

@@ -126,7 +126,7 @@ export function FormDish({ dishData, isNew = false }) {
       return toast.info('Ingrediente informado não foi adicionado')
 
     if (dish.ingredients.length === 0)
-      return toast.info('Informe pelo menos um ingredient.')
+      return toast.info('Informe pelo menos um ingrediente.')
 
     // const formattedIngrediets = dish.ingredients.map((item) => ({
     //   name: item,
