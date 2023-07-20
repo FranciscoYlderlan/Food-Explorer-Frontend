@@ -10,14 +10,13 @@ export const TableContainer = styled.div`
   display: grid;
   grid-template-rows: auto 1fr;
   border: 2px solid ${({ theme }) => theme.COLORS.DARK_1000};
-  max-height: 45rem;
 `
 
 export const TableHeader = styled.div`
   display: flex;
   border-bottom: 2px solid ${({ theme }) => theme.COLORS.DARK_1000};
-  padding-right: 0.6rem;
-
+  padding-right: 0.1rem;
+  background-color: ${({ theme }) => theme.COLORS.DARK_400};
   ${({ theme }) => theme.FONTS.ROBOTO.SMALLER_BOLD};
   color: ${({ theme }) => theme.COLORS.LIGHT_300};
 
@@ -36,13 +35,13 @@ export const TableHeader = styled.div`
   }
   position: sticky;
   top: 0;
+  z-index: 3;
 `
-//  .wrapper-table::-webkit-scrollbar-track {
-//   margin-block-start: 3rem;
-// }
+
 export const TableCell = styled.div`
   display: flex;
   justify-content: start;
+  align-items: center;
   width: 100%;
   padding: 2.1rem 2.4rem;
 
@@ -57,12 +56,13 @@ export const TableBody = styled.div`
   > div:last-child {
     border: none;
   }
-  overflow-y: auto;
 `
 
 export const TableRow = styled.div`
   display: flex;
+  height: fit-content;
   border-bottom: 2px solid ${({ theme }) => theme.COLORS.DARK_1000};
+
   > div:first-child {
     width: 35%;
     //TODO: se for admin diminuir o padding para 1 padding: 1rem 2.4rem;

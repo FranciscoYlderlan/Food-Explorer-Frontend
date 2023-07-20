@@ -35,6 +35,7 @@ function removeHashFileName(name) {
   }
   return name
 }
+
 function URLImageFormatter(filename, placeholderImage) {
   const url = filename
     ? `${api.defaults.baseURL}/files/${filename}`
@@ -42,9 +43,29 @@ function URLImageFormatter(filename, placeholderImage) {
   return url
 }
 
+function dateFormatter(date) {
+  const originalDate = new Date(date)
+
+  const options = {
+    day: '2-digit',
+    month: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  }
+
+  const formattedDate = new Intl.DateTimeFormat('pt-BR', options).format(
+    originalDate,
+  )
+  const formattedDateTime = formattedDate.replace(/,/g, '').replace(' ', ' às ')
+
+  return formattedDateTime
+}
+
 export {
   currencyInputFormatter,
   TwoDigitsFormatter,
   removeHashFileName,
   URLImageFormatter,
+  dateFormatter,
 }

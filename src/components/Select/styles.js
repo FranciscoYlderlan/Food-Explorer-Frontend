@@ -6,8 +6,8 @@ export const Container = styled.div`
 
   width: 100%;
   height: fit-content;
-  position: relative;
 
+  pointer-events: auto;
   > label {
     ${({ theme }) => theme.FONTS.ROBOTO.SMALL_REGULAR};
 
@@ -54,7 +54,7 @@ export const SelectSelected = styled.div`
 export const SelectOptions = styled.ul`
   border-radius: 0 0 10px 10px;
   border: solid ${({ theme }) => theme.COLORS.LIGHT_100} 1px;
-  /* border-top: none; */
+
   position: absolute;
   width: 100%;
   background-color: ${({ theme }) => theme.COLORS.DARK_900};

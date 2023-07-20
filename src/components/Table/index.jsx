@@ -17,10 +17,14 @@ import { toastConfig } from '../../services/toast'
 
 import { useState, useEffect } from 'react'
 import { useAuth } from '../../hooks/auth'
+
+import { dateFormatter } from '../../utils/formatting'
+
 export function Table({ isDesktop = false, ...rest }) {
   const { isAnAdmin } = useAuth()
   const [orders, setOrders] = useState([])
   const [status, setStatus] = useState([])
+  const [keyword, setKeyword] = useState('')
   const rows = [
     {
       id: 1,
@@ -118,21 +122,29 @@ export function Table({ isDesktop = false, ...rest }) {
   async function fetchOrders(e) {
     let resource = ''
     try {
-      resource = !isAnAdmin() ? '/orders/history' : '/orders'
+      resource = !isAnAdmin()
+        ? `/orders/history/?keyword=${keyword}`
+        : `/orders/?keyword=${keyword}`
+
       const response = await toast.promise(api.get(resource), {
         pending: 'Por favor aguarde...',
         ...toastConfig,
       })
       setOrders(response.data)
+      console.log(response.data)
     } catch (error) {
       if (error.response) {
         toast.error(error.response.data.description)
       }
     }
   }
-
+  function handleGetStatusName(statusId) {
+    const status_ = status.find((stats) => stats.id === statusId)
+    console.log(status_)
+    return status_.name
+  }
   useEffect(() => {
-    async function handleLoadingSelectOptions() {
+    async function fetchStatusOptions() {
       try {
         const response = await toast.promise(api.get('/status'), {
           ...toastConfig,
@@ -143,7 +155,7 @@ export function Table({ isDesktop = false, ...rest }) {
         else toast.error('Erro ao tentar carregar status.')
       }
     }
-    fetchOrders().then(() => handleLoadingSelectOptions())
+    fetchOrders().then(() => fetchStatusOptions())
   }, [])
   return (
     <>
@@ -170,26 +182,33 @@ export function Table({ isDesktop = false, ...rest }) {
             <TableCell>Data e Hora</TableCell>
           </TableHeader>
           <TableBody>
-            {orders.map((order, index) => {
-              return (
-                <TableRow key={index}>
-                  <TableCell>
-                    {isAnAdmin() ? (
-                      <Select
-                        options={status}
-                        selected={[order.id, order.status]}
-                        isAdmin
-                      />
-                    ) : (
-                      <Status value={order.status_id} text={order.status_id} />
-                    )}
-                  </TableCell>
-                  <TableCell>{order.code}</TableCell>
-                  <TableCell>{order.details}</TableCell>
-                  <TableCell>{order.create_at}</TableCell>
-                </TableRow>
-              )
-            })}
+            {status.length > 0 &&
+              orders.map((order, index) => {
+                return (
+                  <TableRow key={index}>
+                    <TableCell>
+                      {isAnAdmin() ? (
+                        <Select
+                          options={status}
+                          selected={[
+                            order.status_id,
+                            handleGetStatusName(order.status_id),
+                          ]}
+                          isAdmin
+                        />
+                      ) : (
+                        <Status
+                          value={order.status_id}
+                          text={handleGetStatusName(order.status_id)}
+                        />
+                      )}
+                    </TableCell>
+                    <TableCell>{order.code}</TableCell>
+                    <TableCell>{order.details}</TableCell>
+                    <TableCell>{dateFormatter(order.created_at)}</TableCell>
+                  </TableRow>
+                )
+              })}
           </TableBody>
         </TableContainer>
       )}

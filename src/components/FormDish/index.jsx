@@ -63,7 +63,7 @@ export function FormDish({ dishData, isNew = false }) {
 
     // TODO: alterar para mensagem em baixo do input ao invés de um toast nas próximas versões
     if (newIngredientIsEmpty)
-      return toast.info('Informe o ingrediente antes de adicionar')
+      return toast.info('Informe o ingrediente antes de adicionar.')
     if (containsIngredient)
       return toast.info('Este ingrediente já foi inserido.')
     if (containsNumber)
@@ -123,7 +123,7 @@ export function FormDish({ dishData, isNew = false }) {
     e.preventDefault()
 
     if (newIngredient.name)
-      return toast.info('Ingrediente informado não foi adicionado')
+      return toast.info('Ingrediente informado não foi adicionado.')
 
     if (dish.ingredients.length === 0)
       return toast.info('Informe pelo menos um ingrediente.')
@@ -152,7 +152,7 @@ export function FormDish({ dishData, isNew = false }) {
           }),
           {
             pending: 'Por favor aguarde...',
-            success: 'Prato atualizado sucesso!',
+            success: 'Prato editado sucesso!',
             ...toastConfig,
           },
         )
@@ -165,7 +165,7 @@ export function FormDish({ dishData, isNew = false }) {
           }),
           {
             pending: 'Por favor aguarde...',
-            success: 'Prato editado com sucesso!',
+            success: 'Prato cadastrado com sucesso!',
             ...toastConfig,
           },
         )
@@ -185,7 +185,7 @@ export function FormDish({ dishData, isNew = false }) {
         if (confirm('Tem certeza que deseja excluir este prato?')) {
           await toast.promise(api.delete(`/dish/${params.id}`), {
             pending: 'Por favor aguarde...',
-            success: 'Prato deletado com sucesso',
+            success: 'Prato deletado com sucesso.',
             ...toastConfig,
           })
         }

@@ -106,7 +106,7 @@ export function Carousel({ data, updatedData }) {
                     alt={`${dish.name}`}
                   />
                   <TextIcon onClick={() => handleClickPreviewPage(dish.id)}>
-                    <h2>{dish.name}</h2>
+                    <h2 title={dish.name}>{dish.name}</h2>
                     {/* //TODO: consertar esse ícone */}
                     <span>&#8250;</span>
                   </TextIcon>

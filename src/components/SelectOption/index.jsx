@@ -7,7 +7,7 @@ export function SelectOption({ value, text, onClick, ...rest }) {
       {text === 'Pendente' && <Dot color="#AB222E" />}
       {text === 'Preparando' && <Dot color="#FBA94C" />}
       {text === 'Entregue' && <Dot color="#04D361" />}
-      {text}
+      <span>{text}</span>
     </Container>
   )
 }
