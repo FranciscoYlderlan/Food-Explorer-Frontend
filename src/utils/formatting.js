@@ -62,10 +62,15 @@ function dateFormatter(date) {
   return formattedDateTime
 }
 
+function detailsFormatter(details) {
+  return details.slice(0, -2)
+}
+
 export {
   currencyInputFormatter,
   TwoDigitsFormatter,
   removeHashFileName,
   URLImageFormatter,
   dateFormatter,
+  detailsFormatter,
 }

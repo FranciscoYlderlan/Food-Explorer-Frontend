@@ -30,5 +30,6 @@ export const Status = styled(SelectOption)`
   background-color: transparent;
   color: ${({ theme }) => theme.COLORS.LIGHT_400};
   height: fit-content;
+  line-height: 100%;
   padding: 0;
 `

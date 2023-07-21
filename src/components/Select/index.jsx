@@ -8,11 +8,16 @@ import { useState, useEffect } from 'react'
 import { SelectOption } from '../SelectOption'
 import { Dot } from '../Dot/index.jsx'
 
+import { toast } from 'react-toastify'
+import { toastConfig } from '../../services/toast'
+
 export function Select({
   options,
   selected = null,
   labelName = null,
   onChange = () => {},
+  currentItem = null,
+  handleResource = () => {},
   ...rest
 }) {
   const [isOpen, setIsOpen] = useState(false)
@@ -22,11 +27,17 @@ export function Select({
     setIsOpen(!isOpen)
   }
 
-  function handleOptionClick(value, text) {
+  async function handleOptionClick(value, text) {
     setSelectedOption(text)
     setIsOpen(false)
     setSelectedIcon(text)
     onChange(value)
+    if (isOpen && currentItem) {
+      await toast.promise(handleResource(currentItem, value), {
+        pending: 'Por favor aguarde...',
+        ...toastConfig,
+      })
+    }
   }
   useEffect(() => {
     function isSelected(selected) {

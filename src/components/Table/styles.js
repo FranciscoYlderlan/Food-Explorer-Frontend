@@ -10,27 +10,29 @@ export const TableContainer = styled.div`
   display: grid;
   grid-template-rows: auto 1fr;
   border: 2px solid ${({ theme }) => theme.COLORS.DARK_1000};
+  border-radius: 0.8rem 0.8rem 0 0;
 `
 
 export const TableHeader = styled.div`
   display: flex;
   border-bottom: 2px solid ${({ theme }) => theme.COLORS.DARK_1000};
-  padding-right: 0.1rem;
+  border-radius: 0.8rem 0.8rem 0 0;
   background-color: ${({ theme }) => theme.COLORS.DARK_400};
   ${({ theme }) => theme.FONTS.ROBOTO.SMALLER_BOLD};
   color: ${({ theme }) => theme.COLORS.LIGHT_300};
 
   > div:first-child {
-    width: 35%;
+    width: 45%;
+    //TODO: se for admin diminuir o padding para 1 padding: 1rem 2.4rem;
   }
   > div:nth-child(2) {
-    width: 25%;
+    width: 30%;
   }
   > div:nth-child(3) {
-    width: 100%;
+    width: 80%;
   }
   > div:last-child {
-    width: 25%;
+    width: 30%;
     border: none;
   }
   position: sticky;
@@ -64,17 +66,18 @@ export const TableRow = styled.div`
   border-bottom: 2px solid ${({ theme }) => theme.COLORS.DARK_1000};
 
   > div:first-child {
-    width: 35%;
+    width: 45%;
     //TODO: se for admin diminuir o padding para 1 padding: 1rem 2.4rem;
   }
   > div:nth-child(2) {
-    width: 25%;
+    width: 30%;
   }
   > div:nth-child(3) {
-    width: 100%;
+    width: 80%;
   }
   > div:last-child {
-    width: 25%;
+    width: 30%;
+    border: none;
   }
 `
 export const Status = styled(SelectOption)`
