@@ -15,6 +15,12 @@ export const TextLinkStyled = styled(TextLink)`
 export const CartStyled = styled.div`
   max-width: 115rem;
   display: grid;
+  > div:first-child {
+    width: 100%;
+  }
+  > div:last-child {
+    width: 100%;
+  }
   justify-content: space-between;
   h2 {
     ${({ theme }) => theme.FONTS.POPPINS.MEDIUM_SPACED_100}
