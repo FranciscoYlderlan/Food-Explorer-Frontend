@@ -22,6 +22,34 @@ export function Payment({ ...rest }) {
   const [isPixOpen, setIsPixOpen] = useState(true)
   const [statusCheckout, setStatusCheckout] = useState(0)
   const [image, setImage] = useState(qrCodeExample)
+  const [cardNumber, setCardNumber] = useState('')
+  const [expirationDate, setExpirationDate] = useState('')
+
+  function handleChangeCardNumber(event) {
+    // Remover todos os espaços em branco do valor atual do input
+    const inputValue = event.target.value.replace(/\s/g, '')
+
+    // Adicionar espaçamento a cada grupo de 4 dígitos
+    const spacedValue = inputValue.replace(/(\d{4})/g, '$1 ').trim()
+
+    // Atualizar o valor do input com o espaçamento adicionado
+    setCardNumber(spacedValue)
+  }
+
+  function handleChangeExpirationDate(event) {
+    // Remover todos os caracteres não numéricos do valor atual do input
+    const inputValue = event.target.value.replace(/\D/g, '')
+
+    // Adicionar barras (/) entre o mês e o ano
+    let formattedValue = inputValue
+    if (inputValue.length > 2) {
+      formattedValue = inputValue.replace(/^(\d{2})(\d{0,2})/, '$1/$2')
+    }
+
+    // Atualizar o valor do input com as barras adicionadas
+    setExpirationDate(formattedValue)
+  }
+
   function handleCreditClick() {
     setIsCreditOpen(true)
     setIsPixOpen(false)
@@ -54,10 +82,32 @@ export function Payment({ ...rest }) {
           <img src={image} alt="QR code" />
         ) : (
           <Form>
-            <Input placeholder="0000 0000 0000 0000" />
+            <Input
+              placeholder="0000 0000 0000 0000"
+              pattern="[0-9]{4}\s?[0-9]{4}\s?[0-9]{4}\s?[0-9]{4}"
+              maxlength="19"
+              value={cardNumber}
+              errorMessage="Número do cartão inválido"
+              onChange={handleChangeCardNumber}
+              required
+            />
             <Col2>
-              <Input placeholder="03/23" />
-              <Input placeholder="000" />
+              <Input
+                placeholder="03/23"
+                pattern="^(0[1-9]|1[0-2])\/\d{2}$"
+                maxlength="5"
+                value={expirationDate}
+                errorMessage="Data inválida"
+                onChange={handleChangeExpirationDate}
+                required
+              />
+              <Input
+                placeholder="000"
+                pattern="[0-9]{3,4}"
+                maxlength="3"
+                errorMessage="CVV inválida"
+                required
+              />
             </Col2>
             <Button title="Finalizar pagamento" />
           </Form>

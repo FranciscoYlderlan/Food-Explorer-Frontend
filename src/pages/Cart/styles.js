@@ -15,6 +15,7 @@ export const TextLinkStyled = styled(TextLink)`
 export const CartStyled = styled.div`
   max-width: 115rem;
   display: grid;
+  gap: 5rem;
   > div:first-child {
     width: 100%;
   }
@@ -31,6 +32,7 @@ export const CartStyled = styled.div`
   @media ${({ theme }) => theme.DEVICES.laptop} {
     display: flex;
     align-items: flex-start;
+
     h2 {
       ${({ theme }) => theme.FONTS.POPPINS.MEDIUM_400}
     }
