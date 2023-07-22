@@ -36,7 +36,7 @@ export const TableHeader = styled.div`
     border: none;
   }
   position: sticky;
-  top: 0;
+  top: 9.9rem;
   z-index: 3;
 `
 
