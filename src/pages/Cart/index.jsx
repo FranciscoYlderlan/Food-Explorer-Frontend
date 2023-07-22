@@ -24,8 +24,13 @@ import { useAuth } from '../../hooks/auth'
 
 import { currencyInputFormatter } from '../../utils/formatting.js'
 
+import { api } from '../../services/api'
+
+import { toast } from 'react-toastify'
+import { toastConfig } from '../../services/toast'
+
 export function Cart() {
-  const { totalPurchasePrice, handleRemoveItem } = useAuth()
+  const { totalPurchasePrice, handleRemoveItem, acceptedOrder } = useAuth()
   const [orders, setOrders] = useState(
     JSON.parse(localStorage.getItem('@food-explorer:order')),
   )
@@ -45,7 +50,28 @@ export function Cart() {
   function handleMenuClick() {
     setIsOpenMenu(JSON.parse(localStorage.getItem('@food-explorer:isActive')))
   }
+  async function handleSubmit(e) {
+    e.preventDefault()
+    const formatterData = orders.map(({ id, qty }) => {
+      return { id, qty }
+    })
+    const orders_ = { dishes: formatterData }
 
+    try {
+      await toast.promise(api.post('/orders', orders_), {
+        pending: 'Aguardando pagamento no caixa...',
+        success: 'Pagamento aprovado!',
+        error: 'Não foi possível aprovar pagamento.',
+        ...toastConfig,
+      })
+      acceptedOrder()
+      setOrders(JSON.parse(localStorage.getItem('@food-explorer:order')))
+    } catch (error) {
+      if (error.response) {
+        toast.error(error.response.data.description)
+      }
+    }
+  }
   function handleUpdatePuchaseItem(id) {
     handleRemoveItem(id)
     setOrders(JSON.parse(localStorage.getItem('@food-explorer:order')))
@@ -84,10 +110,12 @@ export function Cart() {
                   totalPurchasePrice,
                 )}`}</h3>
               </Itens>
-              <PaymentMethods>
-                <h2>Pagamento</h2>
-                <Payment />
-              </PaymentMethods>
+              {orders.length > 0 && (
+                <PaymentMethods>
+                  <h2>Pagamento</h2>
+                  <Payment handleSubmit={handleSubmit} />
+                </PaymentMethods>
+              )}
             </CartStyled>
           </>
         )}

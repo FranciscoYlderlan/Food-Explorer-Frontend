@@ -40,6 +40,12 @@ function AuthProvider({ children }) {
       }
     }
   }
+
+  function acceptedOrder() {
+    localStorage.setItem('@food-explorer:order', JSON.stringify([]))
+    setOrderQty(0)
+    setTotalPurchasePrice(0)
+  }
   function signOut() {
     const rootUrl = window.location.protocol + '//' + window.location.host + '/'
     window.location.href = rootUrl
@@ -151,6 +157,7 @@ function AuthProvider({ children }) {
         handleRemoveItem,
         orderQty,
         totalPurchasePrice,
+        acceptedOrder,
         signOut,
         user: data.user,
       }}

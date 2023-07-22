@@ -17,7 +17,7 @@ const status = {
   APPROVED: 3,
 }
 
-export function Payment({ ...rest }) {
+export function Payment({ data = null, handleSubmit = () => {}, ...rest }) {
   const [isCreditOpen, setIsCreditOpen] = useState(false)
   const [isPixOpen, setIsPixOpen] = useState(true)
   const [statusCheckout, setStatusCheckout] = useState(0)
@@ -60,6 +60,7 @@ export function Payment({ ...rest }) {
     setIsPixOpen(true)
     setIsCreditOpen(false)
   }
+
   useEffect(() => {
     if (statusCheckout === status.SEND) {
       setImage(stroke)
@@ -81,11 +82,11 @@ export function Payment({ ...rest }) {
         {isPixOpen ? (
           <img src={image} alt="QR code" />
         ) : (
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <Input
               placeholder="0000 0000 0000 0000"
               pattern="[0-9]{4}\s?[0-9]{4}\s?[0-9]{4}\s?[0-9]{4}"
-              maxlength="19"
+              maxLength="19"
               value={cardNumber}
               errorMessage="Número do cartão inválido"
               onChange={handleChangeCardNumber}
@@ -95,7 +96,7 @@ export function Payment({ ...rest }) {
               <Input
                 placeholder="03/23"
                 pattern="^(0[1-9]|1[0-2])\/\d{2}$"
-                maxlength="5"
+                maxLength="5"
                 value={expirationDate}
                 errorMessage="Data inválida"
                 onChange={handleChangeExpirationDate}
@@ -104,12 +105,12 @@ export function Payment({ ...rest }) {
               <Input
                 placeholder="000"
                 pattern="[0-9]{3,4}"
-                maxlength="3"
+                maxLength="3"
                 errorMessage="CVV inválida"
                 required
               />
             </Col2>
-            <Button title="Finalizar pagamento" />
+            <Button type="submit" title="Finalizar pagamento" />
           </Form>
         )}
       </Content>
