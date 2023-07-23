@@ -9,10 +9,9 @@ import {
 import { Header } from '../../components/Header'
 import { Main } from '../../components/Main'
 import { Footer } from '../../components/Footer'
-
 import { Payment } from '../../components/Payment'
-
 import { PurchaseItem } from '../../components/PurchaseItem'
+import { Button } from '../../components/Button'
 
 import { PiCaretLeftBold } from 'react-icons/pi'
 
@@ -36,16 +35,28 @@ export function Cart() {
   )
   const [isOpenMenu, setIsOpenMenu] = useState(false)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1024)
+  const [showPayment, setShowPayment] = useState(false)
   const navigate = useNavigate()
   function handleComeBack() {
-    navigate(-1)
+    showPayment ? setShowPayment(!showPayment) : navigate(-1)
   }
   function checkedOnchangeWindowSize() {
     const width = window.innerWidth
     setWindowWidth(width)
+    setIsMobile(width < 1024)
+    if (width > 1024) {
+      setShowPayment(true)
+    } else {
+      setShowPayment(false)
+    }
   }
 
   window.addEventListener('resize', checkedOnchangeWindowSize)
+
+  function handleShowPayment() {
+    setShowPayment(!showPayment)
+  }
 
   function handleMenuClick() {
     setIsOpenMenu(JSON.parse(localStorage.getItem('@food-explorer:isActive')))
@@ -92,25 +103,33 @@ export function Cart() {
               onClick={handleComeBack}
             />
             <CartStyled>
-              <Itens>
-                <h2>Pedidos</h2>
+              {(!isMobile || !showPayment) && (
+                <Itens>
+                  <h2>Pedidos</h2>
 
-                {orders.length > 0 && (
-                  <ListItemsStyled>
-                    {orders.map((order, index) => (
-                      <PurchaseItem
-                        key={index}
-                        item={order}
-                        removeItem={handleUpdatePuchaseItem}
-                      />
-                    ))}
-                  </ListItemsStyled>
-                )}
-                <h3>{`Total: ${currencyInputFormatter(
-                  totalPurchasePrice,
-                )}`}</h3>
-              </Itens>
-              {orders.length > 0 && (
+                  {orders.length > 0 && (
+                    <ListItemsStyled>
+                      {orders.map((order, index) => (
+                        <PurchaseItem
+                          key={index}
+                          item={order}
+                          removeItem={handleUpdatePuchaseItem}
+                        />
+                      ))}
+                    </ListItemsStyled>
+                  )}
+                  <h3>{`Total: ${currencyInputFormatter(
+                    totalPurchasePrice,
+                  )}`}</h3>
+                  {orders.length > 0 && isMobile && (
+                    <Button
+                      title="Avançar"
+                      onClick={handleShowPayment}
+                    ></Button>
+                  )}
+                </Itens>
+              )}
+              {orders.length > 0 && (!isMobile || showPayment) && (
                 <PaymentMethods>
                   <h2>Pagamento</h2>
                   <Payment handleSubmit={handleSubmit} />

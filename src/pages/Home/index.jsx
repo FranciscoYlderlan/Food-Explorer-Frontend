@@ -34,6 +34,7 @@ export function Home() {
       const response = await toast.promise(
         api.get(`/dish/?keyword=${keyword}`),
         {
+          pending: 'Por favor aguarde...',
           ...toastConfig,
         },
       )

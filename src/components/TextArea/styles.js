@@ -66,7 +66,7 @@ export const BoxTextArea = styled.textarea`
 
     align-items: center;
     padding-left: 2rem;
-    gap: 1.6rem;
+    gap: 0.3rem;
     border-radius: 1rem;
 
     color: ${({ theme }) => theme.COLORS.CARROT};

@@ -44,6 +44,10 @@ export const CartStyled = styled.div`
 export const Itens = styled.div`
   display: grid;
   gap: 3.2rem;
+  > button {
+    width: 50%;
+    justify-self: flex-end;
+  }
 `
 export const PaymentMethods = styled.div`
   display: grid;

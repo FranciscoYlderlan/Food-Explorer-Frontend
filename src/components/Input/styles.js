@@ -101,7 +101,7 @@ export const BoxInput = styled.div`
 
     align-items: center;
     padding-left: 2rem;
-    gap: 1.6rem;
+
     border-radius: 1rem;
 
     color: ${({ theme }) => theme.COLORS.CARROT};

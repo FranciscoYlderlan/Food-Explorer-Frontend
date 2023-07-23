@@ -53,7 +53,7 @@ export function Payment({ data = null, handleSubmit = () => {}, ...rest }) {
   function handleCreditClick() {
     setIsCreditOpen(true)
     setIsPixOpen(false)
-    setStatusCheckout((prevState) => prevState + 1)
+    // setStatusCheckout((prevState) => prevState + 1)
   }
 
   function handlePixClick() {
