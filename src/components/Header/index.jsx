@@ -24,12 +24,13 @@ import { useAuth } from '../../hooks/auth'
 
 export function Header({
   handleMenuClick,
+  handleChangeInput = () => {},
   placeholderSearch = 'Busque por pratos ou ingredientes',
   ...rest
 }) {
   const [isOpen, setIsOpen] = useState(false)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
-  const { signOut, isAnAdmin, orderQty } = useAuth()
+  const { signOut, isAnAdmin, orderQty, searchKeyword } = useAuth()
   const navigate = useNavigate()
 
   function handleClickHistoryPage() {
@@ -84,7 +85,12 @@ export function Header({
 
       {windowWidth >= 1024 && (
         <>
-          <Input icon={MagnifyingGlass} placeholder={placeholderSearch} />
+          <Input
+            value={searchKeyword}
+            onChange={(e) => handleChangeInput(e)}
+            icon={MagnifyingGlass}
+            placeholder={placeholderSearch}
+          />
           {!isAnAdmin() && (
             <TextLink
               title="Meus Favoritos"
@@ -109,8 +115,10 @@ export function Header({
           {isOpen ? (
             <OptionsIn isOpen={isOpen && windowWidth <= 1024}>
               <Input
+                value={searchKeyword}
+                onChange={(e) => handleChangeInput(e)}
                 icon={MagnifyingGlass}
-                placeholder="Busque por pratos ou ingredientes"
+                placeholder={placeholderSearch}
               />
               <Links>
                 {!isAnAdmin() ? (
@@ -134,8 +142,10 @@ export function Header({
           ) : (
             <OptionsOut isOpen={isOpen && windowWidth <= 1024}>
               <Input
+                value={searchKeyword}
+                onChange={(e) => handleChangeInput(e)}
                 icon={MagnifyingGlass}
-                placeholder="Busque por pratos ou ingredientes"
+                placeholder={placeholderSearch}
               />
               <Links>
                 {!isAnAdmin() ? (

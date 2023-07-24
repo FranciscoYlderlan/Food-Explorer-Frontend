@@ -11,7 +11,7 @@ function AuthProvider({ children }) {
   const [data, setData] = useState({})
   const [orderQty, setOrderQty] = useState([])
   const [totalPurchasePrice, setTotalPurchasePrice] = useState(0)
-  // const [search, setSearch] = useState('')
+  const [searchKeyword, setSearchKeyword] = useState('')
 
   async function signIn({ email, password }) {
     try {
@@ -63,10 +63,10 @@ function AuthProvider({ children }) {
       return isAdmin
     }
   }
-  // function handleSearchChange() {
-  //   if (search) {
-  //   }
-  // }
+  function handleSearchKeywordChange(e) {
+    const { value } = e.target
+    setSearchKeyword(value)
+  }
 
   function handleAddItem({ id, picture, name, qty, amount }) {
     const currentOrder = JSON.parse(
@@ -156,6 +156,8 @@ function AuthProvider({ children }) {
         handleRemoveItem,
         orderQty,
         totalPurchasePrice,
+        handleSearchKeywordChange,
+        searchKeyword,
         acceptedOrder,
         signOut,
         user: data.user,

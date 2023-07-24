@@ -8,8 +8,10 @@ import { PiCaretLeftBold } from 'react-icons/pi'
 
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../hooks/auth'
 
 export function Orders() {
+  const { handleSearchKeywordChange } = useAuth()
   const [isOpenMenu, setIsOpenMenu] = useState(false)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const navigate = useNavigate()
@@ -30,8 +32,9 @@ export function Orders() {
   return (
     <Container>
       <Header
+        handleChangeInput={handleSearchKeywordChange}
         handleMenuClick={handleMenuClick}
-        placeholderSearch="Busque por pedidos"
+        placeholderSearch="Busque pelo status"
       />
       <Main>
         {(!isOpenMenu || windowWidth > 1024) && (

@@ -21,20 +21,18 @@ import { useAuth } from '../../hooks/auth'
 import { dateFormatter, detailsFormatter } from '../../utils/formatting'
 
 export function Table({ isDesktop = false, ...rest }) {
-  const { isAnAdmin } = useAuth()
+  const { isAnAdmin, searchKeyword } = useAuth()
   const [orders, setOrders] = useState([])
   const [status, setStatus] = useState([])
-  const [keyword, setKeyword] = useState('')
 
   async function fetchOrders(e) {
     let resource = ''
     try {
       resource = !isAnAdmin()
-        ? `/orders/history/?keyword=${keyword}`
-        : `/orders/?keyword=${keyword}`
+        ? `/orders/history/?keyword=${searchKeyword}`
+        : `/orders/?keyword=${searchKeyword}`
 
       const response = await toast.promise(api.get(resource), {
-        pending: 'Por favor aguarde...',
         ...toastConfig,
       })
       setOrders(response.data)
@@ -45,9 +43,7 @@ export function Table({ isDesktop = false, ...rest }) {
     }
   }
   function handleGetStatusName(statusId) {
-    const status_ = status.find((state) => state.id === statusId)
-
-    return status_.name
+    if (statusId) return status.find((state) => state.id === statusId).name
   }
   async function handleUpdateStatus(order, newState) {
     const data = {
@@ -66,6 +62,10 @@ export function Table({ isDesktop = false, ...rest }) {
   }
 
   useEffect(() => {
+    fetchOrders()
+  }, [searchKeyword])
+
+  useEffect(() => {
     async function fetchStatusOptions() {
       try {
         const response = await toast.promise(api.get('/status'), {
@@ -77,8 +77,16 @@ export function Table({ isDesktop = false, ...rest }) {
         else toast.error('Erro ao tentar carregar status.')
       }
     }
-    fetchOrders().then(() => fetchStatusOptions())
+    async function loadingData() {
+      await toast.promise(fetchOrders(), {
+        pending: 'Por favor aguarde...',
+        ...toastConfig,
+      })
+      fetchStatusOptions()
+    }
+    loadingData()
   }, [])
+
   return (
     <>
       {!isDesktop ? (
@@ -88,7 +96,7 @@ export function Table({ isDesktop = false, ...rest }) {
               return (
                 <Card
                   order={order}
-                  key={index}
+                  key={order.code}
                   options={status}
                   isAdmin={isAnAdmin()}
                   handleResource={handleUpdateStatus}
@@ -112,11 +120,13 @@ export function Table({ isDesktop = false, ...rest }) {
             {orders.length > 0 &&
               status.length > 0 &&
               orders.map((order, index) => {
+                // console.log(order.code, order.status_id)
                 return (
-                  <TableRow key={index}>
+                  <TableRow key={order.code}>
                     <TableCell>
                       {isAnAdmin() ? (
                         <Select
+                          key={order.code}
                           options={status}
                           selected={[
                             order.status_id,
