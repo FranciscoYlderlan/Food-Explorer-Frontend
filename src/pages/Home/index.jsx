@@ -12,9 +12,11 @@ import { toast } from 'react-toastify'
 import { toastConfig } from '../../services/toast'
 
 import { api } from '../../services/api'
+import { useAuth } from '../../hooks/auth'
 
 export function Home() {
-  const [keyword, setKeyword] = useState('')
+  const { handleSearchKeywordChange, searchKeyword } = useAuth()
+
   const [categories, setCategories] = useState([])
   const [dishes, setDishes] = useState([])
   const [isOpenMenu, setIsOpenMenu] = useState(false)
@@ -32,7 +34,7 @@ export function Home() {
   async function fetchSearchDishes() {
     try {
       const response = await toast.promise(
-        api.get(`/dish/?keyword=${keyword}`),
+        api.get(`/dish/?keyword=${searchKeyword}`),
         {
           pending: 'Por favor aguarde...',
           ...toastConfig,
@@ -44,6 +46,10 @@ export function Home() {
       else toast.error('Erro ao tentar carregar os pratos.')
     }
   }
+  useEffect(() => {
+    fetchSearchDishes()
+  }, [searchKeyword])
+
   useEffect(() => {
     localStorage.setItem('@food-explorer:isActive', false)
     async function fetchCategoryOptions() {
@@ -61,7 +67,10 @@ export function Home() {
   }, [])
   return (
     <Container>
-      <Header handleMenuClick={handleMenuClick} />
+      <Header
+        handleMenuClick={handleMenuClick}
+        handleChangeInput={handleSearchKeywordChange}
+      />
       <Main>
         {(!isOpenMenu || windowWidth > 1024) && (
           <>
