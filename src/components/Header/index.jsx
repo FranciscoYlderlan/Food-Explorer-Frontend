@@ -66,8 +66,8 @@ export function Header({
   window.addEventListener('resize', checkedOnchangeWindowSize)
 
   useEffect(() => {
-    const isActive = localStorage.getItem('@food-explorer:isActive')
-    setIsOpen(JSON.parse(isActive))
+    localStorage.setItem('@food-explorer:isActive', false)
+    setIsOpen(false)
   }, [])
   // TODO: quando já tiver na página do menu fechar o menu para exibir a tela
   return (
