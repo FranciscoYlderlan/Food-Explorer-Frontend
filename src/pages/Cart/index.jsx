@@ -77,6 +77,7 @@ export function Cart() {
       })
       acceptedOrder()
       setOrders(JSON.parse(localStorage.getItem('@food-explorer:order')))
+      setShowPayment(false)
     } catch (error) {
       if (error.response) {
         toast.error(error.response.data.description)

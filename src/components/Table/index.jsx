@@ -83,7 +83,7 @@ export function Table({ isDesktop = false, ...rest }) {
     <>
       {!isDesktop ? (
         <CardContainer {...rest}>
-          {orders.length > 0 ? (
+          {orders.length > 0 && status.length > 0 ? (
             orders.map((order, index) => {
               return (
                 <Card
@@ -110,6 +110,7 @@ export function Table({ isDesktop = false, ...rest }) {
           <TableBody>
             {orders.length === 0 && <p>Nenhum pedido registrado</p>}
             {orders.length > 0 &&
+              status.length > 0 &&
               orders.map((order, index) => {
                 return (
                   <TableRow key={index}>
