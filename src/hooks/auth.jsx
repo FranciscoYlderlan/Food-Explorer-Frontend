@@ -87,19 +87,20 @@ function AuthProvider({ children }) {
         JSON.stringify([...currentOrder, { id, picture, name, qty, amount }]),
       )
     }
-
-    setOrderQty(
-      JSON.parse(localStorage.getItem('@food-explorer:order')).reduce(
-        (accumulator, current) => accumulator + current.qty,
-        0,
-      ),
-    )
-    setTotalPurchasePrice(
-      JSON.parse(localStorage.getItem('@food-explorer:order')).reduce(
-        (accumulator, current) => accumulator + current.amount,
-        0,
-      ),
-    )
+    if (localStorage.getItem('@food-explorer:order') !== null) {
+      setOrderQty(
+        JSON.parse(localStorage.getItem('@food-explorer:order')).reduce(
+          (accumulator, current) => accumulator + current.qty,
+          0,
+        ),
+      )
+      setTotalPurchasePrice(
+        JSON.parse(localStorage.getItem('@food-explorer:order')).reduce(
+          (accumulator, current) => accumulator + current.amount,
+          0,
+        ),
+      )
+    }
   }
 
   function handleRemoveItem(id) {
@@ -113,19 +114,20 @@ function AuthProvider({ children }) {
       updatedOrder = currentOrder.filter((dish) => dish.id !== id)
       localStorage.setItem('@food-explorer:order', JSON.stringify(updatedOrder))
     }
-
-    setOrderQty(
-      JSON.parse(localStorage.getItem('@food-explorer:order')).reduce(
-        (accumulator, current) => accumulator + current.qty,
-        0,
-      ),
-    )
-    setTotalPurchasePrice(
-      JSON.parse(localStorage.getItem('@food-explorer:order')).reduce(
-        (accumulator, current) => accumulator + current.amount,
-        0,
-      ),
-    )
+    if (localStorage.getItem('@food-explorer:order') !== null) {
+      setOrderQty(
+        JSON.parse(localStorage.getItem('@food-explorer:order')).reduce(
+          (accumulator, current) => accumulator + current.qty,
+          0,
+        ),
+      )
+      setTotalPurchasePrice(
+        JSON.parse(localStorage.getItem('@food-explorer:order')).reduce(
+          (accumulator, current) => accumulator + current.amount,
+          0,
+        ),
+      )
+    }
   }
 
   useEffect(() => {
