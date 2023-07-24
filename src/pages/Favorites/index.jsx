@@ -13,9 +13,10 @@ import { toast } from 'react-toastify'
 import { toastConfig } from '../../services/toast'
 
 import { api } from '../../services/api'
+import { useAuth } from '../../hooks/auth'
 
 export function Favorites() {
-  const [keyword, setKeyword] = useState('')
+  const { searchKeyword, handleSearchKeywordChange } = useAuth()
   const [favorites, setFavorites] = useState([])
   const [isOpenMenu, setIsOpenMenu] = useState(false)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
@@ -34,7 +35,7 @@ export function Favorites() {
   async function fetchSearchFavorites() {
     try {
       const response = await toast.promise(
-        api.get(`/favorite_dishes/?keyword=${keyword}`),
+        api.get(`/favorite_dishes/?keyword=${searchKeyword}`),
         {
           ...toastConfig,
         },
@@ -60,12 +61,25 @@ export function Favorites() {
   }
 
   useEffect(() => {
-    localStorage.setItem('@food-explorer:isActive', false)
     fetchSearchFavorites()
+  }, [searchKeyword])
+
+  useEffect(() => {
+    localStorage.setItem('@food-explorer:isActive', false)
+    async function loadingData() {
+      await toast.promise(fetchSearchFavorites(), {
+        pending: 'Por favor aguarde...',
+        ...toastConfig,
+      })
+    }
+    loadingData()
   }, [])
   return (
     <Container>
-      <Header handleMenuClick={handleMenuClick} />
+      <Header
+        handleMenuClick={handleMenuClick}
+        handleChangeInput={handleSearchKeywordChange}
+      />
       <Main>
         {(!isOpenMenu || windowWidth > 1024) && (
           <>
