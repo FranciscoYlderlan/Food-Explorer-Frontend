@@ -18,7 +18,7 @@ function AuthProvider({ children }) {
       const response = await toast.promise(
         api.post('/sessions', { email, password }),
         {
-          pending:'Por favor aguarde...'
+          pending: 'Por favor aguarde...',
           ...toastConfig,
         },
       )
