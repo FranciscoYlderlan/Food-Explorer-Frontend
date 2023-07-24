@@ -29,7 +29,10 @@ export function Orders() {
   }, [])
   return (
     <Container>
-      <Header handleMenuClick={handleMenuClick} />
+      <Header
+        handleMenuClick={handleMenuClick}
+        placeholderSearch="Busque por pedidos"
+      />
       <Main>
         {(!isOpenMenu || windowWidth > 1024) && (
           <>
@@ -39,7 +42,7 @@ export function Orders() {
               onClick={handleComeBack}
             />
             <h2>Histórico de pedidos</h2>
-            <Table isDesktop={windowWidth > 1024} />
+            <Table isDesktop={windowWidth >= 1024} />
           </>
         )}
       </Main>

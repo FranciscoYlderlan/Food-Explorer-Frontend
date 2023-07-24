@@ -44,9 +44,31 @@ export const CartStyled = styled.div`
 export const Itens = styled.div`
   display: grid;
   gap: 3.2rem;
+
+  > span {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  span > h2 {
+    ${({ theme }) => theme.FONTS.POPPINS.MEDIUM_SPACED_100}
+  }
+  span > p {
+    color: ${({ theme }) => theme.COLORS.LIGHT_400};
+    border-left: solid 1px ${({ theme }) => theme.COLORS.LIGHT_400};
+    padding-left: 1rem;
+
+    ${({ theme }) => theme.FONTS.POPPINS.MEDIUM_100}
+  }
+
   > button {
     width: 50%;
     justify-self: flex-end;
+  }
+  @media ${({ theme }) => theme.DEVICES.laptop} {
+    span > h2 {
+      ${({ theme }) => theme.FONTS.POPPINS.MEDIUM_400}
+    }
   }
 `
 export const PaymentMethods = styled.div`

@@ -72,7 +72,6 @@ export function SignUp() {
       await toast.promise(api.post('/user', { name, email, password }), {
         pending: 'Por favor aguarde...',
         success: 'Usuário cadastrado!',
-        error: 'Não foi possível cadastrar usuário.',
         ...toastConfig,
       })
     } catch (error) {

@@ -81,9 +81,9 @@ export function Table({ isDesktop = false, ...rest }) {
   }, [])
   return (
     <>
-      {orders.length > 0 && !isDesktop ? (
+      {!isDesktop ? (
         <CardContainer {...rest}>
-          {status.length > 0 &&
+          {orders.length > 0 ? (
             orders.map((order, index) => {
               return (
                 <Card
@@ -94,7 +94,10 @@ export function Table({ isDesktop = false, ...rest }) {
                   handleResource={handleUpdateStatus}
                 />
               )
-            })}
+            })
+          ) : (
+            <p>Nenhum pedido registrado</p>
+          )}
         </CardContainer>
       ) : (
         <TableContainer>
@@ -105,7 +108,8 @@ export function Table({ isDesktop = false, ...rest }) {
             <TableCell>Data e Hora</TableCell>
           </TableHeader>
           <TableBody>
-            {status.length > 0 &&
+            {orders.length === 0 && <p>Nenhum pedido registrado</p>}
+            {orders.length > 0 &&
               orders.map((order, index) => {
                 return (
                   <TableRow key={index}>

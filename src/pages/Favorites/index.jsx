@@ -74,9 +74,14 @@ export function Favorites() {
               icon={PiCaretLeftBold}
               onClick={handleComeBack}
             />
-            <h2>Meus Favoritos</h2>
+            <span>
+              <h2>Meus Favoritos</h2>
+              {favorites.length === 0 && (
+                <p>Nenhum prato adicionado como favorito</p>
+              )}
+            </span>
             <ListItemsStyled>
-              {favorites &&
+              {favorites.length > 0 &&
                 favorites.map((dish, index) => (
                   <PurchaseItem
                     key={index}

@@ -4,6 +4,11 @@ import { SelectOption } from '../SelectOption'
 export const CardContainer = styled.div`
   display: grid;
   gap: 1.7rem;
+
+  p {
+    color: ${({ theme }) => theme.COLORS.LIGHT_400};
+    ${({ theme }) => theme.FONTS.POPPINS.MEDIUM_100}
+  }
 `
 
 export const TableContainer = styled.div`
@@ -53,6 +58,11 @@ export const TableCell = styled.div`
 export const TableBody = styled.div`
   ${({ theme }) => theme.FONTS.ROBOTO.SMALLER_REGULAR};
   color: ${({ theme }) => theme.COLORS.LIGHT_400};
+
+  p {
+    text-align: center;
+    margin: 2rem 0;
+  }
 
   display: grid;
   > div:last-child {

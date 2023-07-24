@@ -105,8 +105,12 @@ export function Cart() {
             <CartStyled>
               {(!isMobile || !showPayment) && (
                 <Itens>
-                  <h2>Pedidos</h2>
-
+                  <span>
+                    <h2>Pedidos</h2>
+                    {orders.length === 0 && (
+                      <p>Nenhum prato adicionado ao pedido</p>
+                    )}
+                  </span>
                   {orders.length > 0 && (
                     <ListItemsStyled>
                       {orders.map((order, index) => (

@@ -22,7 +22,11 @@ import { useNavigate } from 'react-router-dom'
 
 import { useAuth } from '../../hooks/auth'
 
-export function Header({ handleMenuClick }) {
+export function Header({
+  handleMenuClick,
+  placeholderSearch = 'Busque por pratos ou ingredientes',
+  ...rest
+}) {
   const [isOpen, setIsOpen] = useState(false)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const { signOut, isAnAdmin, orderQty } = useAuth()
@@ -80,10 +84,7 @@ export function Header({ handleMenuClick }) {
 
       {windowWidth >= 1024 && (
         <>
-          <Input
-            icon={MagnifyingGlass}
-            placeholder="Busque por pratos ou ingredientes"
-          />
+          <Input icon={MagnifyingGlass} placeholder={placeholderSearch} />
           {!isAnAdmin() && (
             <TextLink
               title="Meus Favoritos"
