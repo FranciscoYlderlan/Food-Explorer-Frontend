@@ -36,7 +36,6 @@ export function Home() {
       const response = await toast.promise(
         api.get(`/dish/?keyword=${searchKeyword}`),
         {
-          pending: 'Por favor aguarde...',
           ...toastConfig,
         },
       )
@@ -63,7 +62,14 @@ export function Home() {
         else toast.error('Erro ao tentar carregar categorias.')
       }
     }
-    fetchSearchDishes().then(fetchCategoryOptions())
+    async function loadingData() {
+      await toast.promise(fetchSearchDishes(), {
+        pending: 'Por favor aguarde...',
+        ...toastConfig,
+      })
+      fetchCategoryOptions()
+    }
+    loadingData()
   }, [])
   return (
     <Container>
