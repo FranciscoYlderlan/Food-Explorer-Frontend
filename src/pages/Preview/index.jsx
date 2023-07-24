@@ -29,7 +29,7 @@ import dishPlaceholder from '../../assets/placeholder-dish.svg'
 import { Button } from '../../components/Button'
 
 export function Preview() {
-  const { isAnAdmin } = useAuth()
+  const { isAnAdmin, goToHome } = useAuth()
   const [dish, setDish] = useState()
   const [isOpenMenu, setIsOpenMenu] = useState(false)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
@@ -67,7 +67,7 @@ export function Preview() {
   }, [])
   return (
     <Container>
-      <Header handleMenuClick={handleMenuClick} />
+      <Header handleMenuClick={handleMenuClick} handleChangeInput={goToHome} />
       <Main>
         {(!isOpenMenu || windowWidth > 1024) && (
           <>

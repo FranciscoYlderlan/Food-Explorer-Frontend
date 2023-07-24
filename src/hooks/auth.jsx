@@ -53,7 +53,10 @@ function AuthProvider({ children }) {
     localStorage.removeItem('@food-explorer:token')
     setData({})
   }
-
+  function goToHome() {
+    const rootUrl = window.location.protocol + '//' + window.location.host + '/'
+    window.location.href = rootUrl
+  }
   function isAnAdmin() {
     const token = localStorage.getItem('@food-explorer:token')
     if (token) {
@@ -158,6 +161,7 @@ function AuthProvider({ children }) {
         totalPurchasePrice,
         handleSearchKeywordChange,
         searchKeyword,
+        goToHome,
         acceptedOrder,
         signOut,
         user: data.user,

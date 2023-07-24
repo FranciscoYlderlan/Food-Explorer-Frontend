@@ -14,8 +14,10 @@ import { toast } from 'react-toastify'
 import { toastConfig } from '../../services/toast'
 
 import { api } from '../../services/api'
+import { useAuth } from '../../hooks/auth'
 
 export function Update() {
+  const { goToHome } = useAuth()
   const [isOpenMenu, setIsOpenMenu] = useState(false)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const [dish, setDish] = useState(null)
@@ -53,7 +55,7 @@ export function Update() {
   }, [])
   return (
     <Container>
-      <Header handleMenuClick={handleMenuClick} />
+      <Header handleMenuClick={handleMenuClick} handleChangeInput={goToHome} />
       <Main>
         {(!isOpenMenu || windowWidth > 1024) && (
           <>

@@ -29,7 +29,8 @@ import { toast } from 'react-toastify'
 import { toastConfig } from '../../services/toast'
 
 export function Cart() {
-  const { totalPurchasePrice, handleRemoveItem, acceptedOrder } = useAuth()
+  const { totalPurchasePrice, handleRemoveItem, acceptedOrder, goToHome } =
+    useAuth()
   const [orders, setOrders] = useState(
     JSON.parse(localStorage.getItem('@food-explorer:order')),
   )
@@ -94,7 +95,7 @@ export function Cart() {
   }, [])
   return (
     <Container>
-      <Header handleMenuClick={handleMenuClick} />
+      <Header handleMenuClick={handleMenuClick} handleChangeInput={goToHome} />
       <Main>
         {(!isOpenMenu || windowWidth > 1024) && (
           <>

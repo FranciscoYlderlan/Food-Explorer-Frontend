@@ -9,8 +9,10 @@ import { PiCaretLeftBold } from 'react-icons/pi'
 import { useState, useEffect } from 'react'
 
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../hooks/auth'
 
 export function Create() {
+  const { goToHome } = useAuth()
   const [isOpenMenu, setIsOpenMenu] = useState(false)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const navigate = useNavigate()
@@ -30,7 +32,7 @@ export function Create() {
   }, [])
   return (
     <Container>
-      <Header handleMenuClick={handleMenuClick} />
+      <Header handleMenuClick={handleMenuClick} handleChangeInput={goToHome} />
       <Main>
         {(!isOpenMenu || windowWidth > 1024) && (
           <>
