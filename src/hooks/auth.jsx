@@ -136,19 +136,20 @@ function AuthProvider({ children }) {
       user: JSON.parse(user),
       token,
     })
-
-    setOrderQty(
-      JSON.parse(localStorage.getItem('@food-explorer:order')).reduce(
-        (accumulator, current) => accumulator + current.qty,
-        0,
-      ),
-    )
-    setTotalPurchasePrice(
-      JSON.parse(localStorage.getItem('@food-explorer:order')).reduce(
-        (accumulator, current) => accumulator + current.amount,
-        0,
-      ),
-    )
+    if (localStorage.getItem('@food-explorer:order') !== null) {
+      setOrderQty(
+        JSON.parse(localStorage.getItem('@food-explorer:order')).reduce(
+          (accumulator, current) => accumulator + current.qty,
+          0,
+        ),
+      )
+      setTotalPurchasePrice(
+        JSON.parse(localStorage.getItem('@food-explorer:order')).reduce(
+          (accumulator, current) => accumulator + current.amount,
+          0,
+        ),
+      )
+    }
   }, [])
   return (
     <AuthContext.Provider
