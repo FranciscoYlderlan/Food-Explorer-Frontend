@@ -61,6 +61,7 @@ export function Favorites() {
   }
 
   useEffect(() => {
+    localStorage.setItem('@food-explorer:isActive', false)
     fetchSearchFavorites()
   }, [searchKeyword])
 

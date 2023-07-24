@@ -46,6 +46,7 @@ export function Home() {
     }
   }
   useEffect(() => {
+    localStorage.setItem('@food-explorer:isActive', false)
     fetchSearchDishes()
   }, [searchKeyword])
 
