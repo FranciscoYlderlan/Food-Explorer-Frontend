@@ -37,11 +37,11 @@ A Food Explorer oferece as seguintes funcionalidades principais:
 - Visualização do catálogo de pratos disponíveis para venda.
 - Filtro e pesquisa para encontrar pratos específicos.
 - Adição de pratos ao carrinho de compras.
-- Histórico de pedidos.
-- Adicionar favoritos.
+- Histórico de pedidos, pesquisar por status específico.
+- Adicionar e remover favoritos pesquisa para encontrar pratos específicos.
 - Visualização do carrinho de compras com resumo dos itens selecionados.
 - Finalização do pedido com opção de escolher método de pagamento.
-- Autenticação de usuários e permissões para o administrador editar e gerenciar o catálogo.
+
 
 ## Instalação e Execução
 
