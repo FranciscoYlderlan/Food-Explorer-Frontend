@@ -34,6 +34,7 @@ O ambiente de desenvolvimento não contém dados registrados e está disponível
 
 A Food Explorer oferece as seguintes funcionalidades principais:
 
+- Autenticação de usuários e permissões para o administrador editar e gerenciar o catálogo.
 - Visualização do catálogo de pratos disponíveis para venda.
 - Filtro e pesquisa para encontrar pratos específicos.
 - Adição de pratos ao carrinho de compras.
