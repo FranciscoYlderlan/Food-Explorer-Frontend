@@ -1,6 +1,6 @@
 # Food Explorer - Aplicação de E-commerce
 
-![Food Explorer Logo](./src/assets/logo.svg)
+[![Food Explorer Preview](./src/assets/PreviewProject.png)](https://www.figma.com/file/AR7MptwSpcyNmTTIErSeJP/food-explorer-Meu-Draft?type=design&node-id=201%3A1532&mode=design&t=FTsc7O8fOtSRORwZ-1)
 
 A Food Explorer é uma aplicação de frontend voltada para pedidos e vendas de pratos em um e-commerce. Construída utilizando as tecnologias React, Vite, JavaScript, Styled Components e React Data Grid Table, ela oferece uma experiência intuitiva e interativa para os usuários ao explorarem e realizarem pedidos dos deliciosos pratos disponíveis.
 
