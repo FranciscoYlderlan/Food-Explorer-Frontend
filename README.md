@@ -79,16 +79,11 @@ Obrigado por acessar a aplicação Food Explorer!
 
 Este projeto está licenciado sob a licença [MIT](https://opensource.org/licenses/MIT).
 
-
-## 🚀 About me
-
-I'm a web programmer...
-
 ## 🔗 Links
 
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/franciscoylderlanoliveira/)
 
-## Author
+## Autor
 
 -   [@FranciscoYlderlan](https://www.github.com/FranciscoYlderlan)
 
